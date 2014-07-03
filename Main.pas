@@ -22,14 +22,6 @@ type
     DBTInvoicesNogTeBetalen: TBCDField;
     DBTInvoicesKlantNaam: TWideStringField;
     DBTInvoiceDetails: TADOTable;
-    DBTInvoiceDetailsId: TAutoIncField;
-    DBTInvoiceDetailsFactuurId: TIntegerField;
-    DBTInvoiceDetailsArtikelId: TIntegerField;
-    DBTInvoiceDetailsArtikelNaam: TWideStringField;
-    DBTInvoiceDetailsAantal: TIntegerField;
-    DBTInvoiceDetailsArtikelPrijs: TBCDField;
-    DBTInvoiceDetailsOpmaat: TBooleanField;
-    DBTInvoiceDetailsPrijs: TBCDField;
     DBTArticles: TADOTable;
     DBTOffers: TADOTable;
     DBTOffersId: TAutoIncField;
@@ -50,8 +42,29 @@ type
     DBTArticlesAangemaaktOp: TDateTimeField;
     DBTInvoicesFactuur: TBooleanField;
     DBTOffersFactuur: TBooleanField;
+    DBTInvoiceDetailsId: TAutoIncField;
+    DBTInvoiceDetailsFactuurId: TIntegerField;
+    DBTInvoiceDetailsArtikelId: TIntegerField;
+    DBTInvoiceDetailsArtikelNaam: TWideStringField;
+    DBTInvoiceDetailsAantal: TIntegerField;
+    DBTInvoiceDetailsPrijs: TBCDField;
+    DBTInvoiceDetailsOpmaat: TBooleanField;
+    DBTInvoiceDetailsTotaal: TBCDField;
     DBTInvoiceDetailsAangemaaktDoor: TWideStringField;
     DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
+    DBTInvoicesBtw: TBCDField;
+    DBTOffersBtw: TBCDField;
+    DBTInvoicesKlantAdres: TWideStringField;
+    DBTInvoicesKlantPostCodePlaats: TWideStringField;
+    DBTOffersKlantAdres: TWideStringField;
+    DBTOffersKlantPostCodePlaats: TWideStringField;
+    DBTCustomers: TADOTable;
+    DBTCustomersId: TAutoIncField;
+    DBTCustomersNaam: TWideStringField;
+    DBTCustomersAdres: TWideStringField;
+    DBTCustomersPostcodePlaats: TWideStringField;
+    DBTCustomersTelefoonnummer: TWideStringField;
+    DBTCustomersEmailAdres: TWideStringField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -106,12 +119,10 @@ begin
     if lvwItems.HelpKeyword = Invoice then begin
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable, 'FactuurId');
       frmHEdit.Caption := 'Factuur bekijken / wijzigen';
-      TfrmEditInvoice(frmHEdit).ckbInvoice.Visible := false;
     end
     else if lvwItems.HelpKeyword = Offer then begin
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'FactuurId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
-      TfrmEditInvoice(frmHEdit).ckbInvoice.Visible := true;
     end
     else if lvwItems.HelpKeyword = Article then
       frmHEdit := TfrmEditArticle.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable) ;
@@ -209,6 +220,7 @@ begin
   DBTOffers.Open;
   DBTArticles.Open;
   DBTInvoiceDetails.Open;
+  DBTCustomers.Open;
 end;
 
 procedure TfrmMain.Refresh;

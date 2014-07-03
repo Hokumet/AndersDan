@@ -2,7 +2,7 @@ inherited frmMain: TfrmMain
   Left = 0
   Top = 0
   Align = alClient
-  Caption = 'frmMain'
+  Caption = 'Main'
   ClientHeight = 507
   ClientWidth = 1221
   WindowState = wsMaximized
@@ -121,7 +121,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F00D400D40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F00E400E40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4354,7 +4354,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C01011300D400D40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011300E400E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5080,6 +5080,18 @@ inherited frmMain: TfrmMain
     object DBTInvoicesFactuur: TBooleanField
       FieldName = 'Factuur'
     end
+    object DBTInvoicesBtw: TBCDField
+      FieldName = 'Btw'
+      Precision = 19
+    end
+    object DBTInvoicesKlantAdres: TWideStringField
+      FieldName = 'KlantAdres'
+      Size = 255
+    end
+    object DBTInvoicesKlantPostCodePlaats: TWideStringField
+      FieldName = 'KlantPostCodePlaats'
+      Size = 255
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -5104,15 +5116,15 @@ inherited frmMain: TfrmMain
     object DBTInvoiceDetailsAantal: TIntegerField
       FieldName = 'Aantal'
     end
-    object DBTInvoiceDetailsArtikelPrijs: TBCDField
-      FieldName = 'ArtikelPrijs'
+    object DBTInvoiceDetailsPrijs: TBCDField
+      FieldName = 'Prijs'
       Precision = 19
     end
     object DBTInvoiceDetailsOpmaat: TBooleanField
       FieldName = 'Opmaat'
     end
-    object DBTInvoiceDetailsPrijs: TBCDField
-      FieldName = 'Prijs'
+    object DBTInvoiceDetailsTotaal: TBCDField
+      FieldName = 'Totaal'
       Precision = 19
     end
     object DBTInvoiceDetailsAangemaaktDoor: TWideStringField
@@ -5190,6 +5202,49 @@ inherited frmMain: TfrmMain
     end
     object DBTOffersFactuur: TBooleanField
       FieldName = 'Factuur'
+    end
+    object DBTOffersBtw: TBCDField
+      FieldName = 'Btw'
+      Precision = 19
+    end
+    object DBTOffersKlantAdres: TWideStringField
+      FieldName = 'KlantAdres'
+      Size = 255
+    end
+    object DBTOffersKlantPostCodePlaats: TWideStringField
+      FieldName = 'KlantPostCodePlaats'
+      Size = 255
+    end
+  end
+  object DBTCustomers: TADOTable
+    Connection = DBCConnection
+    CursorType = ctStatic
+    TableName = 'Klanten'
+    Left = 384
+    Top = 168
+    object DBTCustomersId: TAutoIncField
+      FieldName = 'Id'
+      ReadOnly = True
+    end
+    object DBTCustomersNaam: TWideStringField
+      FieldName = 'Naam'
+      Size = 255
+    end
+    object DBTCustomersAdres: TWideStringField
+      FieldName = 'Adres'
+      Size = 255
+    end
+    object DBTCustomersPostcodePlaats: TWideStringField
+      FieldName = 'PostcodePlaats'
+      Size = 255
+    end
+    object DBTCustomersTelefoonnummer: TWideStringField
+      FieldName = 'Telefoonnummer'
+      Size = 255
+    end
+    object DBTCustomersEmailAdres: TWideStringField
+      FieldName = 'EmailAdres'
+      Size = 255
     end
   end
 end

@@ -1,24 +1,24 @@
 inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
   Caption = 'frmEditInvoiceDetail'
-  ClientHeight = 183
+  ClientHeight = 267
   ClientWidth = 437
   KeyPreview = True
   OldCreateOrder = False
   ExplicitWidth = 445
-  ExplicitHeight = 210
+  ExplicitHeight = 294
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
-    Top = 104
+    Top = 188
     Width = 437
-    ExplicitTop = 127
-    ExplicitWidth = 308
+    ExplicitTop = 188
+    ExplicitWidth = 437
   end
   inherited pnlLabels: TPanel
     Width = 204
-    Height = 104
-    ExplicitWidth = 75
-    ExplicitHeight = 127
+    Height = 188
+    ExplicitWidth = 204
+    ExplicitHeight = 188
     object Label1: TLabel
       Left = 80
       Top = 24
@@ -33,12 +33,33 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       Height = 13
       Caption = 'Artikel naam:'
     end
+    object Label3: TLabel
+      Left = 80
+      Top = 88
+      Width = 24
+      Height = 13
+      Caption = 'Prijs:'
+    end
+    object Label4: TLabel
+      Left = 80
+      Top = 120
+      Width = 35
+      Height = 13
+      Caption = 'Aantal:'
+    end
+    object Label5: TLabel
+      Left = 80
+      Top = 152
+      Width = 34
+      Height = 13
+      Caption = 'Totaal:'
+    end
   end
   inherited pnlFields: TPanel
     Left = 204
-    Height = 104
-    ExplicitLeft = 75
-    ExplicitHeight = 127
+    Height = 188
+    ExplicitLeft = 204
+    ExplicitHeight = 188
     object edtArticleId: TEdit
       Left = 16
       Top = 16
@@ -47,7 +68,6 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       HelpType = htKeyword
       HelpKeyword = 'ArtikelId'
       TabOrder = 0
-      Text = 'edtArticleId'
     end
     object edtArticleName: TEdit
       Left = 16
@@ -57,7 +77,47 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       HelpType = htKeyword
       HelpKeyword = 'ArtikelNaam'
       TabOrder = 1
-      Text = 'edtArticleName'
+    end
+    object edtPrice: THCurrencyEdit
+      Left = 16
+      Top = 85
+      Width = 121
+      Height = 21
+      HelpType = htKeyword
+      HelpKeyword = 'Prijs'
+      TabOrder = 2
+      OnExit = edtPriceExit
+      Alignment = taRightJustify
+      MinValue = -99999.000000000000000000
+      MaxValue = 999999.000000000000000000
+    end
+    object edtAmount: THFloatEdit
+      Left = 16
+      Top = 112
+      Width = 121
+      Height = 21
+      HelpType = htKeyword
+      HelpKeyword = 'Aantal'
+      FloatFormat = '0.'
+      TabOrder = 3
+      OnExit = edtPriceExit
+      NumberOfDecimals = 0
+      Alignment = taRightJustify
+      MaxValue = 999999.000000000000000000
+      AllowNull = False
+    end
+    object edtTotal: THCurrencyEdit
+      Left = 16
+      Top = 139
+      Width = 121
+      Height = 21
+      HelpType = htKeyword
+      HelpKeyword = 'Totaal'
+      ReadOnly = True
+      TabOrder = 4
+      Alignment = taRightJustify
+      MinValue = -9999999.000000000000000000
+      MaxValue = 999999.000000000000000000
     end
   end
 end
