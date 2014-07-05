@@ -119,9 +119,26 @@ inherited frmMain: TfrmMain
     ExplicitWidth = 1221
     ExplicitHeight = 400
   end
+  object HCustomListBoxEx1: THCustomListBoxEx [4]
+    Left = 584
+    Top = 112
+    Width = 162
+    Height = 294
+    AllowEdit = True
+    AppearFocused = False
+    Caption = 'ListBoxEx'
+  end
+  object HCustomListViewEx1: THCustomListViewEx [5]
+    Left = 430
+    Top = 112
+    Width = 162
+    Height = 322
+    Columns = <>
+    AppearFocused = False
+  end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F00E400E40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F00E800E80020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4354,7 +4371,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C01011300E400E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011300E800E80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5106,11 +5123,11 @@ inherited frmMain: TfrmMain
     object DBTInvoiceDetailsFactuurId: TIntegerField
       FieldName = 'FactuurId'
     end
-    object DBTInvoiceDetailsArtikelId: TIntegerField
-      FieldName = 'ArtikelId'
+    object DBTInvoiceDetailsProductId: TIntegerField
+      FieldName = 'ProductId'
     end
-    object DBTInvoiceDetailsArtikelNaam: TWideStringField
-      FieldName = 'ArtikelNaam'
+    object DBTInvoiceDetailsProductNaam: TWideStringField
+      FieldName = 'ProductNaam'
       Size = 255
     end
     object DBTInvoiceDetailsAantal: TIntegerField
@@ -5135,33 +5152,33 @@ inherited frmMain: TfrmMain
       FieldName = 'AangemaaktOp'
     end
   end
-  object DBTArticles: TADOTable
+  object DBTProducts: TADOTable
     Connection = DBCConnection
     CursorType = ctStatic
-    TableName = 'Artikels'
-    Left = 256
-    Top = 296
-    object DBTArticlesId: TAutoIncField
+    TableName = 'Producten'
+    Left = 360
+    Top = 240
+    object DBTProductsId: TAutoIncField
       FieldName = 'Id'
       ReadOnly = True
     end
-    object DBTArticlesNr: TWideStringField
+    object DBTProductsNr: TWideStringField
       FieldName = 'Nr'
       Size = 255
     end
-    object DBTArticlesNaam: TWideStringField
+    object DBTProductsNaam: TWideStringField
       FieldName = 'Naam'
       Size = 255
     end
-    object DBTArticlesPrijs: TBCDField
+    object DBTProductsPrijs: TBCDField
       FieldName = 'Prijs'
       Precision = 19
     end
-    object DBTArticlesAangemaaktDoor: TWideStringField
+    object DBTProductsAangemaaktDoor: TWideStringField
       FieldName = 'AangemaaktDoor'
       Size = 255
     end
-    object DBTArticlesAangemaaktOp: TDateTimeField
+    object DBTProductsAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
     end
   end

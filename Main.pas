@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, MainAncestor, Vcl.Menus, Data.Win.ADODB,
   Data.DB, Vcl.ImgList, Vcl.ComCtrls, MyListView, Vcl.ToolWin, Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, HControls, ListBoxEx, ListViewEx;
 
 type
   TfrmMain = class(TfrmMainAncestor)
@@ -22,7 +22,7 @@ type
     DBTInvoicesNogTeBetalen: TBCDField;
     DBTInvoicesKlantNaam: TWideStringField;
     DBTInvoiceDetails: TADOTable;
-    DBTArticles: TADOTable;
+    DBTProducts: TADOTable;
     DBTOffers: TADOTable;
     DBTOffersId: TAutoIncField;
     DBTOffersFactuurNr: TIntegerField;
@@ -34,24 +34,8 @@ type
     DBTInvoicesAangemaaktOp: TDateTimeField;
     DBTOffersAangemaaktDoor: TWideStringField;
     DBTOffersAangemaaktOp: TDateTimeField;
-    DBTArticlesId: TAutoIncField;
-    DBTArticlesNr: TWideStringField;
-    DBTArticlesNaam: TWideStringField;
-    DBTArticlesPrijs: TBCDField;
-    DBTArticlesAangemaaktDoor: TWideStringField;
-    DBTArticlesAangemaaktOp: TDateTimeField;
     DBTInvoicesFactuur: TBooleanField;
     DBTOffersFactuur: TBooleanField;
-    DBTInvoiceDetailsId: TAutoIncField;
-    DBTInvoiceDetailsFactuurId: TIntegerField;
-    DBTInvoiceDetailsArtikelId: TIntegerField;
-    DBTInvoiceDetailsArtikelNaam: TWideStringField;
-    DBTInvoiceDetailsAantal: TIntegerField;
-    DBTInvoiceDetailsPrijs: TBCDField;
-    DBTInvoiceDetailsOpmaat: TBooleanField;
-    DBTInvoiceDetailsTotaal: TBCDField;
-    DBTInvoiceDetailsAangemaaktDoor: TWideStringField;
-    DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
     DBTInvoicesBtw: TBCDField;
     DBTOffersBtw: TBCDField;
     DBTInvoicesKlantAdres: TWideStringField;
@@ -65,6 +49,24 @@ type
     DBTCustomersPostcodePlaats: TWideStringField;
     DBTCustomersTelefoonnummer: TWideStringField;
     DBTCustomersEmailAdres: TWideStringField;
+    DBTInvoiceDetailsId: TAutoIncField;
+    DBTInvoiceDetailsFactuurId: TIntegerField;
+    DBTInvoiceDetailsProductId: TIntegerField;
+    DBTInvoiceDetailsProductNaam: TWideStringField;
+    DBTInvoiceDetailsAantal: TIntegerField;
+    DBTInvoiceDetailsPrijs: TBCDField;
+    DBTInvoiceDetailsOpmaat: TBooleanField;
+    DBTInvoiceDetailsTotaal: TBCDField;
+    DBTInvoiceDetailsAangemaaktDoor: TWideStringField;
+    DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
+    DBTProductsId: TAutoIncField;
+    DBTProductsNr: TWideStringField;
+    DBTProductsNaam: TWideStringField;
+    DBTProductsPrijs: TBCDField;
+    DBTProductsAangemaaktDoor: TWideStringField;
+    DBTProductsAangemaaktOp: TDateTimeField;
+    HCustomListBoxEx1: THCustomListBoxEx;
+    HCustomListViewEx1: THCustomListViewEx;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -103,7 +105,7 @@ Const
 procedure TfrmMain.btnArticlesClick(Sender: TObject);
 begin
   lvwItems.HelpKeyword := btnArticles.HelpKeyword;
-  CurrentTable := DBTArticles;
+  CurrentTable := DBTProducts;
   Refresh;
 end;
 
@@ -218,7 +220,7 @@ begin
   inherited;
   DBTInvoices.Open;
   DBTOffers.Open;
-  DBTArticles.Open;
+  DBTProducts.Open;
   DBTInvoiceDetails.Open;
   DBTCustomers.Open;
 end;

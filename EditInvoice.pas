@@ -38,6 +38,7 @@ type
     ckbSaveCustomer: TCheckBox;
     searchEdit: THSearchEdit;
     lbxCustomers: TListBox;
+    HCustomListBoxEx1: THCustomListBoxEx;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -104,6 +105,7 @@ begin
   end
   else begin
     lbxCustomers.Items.Clear;
+    HCustomListBoxEx1.Clear;
     TCustomers.Filtered := False;
     if(edtCustomerName.Text <> '') then begin
       TFilter := TCustomers;
@@ -111,12 +113,15 @@ begin
       lbxCustomers.Visible := TCustomers.RecordCount > 1;
       if TCustomers.RecordCount > 1 then begin
         lbxCustomers.Items.BeginUpdate;
+
         lbxCustomers.Visible := true;
         for I := 0 to TCustomers.RecordCount-1 do begin
           lbxCustomers.Items.AddObject(TCustomers.FieldByName('Naam').AsString, Pointer(TCustomers.FieldByName('ID').AsInteger));
+          HCustomListBoxEx1.AddObject(TCustomers.FieldByName('Naam').AsString, Pointer(TCustomers.FieldByName('ID').AsInteger));
           TCustomers.Next
         end;
         lbxCustomers.Items.EndUpdate;
+        HCustomListBoxEx1.Update;
       end;
     end;
   end;
@@ -166,8 +171,8 @@ begin
   TInvoiceDetails.First;
   for I := 0 to TInvoiceDetails.RecordCount-1 do begin
     Item := frameInvoiceDetails.lvwItems.Items.Add;
-    Item.Caption := TInvoiceDetails.FieldByName('ArtikelId').AsString;
-    Item.SubItems.Add(TInvoiceDetails.FieldByName('ArtikelNaam').AsString);
+    Item.Caption := TInvoiceDetails.FieldByName('ProductId').AsString;
+    Item.SubItems.Add(TInvoiceDetails.FieldByName('ProductNaam').AsString);
     Item.SubItems.Add(CurrToStrF(TInvoiceDetails.FieldByName('Prijs').AsCurrency, ffCurrency ,2));
     Item.SubItems.Add(IntToStr(TInvoiceDetails.FieldByName('Aantal').AsInteger));
     Item.SubItems.Add(CurrToStrF(TInvoiceDetails.FieldByName('Totaal').AsCurrency, ffCurrency ,2));
@@ -210,8 +215,8 @@ begin
   frameInvoiceDetails.FTable := TInvoiceDetails;
   frameInvoiceDetails.EForm := frmEditArticle;
 
-  frameInvoiceDetails.addColumn('ArtikelId', 75);
-  frameInvoiceDetails.addColumn('ArtikelNaam', 200 );
+  frameInvoiceDetails.addColumn('ProductId', 75);
+  frameInvoiceDetails.addColumn('ProductNaam', 200 );
   frameInvoiceDetails.addAlignColumn('Prijs', 75, taRightJustify);
   frameInvoiceDetails.addColumn('Aantal', 75);
   frameInvoiceDetails.addAlignColumn('Totaal', 100, taRightJustify);

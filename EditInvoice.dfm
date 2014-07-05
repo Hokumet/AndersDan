@@ -319,6 +319,15 @@ inherited frmEditInvoice: TfrmEditInvoice
     OnDblClick = lbxCustomersDblClick
     OnKeyUp = lbxCustomersKeyUp
   end
+  object HCustomListBoxEx1: THCustomListBoxEx [5]
+    Left = 328
+    Top = 26
+    Width = 162
+    Height = 68
+    AllowEdit = True
+    AppearFocused = False
+    Caption = 'ListBoxEx'
+  end
   inherited CurrQuery: TADOQuery
     Left = 8
     Top = 8

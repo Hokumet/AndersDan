@@ -60,28 +60,31 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     Height = 188
     ExplicitLeft = 204
     ExplicitHeight = 188
-    object edtArticleId: TEdit
+    object edtProductId: TEdit
       Left = 16
       Top = 16
-      Width = 121
+      Width = 139
       Height = 21
       HelpType = htKeyword
-      HelpKeyword = 'ArtikelId'
+      HelpKeyword = 'ProductId'
       TabOrder = 0
+      OnKeyUp = edtProductIdKeyUp
     end
-    object edtArticleName: TEdit
+    object edtProductName: TEdit
       Left = 16
       Top = 48
-      Width = 121
+      Width = 139
       Height = 21
       HelpType = htKeyword
-      HelpKeyword = 'ArtikelNaam'
+      HelpKeyword = 'ProductNaam'
       TabOrder = 1
+      OnExit = edtProductNameExit
+      OnKeyUp = edtProductNameKeyUp
     end
     object edtPrice: THCurrencyEdit
       Left = 16
       Top = 85
-      Width = 121
+      Width = 139
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Prijs'
@@ -94,7 +97,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     object edtAmount: THFloatEdit
       Left = 16
       Top = 112
-      Width = 121
+      Width = 139
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Aantal'
@@ -109,7 +112,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     object edtTotal: THCurrencyEdit
       Left = 16
       Top = 139
-      Width = 121
+      Width = 139
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Totaal'
@@ -118,6 +121,17 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       Alignment = taRightJustify
       MinValue = -9999999.000000000000000000
       MaxValue = 999999.000000000000000000
+    end
+    object lbxProducts: TListBox
+      Left = 16
+      Top = 36
+      Width = 139
+      Height = 73
+      ItemHeight = 13
+      TabOrder = 5
+      Visible = False
+      OnDblClick = lbxProductsDblClick
+      OnKeyUp = lbxProductsKeyUp
     end
   end
 end
