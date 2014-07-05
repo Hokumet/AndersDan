@@ -1,16 +1,16 @@
 inherited frmEditArticle: TfrmEditArticle
-  Caption = 'Artikel bekijken / wijzigen'
-  ClientHeight = 365
+  Caption = 'Product bekijken / wijzigen'
+  ClientHeight = 206
   ClientWidth = 438
   OldCreateOrder = False
   ExplicitWidth = 446
-  ExplicitHeight = 392
+  ExplicitHeight = 233
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlFields: TPanel [0]
     Left = 149
     Width = 289
-    Height = 286
+    Height = 127
     ExplicitLeft = 149
     ExplicitWidth = 289
     ExplicitHeight = 286
@@ -45,14 +45,14 @@ inherited frmEditArticle: TfrmEditArticle
     end
   end
   inherited Panel3: TPanel [1]
-    Top = 286
+    Top = 127
     Width = 438
     ExplicitTop = 286
     ExplicitWidth = 438
   end
   inherited pnlLabels: TPanel [2]
     Width = 149
-    Height = 286
+    Height = 127
     ExplicitWidth = 149
     ExplicitHeight = 286
     object Label2: TLabel
@@ -78,7 +78,7 @@ inherited frmEditArticle: TfrmEditArticle
     end
   end
   inherited CurrQuery: TADOQuery
-    Left = 32
-    Top = 112
+    Left = 16
+    Top = 64
   end
 end

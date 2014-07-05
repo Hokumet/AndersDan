@@ -76,7 +76,7 @@ inherited frmMain: TfrmMain
         Left = 355
         HelpType = htKeyword
         HelpKeyword = 'Invoice'
-        Caption = 'Facturen'
+        Caption = '&Facturen'
         Grouped = True
         Style = tbsCheck
         ExplicitLeft = 355
@@ -88,7 +88,7 @@ inherited frmMain: TfrmMain
         Top = 0
         HelpType = htKeyword
         HelpKeyword = 'Offer'
-        Caption = 'Offertes'
+        Caption = '&Offertes'
         Grouped = True
         ImageIndex = 14
         Style = tbsCheck
@@ -98,12 +98,23 @@ inherited frmMain: TfrmMain
         Left = 483
         Top = 0
         HelpType = htKeyword
-        HelpKeyword = 'Article'
-        Caption = 'Artikels'
+        HelpKeyword = 'Product'
+        Caption = '&Producten'
         Grouped = True
         ImageIndex = 15
         Style = tbsCheck
         OnClick = btnArticlesClick
+      end
+      object btnCustomers: TToolButton
+        Left = 547
+        Top = 0
+        HelpType = htKeyword
+        HelpKeyword = 'Customer'
+        Caption = '&Klanten'
+        Grouped = True
+        ImageIndex = 16
+        Style = tbsCheck
+        OnClick = btnCustomersClick
       end
     end
   end
@@ -119,26 +130,9 @@ inherited frmMain: TfrmMain
     ExplicitWidth = 1221
     ExplicitHeight = 400
   end
-  object HCustomListBoxEx1: THCustomListBoxEx [4]
-    Left = 584
-    Top = 112
-    Width = 162
-    Height = 294
-    AllowEdit = True
-    AppearFocused = False
-    Caption = 'ListBoxEx'
-  end
-  object HCustomListViewEx1: THCustomListViewEx [5]
-    Left = 430
-    Top = 112
-    Width = 162
-    Height = 322
-    Columns = <>
-    AppearFocused = False
-  end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F00E800E80020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F00F000F00020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4371,7 +4365,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C01011300E800E80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011300F000F00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5115,7 +5109,7 @@ inherited frmMain: TfrmMain
     CursorType = ctStatic
     TableName = 'FactuurDetails'
     Left = 256
-    Top = 232
+    Top = 240
     object DBTInvoiceDetailsId: TAutoIncField
       FieldName = 'Id'
       ReadOnly = True
@@ -5123,8 +5117,8 @@ inherited frmMain: TfrmMain
     object DBTInvoiceDetailsFactuurId: TIntegerField
       FieldName = 'FactuurId'
     end
-    object DBTInvoiceDetailsProductId: TIntegerField
-      FieldName = 'ProductId'
+    object DBTInvoiceDetailsProductNr: TIntegerField
+      FieldName = 'ProductNr'
     end
     object DBTInvoiceDetailsProductNaam: TWideStringField
       FieldName = 'ProductNaam'
@@ -5262,6 +5256,13 @@ inherited frmMain: TfrmMain
     object DBTCustomersEmailAdres: TWideStringField
       FieldName = 'EmailAdres'
       Size = 255
+    end
+    object DBTCustomersAangemaaktDoor: TWideStringField
+      FieldName = 'AangemaaktDoor'
+      Size = 255
+    end
+    object DBTCustomersAangemaaktOp: TDateTimeField
+      FieldName = 'AangemaaktOp'
     end
   end
 end

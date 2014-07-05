@@ -12,7 +12,7 @@ type
   TfrmEditInvoiceDetail = class(TfrmHEdit)
     Label1: TLabel;
     Label2: TLabel;
-    edtProductId: TEdit;
+    edtProductNr: TEdit;
     edtProductName: TEdit;
     Label3: TLabel;
     Label4: TLabel;
@@ -21,6 +21,7 @@ type
     Label5: TLabel;
     edtTotal: THCurrencyEdit;
     lbxProducts: TListBox;
+    ckbSaveProduct: TCheckBox;
     procedure edtPriceExit(Sender: TObject);
     procedure edtProductNameKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -28,13 +29,14 @@ type
     procedure lbxProductsKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure lbxProductsDblClick(Sender: TObject);
-    procedure edtProductIdKeyUp(Sender: TObject; var Key: Word;
+    procedure edtProductNrKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
     TProducts: TADOTable;
     procedure selectProduct(ProductId: Integer);
     procedure fillProducts(TProducts: TADOTable);
   protected
+    procedure saveFields(); override;
     procedure loadOnce(); override;
   public
     { Public declarations }
@@ -49,7 +51,7 @@ implementation
 
 uses Main, EditInvoice;
 
-procedure TfrmEditInvoiceDetail.edtProductIdKeyUp(Sender: TObject;
+procedure TfrmEditInvoiceDetail.edtProductNrKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 var I: Integer;
 begin
@@ -65,7 +67,7 @@ begin
     lbxProducts.Top := 36;
     if(edtProductName.Text <> '') then begin
       TFilter := TProducts;
-      filterTable('ID', StrToInt(edtProductId.Text));
+      filterTable('ID', StrToInt(edtProductNr.Text));
       lbxProducts.Visible := TProducts.RecordCount > 1;
       if TProducts.RecordCount > 1 then
         fillProducts(TProducts);
@@ -109,7 +111,7 @@ begin
   lbxProducts.Items.BeginUpdate;
   lbxProducts.Visible := true;
   for I := 0 to TProducts.RecordCount-1 do begin
-    lbxProducts.Items.AddObject(TProducts.FieldByName('ID').AsString + '|' +TProducts.FieldByName('Naam').AsString, Pointer(TProducts.FieldByName('ID').AsInteger));
+    lbxProducts.Items.AddObject(TProducts.FieldByName('Nr').AsString + ' | ' +TProducts.FieldByName('Naam').AsString, Pointer(TProducts.FieldByName('ID').AsInteger));
     TProducts.Next
   end;
   lbxProducts.Items.EndUpdate;
@@ -140,11 +142,27 @@ begin
 
 end;
 
+procedure TfrmEditInvoiceDetail.saveFields;
+begin
+  inherited;
+  if ckbSaveProduct.Checked then
+    filterTable('Naam', ' = ', edtProductName.Text);
+
+    if TProducts.RecordCount = 0 then begin
+      TProducts.Insert;
+      TProducts.FieldByName('Nr').AsString := edtProductNr.Text;
+      TProducts.FieldByName('Naam').AsString := edtProductName.Text;
+      TProducts.FieldByName('Prijs').AsString := edtPrice.Text;
+      TProducts.Post;
+      TProducts.UpdateBatch;
+    end;
+end;
+
 procedure TfrmEditInvoiceDetail.SelectProduct(ProductId: Integer);
 begin
   TFilter := TProducts;
   filterTable('Id', ProductId);
-  edtProductId.Text := TFilter.FieldByName('ID').AsString;
+  edtProductNr.Text := TFilter.FieldByName('Nr').AsString;
   edtProductName.Text := TFilter.FieldByName('Naam').AsString;
   edtPrice.Value := TFilter.FieldByName('Prijs').AsCurrency;
   lbxProducts.Visible := false;

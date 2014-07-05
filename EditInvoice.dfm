@@ -177,7 +177,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Totaal'
         ReadOnly = True
-        TabOrder = 2
+        TabOrder = 4
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
       end
@@ -189,7 +189,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Offerte'
         Caption = 'Zet om naar een factuur'
-        TabOrder = 5
+        TabOrder = 1
       end
       object edtBtw: THCurrencyEdit
         Left = 169
@@ -199,7 +199,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Btw'
         ReadOnly = True
-        TabOrder = 1
+        TabOrder = 3
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
       end
@@ -211,7 +211,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Subtotaal'
         ReadOnly = True
-        TabOrder = 0
+        TabOrder = 2
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
       end
@@ -222,7 +222,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'Aanbetaling'
-        TabOrder = 3
+        TabOrder = 0
         OnExit = edtAanbetalingExit
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
@@ -234,7 +234,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'NogTeBetalen'
-        TabOrder = 4
+        TabOrder = 5
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
       end
@@ -294,39 +294,16 @@ inherited frmEditInvoice: TfrmEditInvoice
     ExplicitWidth = 1
     ExplicitHeight = 486
   end
-  object searchEdit: THSearchEdit [3]
-    Left = 171
-    Top = 72
-    Width = 121
-    Height = 22
-    PopupMenuItems.Strings = (
-      'TEST'
-      'Bla'
-      'TES'
-      'Hkaa')
-    StopButtonVisible = False
-    TabOrder = 3
-    Text = 'searchEdit'
-  end
-  object lbxCustomers: TListBox [4]
+  object lbxCustomers: TListBox [3]
     Left = 523
     Top = 38
     Width = 240
     Height = 59
     ItemHeight = 13
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
     OnDblClick = lbxCustomersDblClick
     OnKeyUp = lbxCustomersKeyUp
-  end
-  object HCustomListBoxEx1: THCustomListBoxEx [5]
-    Left = 328
-    Top = 26
-    Width = 162
-    Height = 68
-    AllowEdit = True
-    AppearFocused = False
-    Caption = 'ListBoxEx'
   end
   inherited CurrQuery: TADOQuery
     Left = 8

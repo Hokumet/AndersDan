@@ -49,9 +49,15 @@ type
     DBTCustomersPostcodePlaats: TWideStringField;
     DBTCustomersTelefoonnummer: TWideStringField;
     DBTCustomersEmailAdres: TWideStringField;
+    DBTProductsId: TAutoIncField;
+    DBTProductsNr: TWideStringField;
+    DBTProductsNaam: TWideStringField;
+    DBTProductsPrijs: TBCDField;
+    DBTProductsAangemaaktDoor: TWideStringField;
+    DBTProductsAangemaaktOp: TDateTimeField;
     DBTInvoiceDetailsId: TAutoIncField;
     DBTInvoiceDetailsFactuurId: TIntegerField;
-    DBTInvoiceDetailsProductId: TIntegerField;
+    DBTInvoiceDetailsProductNr: TIntegerField;
     DBTInvoiceDetailsProductNaam: TWideStringField;
     DBTInvoiceDetailsAantal: TIntegerField;
     DBTInvoiceDetailsPrijs: TBCDField;
@@ -59,24 +65,21 @@ type
     DBTInvoiceDetailsTotaal: TBCDField;
     DBTInvoiceDetailsAangemaaktDoor: TWideStringField;
     DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
-    DBTProductsId: TAutoIncField;
-    DBTProductsNr: TWideStringField;
-    DBTProductsNaam: TWideStringField;
-    DBTProductsPrijs: TBCDField;
-    DBTProductsAangemaaktDoor: TWideStringField;
-    DBTProductsAangemaaktOp: TDateTimeField;
-    HCustomListBoxEx1: THCustomListBoxEx;
-    HCustomListViewEx1: THCustomListViewEx;
+    btnCustomers: TToolButton;
+    DBTCustomersAangemaaktDoor: TWideStringField;
+    DBTCustomersAangemaaktOp: TDateTimeField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
+    procedure btnCustomersClick(Sender: TObject);
   private
        procedure LoadInvoices;
-       procedure LoadArticles;
+       procedure LoadData;
 
        procedure SetArticleColums;
+       procedure SetCustomerColums;
        procedure SetInvoiceColums;
        procedure SetOfferColums;
   protected
@@ -91,12 +94,13 @@ var
 
 implementation
 
-uses EditOffer, EditInvoice, EditArticle;
+uses EditOffer, EditInvoice, EditArticle, EditCustomer;
 
 Const
   Invoice = 'Invoice';
   Offer = 'Offer';
-  Article = 'Article';
+  Product = 'Product';
+  Customer = 'Customer';
 
 {$R *.dfm}
 
@@ -116,6 +120,13 @@ begin
   Refresh;
 end;
 
+procedure TfrmMain.btnCustomersClick(Sender: TObject);
+begin
+  lvwItems.HelpKeyword := btnCustomers.HelpKeyword;
+  CurrentTable := DBTCustomers;
+  Refresh;
+end;
+
 procedure TfrmMain.btnEditClick(Sender: TObject);
 begin
     if lvwItems.HelpKeyword = Invoice then begin
@@ -126,8 +137,10 @@ begin
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'FactuurId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
     end
-    else if lvwItems.HelpKeyword = Article then
-      frmHEdit := TfrmEditArticle.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable) ;
+    else if lvwItems.HelpKeyword = Product then
+      frmHEdit := TfrmEditArticle.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable)
+    else if lvwItems.HelpKeyword = Customer then
+      frmHEdit := TfrmEditCustomer.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable) ;
   inherited;
 end;
 
@@ -137,7 +150,7 @@ begin
       frmHEdit := TfrmEditInvoice.Create(Self, 0, CurrentTable)
     else if lvwItems.HelpKeyword = Offer then
       frmHEdit := TfrmEditOffer.Create(Self, 0, CurrentTable)
-    else if lvwItems.HelpKeyword = Article then
+    else if lvwItems.HelpKeyword = Product then
       frmHEdit := TfrmEditArticle.Create(Self, 0, CurrentTable) ;
 
   try
@@ -155,7 +168,7 @@ begin
   Refresh;
 end;
 
-procedure TfrmMain.LoadArticles;
+procedure TfrmMain.LoadData;
 var
   LI: TListItem;
   I,X: Integer;
@@ -247,7 +260,7 @@ begin
 
     LoadInvoices
   end
-  else if lvwItems.HelpKeyword = Article  then begin
+  else if lvwItems.HelpKeyword = Product  then begin
     lvwItems.Columns.Clear;
     FieldCaptionAndFieldName.Clear;
 
@@ -255,7 +268,17 @@ begin
     SetArticleColums;
     lvwItems.Columns.EndUpdate;
 
-    LoadArticles
+    LoadData
+  end
+  else if lvwItems.HelpKeyword = Customer  then begin
+    lvwItems.Columns.Clear;
+    FieldCaptionAndFieldName.Clear;
+
+    lvwItems.Columns.BeginUpdate;
+    SetCustomerColums;
+    lvwItems.Columns.EndUpdate;
+
+    LoadData
   end
   else begin
     lvwItems.HelpKeyword := 'Invoice';
@@ -276,6 +299,15 @@ begin
   addColumn('Nr','Nr', 75);
   addColumn('Naam', 'Naam', 200);
   addColumn('Prijs', 'Prijs', 'curr', 130);
+end;
+
+procedure TfrmMain.SetCustomerColums;
+begin
+  addColumn('Naam', 'Naam', 200);
+  addColumn('Adres', 'Adres', 200);
+  addColumn('Postcode en plaats', 'PostcodePlaats', 200);
+  addColumn('Telefoonnummer', 'Telefoonnummer', 200);
+  addColumn('Emailadres', 'Emailadres', 200);
 end;
 
 procedure TfrmMain.SetInvoiceColums;

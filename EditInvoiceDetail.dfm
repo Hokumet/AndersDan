@@ -22,9 +22,9 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     object Label1: TLabel
       Left = 80
       Top = 24
-      Width = 45
+      Width = 76
       Height = 13
-      Caption = 'Artikel id:'
+      Caption = 'Artikel Nummer:'
     end
     object Label2: TLabel
       Left = 80
@@ -60,15 +60,15 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     Height = 188
     ExplicitLeft = 204
     ExplicitHeight = 188
-    object edtProductId: TEdit
+    object edtProductNr: TEdit
       Left = 16
       Top = 16
       Width = 139
       Height = 21
       HelpType = htKeyword
-      HelpKeyword = 'ProductId'
+      HelpKeyword = 'ProductNr'
       TabOrder = 0
-      OnKeyUp = edtProductIdKeyUp
+      OnKeyUp = edtProductNrKeyUp
     end
     object edtProductName: TEdit
       Left = 16
@@ -128,10 +128,24 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       Width = 139
       Height = 73
       ItemHeight = 13
-      TabOrder = 5
+      TabOrder = 6
       Visible = False
       OnDblClick = lbxProductsDblClick
       OnKeyUp = lbxProductsKeyUp
+    end
+    object ckbSaveProduct: TCheckBox
+      Left = 16
+      Top = 166
+      Width = 137
+      Height = 17
+      Caption = 'Sla product op'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
     end
   end
 end
