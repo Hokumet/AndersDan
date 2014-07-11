@@ -37,7 +37,7 @@ type
     DBTTInvoicesAangemaaktDoor: TWideStringField;
     DBTTInvoicesAangemaaktOp: TDateTimeField;
     frxDetailData: TfrxDBDataset;
-    frxReport: TfrxReport;
+    frxreport: TfrxReport;
     frxMasterData: TfrxDBDataset;
   private
     { Private declarations }

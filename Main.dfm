@@ -20,47 +20,73 @@ inherited frmMain: TfrmMain
       item
         Control = ToolBar
         ImageIndex = -1
-        MinHeight = 56
+        MinHeight = 64
         Width = 1221
       end>
     ExplicitWidth = 1221
     inherited ToolBar: TToolBar
+      Left = 9
       Width = 1212
       Height = 56
       ButtonHeight = 52
-      ButtonWidth = 64
+      ButtonWidth = 99
+      ExplicitLeft = 9
       ExplicitWidth = 1212
+      ExplicitHeight = 56
       inherited btnNew: TToolButton
         OnClick = btnNewClick
+        ExplicitWidth = 112
+        ExplicitHeight = 52
       end
       inherited btnEdit: TToolButton
-        Left = 77
+        Left = 112
+        ExplicitLeft = 112
+        ExplicitWidth = 99
+        ExplicitHeight = 52
       end
       inherited btnDelete: TToolButton
-        Left = 141
+        Left = 211
+        ExplicitLeft = 211
+        ExplicitWidth = 99
+        ExplicitHeight = 52
       end
-      inherited btnPrint: TToolButton [3]
-        Left = 205
+      inherited Seperator: TToolButton
+        Left = 310
+        ExplicitLeft = 310
+        ExplicitHeight = 52
       end
-      inherited Seperator: TToolButton [4]
-        Left = 269
+      inherited btnPrint: TToolButton
+        Left = 324
+        Visible = False
+        ExplicitLeft = 324
+        ExplicitWidth = 99
+        ExplicitHeight = 52
       end
       inherited btnPrinten: TToolButton
-        Left = 283
+        Left = 423
+        Enabled = False
+        ExplicitLeft = 423
+        ExplicitWidth = 99
+        ExplicitHeight = 52
       end
-      inherited btnBegin: TToolButton [6]
-        Left = 347
+      inherited ToolButton2: TToolButton
+        Left = 522
+        ExplicitLeft = 522
+        ExplicitHeight = 52
+      end
+      inherited btnBegin: TToolButton
+        Left = 530
         HelpType = htKeyword
         HelpKeyword = 'Invoice'
         Caption = '&Facturen'
         Grouped = True
         Style = tbsCheck
-      end
-      inherited ToolButton2: TToolButton [7]
-        Left = 411
+        ExplicitLeft = 530
+        ExplicitWidth = 99
+        ExplicitHeight = 52
       end
       object btnOffers: TToolButton
-        Left = 419
+        Left = 629
         Top = 0
         HelpType = htKeyword
         HelpKeyword = 'Offer'
@@ -71,22 +97,22 @@ inherited frmMain: TfrmMain
         OnClick = btnOffersClick
       end
       object btnArticles: TToolButton
-        Left = 483
+        Left = 728
         Top = 0
         HelpType = htKeyword
         HelpKeyword = 'Product'
-        Caption = '&Producten'
+        Caption = '&Producten beheren'
         Grouped = True
         ImageIndex = 15
         Style = tbsCheck
         OnClick = btnArticlesClick
       end
       object btnCustomers: TToolButton
-        Left = 547
+        Left = 827
         Top = 0
         HelpType = htKeyword
         HelpKeyword = 'Customer'
-        Caption = '&Klanten'
+        Caption = '&Klanten beheren'
         Grouped = True
         ImageIndex = 16
         Style = tbsCheck
@@ -108,7 +134,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F00F400F40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F00FC00FC0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4341,7 +4367,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C01011300F400F40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011300FC00FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5079,6 +5105,9 @@ inherited frmMain: TfrmMain
       FieldName = 'KlantPostCodePlaats'
       Size = 255
     end
+    object DBTInvoicesOfferteNr: TIntegerField
+      FieldName = 'OfferteNr'
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -5201,6 +5230,9 @@ inherited frmMain: TfrmMain
     object DBTOffersKlantPostCodePlaats: TWideStringField
       FieldName = 'KlantPostCodePlaats'
       Size = 255
+    end
+    object DBTOffersOfferteNr: TIntegerField
+      FieldName = 'OfferteNr'
     end
   end
   object DBTCustomers: TADOTable

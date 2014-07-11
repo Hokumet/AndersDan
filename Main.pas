@@ -83,6 +83,8 @@ type
     ADODataSet1NogTeBetalen: TBCDField;
     ADODataSet1Subtotaal: TBCDField;
     ADODataSet1Totaal: TBCDField;
+    DBTInvoicesOfferteNr: TIntegerField;
+    DBTOffersOfferteNr: TIntegerField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -90,6 +92,8 @@ type
     procedure btnNewClick(Sender: TObject);
     procedure btnCustomersClick(Sender: TObject);
     procedure btnPrintenClick(Sender: TObject);
+    procedure lvwItemsSelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
   private
        procedure LoadInvoices;
        procedure LoadData;
@@ -98,6 +102,7 @@ type
        procedure SetCustomerColums;
        procedure SetInvoiceColums;
        procedure SetOfferColums;
+       function GetLastNr(Table:TADOTable; FieldId: String): String;
   protected
         procedure Refresh; override;
         procedure OpenDatasets(); override;
@@ -161,17 +166,41 @@ begin
 end;
 
 procedure TfrmMain.btnNewClick(Sender: TObject);
+var fNr: Integer;
+    fId: Integer;
 begin
-    if lvwItems.HelpKeyword = Invoice then
-      frmHEdit := TfrmEditInvoice.Create(Self, 0, CurrentTable)
-    else if lvwItems.HelpKeyword = Offer then
-      frmHEdit := TfrmEditOffer.Create(Self, 0, CurrentTable)
-    else if lvwItems.HelpKeyword = Product then
+    if lvwItems.HelpKeyword = Invoice then begin
+      fNr := StrToInt(GetLastNr(CurrentTable, 'FactuurNr'))+ 1;
+      DBTQuery.Active := False;
+      DBTQuery.SQL.Clear;
+      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(FactuurNr, Factuur) Values(' + IntToStr(fNr) + ', true)';
+      DBTQuery.ExecSQL;
+      CurrentTable.Active := False;
+      CurrentTable.Active := True;
+      CurrentTable.Locate('FactuurNr', fNr, []);
+      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable, 'FactuurId')
+    end
+    else if lvwItems.HelpKeyword = Offer then begin
+      fNr := StrToInt(GetLastNr(CurrentTable, 'OfferteNr'))+ 1;
+      DBTQuery.Active := False;
+      DBTQuery.SQL.Clear;
+      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(OfferteNr) Values(' + IntToStr(fNr) + ')';
+      DBTQuery.ExecSQL;
+      CurrentTable.Active := False;
+      CurrentTable.Active := True;
+      CurrentTable.Locate('OfferteNr', fNr, []);
+      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'FactuurId')
+    end
+    else if lvwItems.HelpKeyword = Product then begin
       frmHEdit := TfrmEditArticle.Create(Self, 0, CurrentTable) ;
+    end;
 
   try
     if frmHEdit.ShowModal = mrOk then
-        Refresh;
+        Refresh
+    else begin
+        CurrentTable.DeleteRecords(arCurrent);
+    end;
   finally
     frmHEdit.Free;
   end;
@@ -197,6 +226,13 @@ begin
    finally
    frmReporInvoice.Free;
   end;
+end;
+
+function TfrmMain.GetLastNr(Table:TADOTable; FieldId: String): String;
+begin
+  Table.Sort := FieldId + ' DESC';
+  Table.First;
+  Result := Table.FieldByName(FieldId).AsString;
 end;
 
 procedure TfrmMain.LoadData;
@@ -258,6 +294,16 @@ begin
   end;
 end;
 
+
+procedure TfrmMain.lvwItemsSelectItem(Sender: TObject; Item: TListItem;
+  Selected: Boolean);
+begin
+  inherited;
+  if lvwItems.HelpKeyword = Invoice  then
+    btnPrinten.Enabled := not(Selected and (lvwItems.Selected.Data = nil))
+  else
+    btnPrinten.Enabled := false;
+end;
 
 procedure TfrmMain.OpenDatasets;
 begin
@@ -353,7 +399,7 @@ end;
 
 procedure TfrmMain.SetOfferColums;
 begin
-  addColumn('Factuur nr','FactuurNr', 75);
+  addColumn('Offerte nr','OfferteNr', 75);
   addColumn('Factuur datum','FactuurDatum', 110);
   addColumn('Klant naam', 'KlantNaam', 200);
   addColumn('Totaal', 'Totaal', 'curr', 150);

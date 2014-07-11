@@ -216,6 +216,11 @@ begin
   frameInvoiceDetails.addAlignColumn('Totaal', 100, taRightJustify);
 
   TCustomers := TfrmMain(Owner).DBTCustomers;
+
+  if Not CurrTable.FieldByName('Factuur').AsBoolean then
+    edtInvoiceNr.HelpKeyword := 'OfferteNr';
+
+  //  TInvoiceDetails := TfrmMain(Owner).DBTInvoiceDetails;
 end;
 
 procedure TfrmEditInvoice.loadOnceAfter;
