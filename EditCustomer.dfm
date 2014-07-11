@@ -1,6 +1,8 @@
 inherited frmEditCustomer: TfrmEditCustomer
   Caption = 'Klant wijzigen'
   ClientHeight = 265
+  KeyPreview = True
+  Position = poOwnerFormCenter
   ExplicitWidth = 407
   ExplicitHeight = 292
   PixelsPerInch = 96
@@ -19,28 +21,28 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Label2: TLabel
       Left = 36
-      Top = 61
+      Top = 54
       Width = 32
       Height = 13
       Caption = 'Adres:'
     end
     object Label3: TLabel
       Left = 36
-      Top = 88
+      Top = 84
       Width = 121
       Height = 13
       Caption = 'Postcode en woonplaats:'
     end
     object Label4: TLabel
       Left = 39
-      Top = 120
+      Top = 114
       Width = 84
       Height = 13
       Caption = 'Telefoonnummer:'
     end
     object Label5: TLabel
       Left = 39
-      Top = 152
+      Top = 144
       Width = 55
       Height = 13
       Caption = 'Emailadres:'
@@ -50,7 +52,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     Height = 186
     object Edit1: TEdit
       Left = 40
-      Top = 29
+      Top = 16
       Width = 184
       Height = 21
       HelpType = htKeyword
@@ -59,7 +61,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit2: TEdit
       Left = 40
-      Top = 53
+      Top = 46
       Width = 184
       Height = 21
       HelpType = htKeyword
@@ -68,7 +70,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit3: TEdit
       Left = 40
-      Top = 80
+      Top = 76
       Width = 184
       Height = 21
       HelpType = htKeyword
@@ -77,7 +79,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit4: TEdit
       Left = 40
-      Top = 112
+      Top = 106
       Width = 184
       Height = 21
       HelpType = htKeyword
@@ -86,7 +88,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit5: TEdit
       Left = 40
-      Top = 144
+      Top = 136
       Width = 184
       Height = 21
       HelpType = htKeyword

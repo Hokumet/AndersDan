@@ -1,9 +1,10 @@
 inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
-  Caption = 'frmEditInvoiceDetail'
+  Caption = 'Factuur details wijzigen'
   ClientHeight = 267
   ClientWidth = 437
   KeyPreview = True
   OldCreateOrder = False
+  Position = poOwnerFormCenter
   ExplicitWidth = 445
   ExplicitHeight = 294
   PixelsPerInch = 96
@@ -20,36 +21,36 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     ExplicitWidth = 204
     ExplicitHeight = 188
     object Label1: TLabel
-      Left = 80
+      Left = 41
       Top = 24
       Width = 76
       Height = 13
       Caption = 'Artikel Nummer:'
     end
     object Label2: TLabel
-      Left = 80
-      Top = 56
+      Left = 41
+      Top = 54
       Width = 63
       Height = 13
       Caption = 'Artikel naam:'
     end
     object Label3: TLabel
-      Left = 80
-      Top = 88
+      Left = 41
+      Top = 84
       Width = 24
       Height = 13
       Caption = 'Prijs:'
     end
     object Label4: TLabel
-      Left = 80
-      Top = 120
+      Left = 41
+      Top = 114
       Width = 35
       Height = 13
       Caption = 'Aantal:'
     end
     object Label5: TLabel
-      Left = 80
-      Top = 152
+      Left = 41
+      Top = 144
       Width = 34
       Height = 13
       Caption = 'Totaal:'
@@ -72,7 +73,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object edtProductName: TEdit
       Left = 16
-      Top = 48
+      Top = 46
       Width = 139
       Height = 21
       HelpType = htKeyword
@@ -83,7 +84,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object edtPrice: THCurrencyEdit
       Left = 16
-      Top = 85
+      Top = 76
       Width = 139
       Height = 21
       HelpType = htKeyword
@@ -96,7 +97,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object edtAmount: THFloatEdit
       Left = 16
-      Top = 112
+      Top = 106
       Width = 139
       Height = 21
       HelpType = htKeyword
@@ -111,7 +112,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object edtTotal: THCurrencyEdit
       Left = 16
-      Top = 139
+      Top = 136
       Width = 139
       Height = 21
       HelpType = htKeyword
@@ -126,7 +127,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       Left = 16
       Top = 36
       Width = 139
-      Height = 73
+      Height = 68
       ItemHeight = 13
       TabOrder = 6
       Visible = False

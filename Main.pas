@@ -68,12 +68,28 @@ type
     btnCustomers: TToolButton;
     DBTCustomersAangemaaktDoor: TWideStringField;
     DBTCustomersAangemaaktOp: TDateTimeField;
+    ADODataSet1: TADODataSet;
+    ADODataSet1Aanbetaling: TBCDField;
+    ADODataSet1AangemaaktDoor: TWideStringField;
+    ADODataSet1AangemaaktOp: TDateTimeField;
+    ADODataSet1Btw: TBCDField;
+    ADODataSet1Factuur: TBooleanField;
+    ADODataSet1FactuurDatum: TDateTimeField;
+    ADODataSet1FactuurNr: TIntegerField;
+    ADODataSet1Id: TAutoIncField;
+    ADODataSet1KlantAdres: TWideStringField;
+    ADODataSet1KlantNaam: TWideStringField;
+    ADODataSet1KlantPostCodePlaats: TWideStringField;
+    ADODataSet1NogTeBetalen: TBCDField;
+    ADODataSet1Subtotaal: TBCDField;
+    ADODataSet1Totaal: TBCDField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
     procedure btnCustomersClick(Sender: TObject);
+    procedure btnPrintenClick(Sender: TObject);
   private
        procedure LoadInvoices;
        procedure LoadData;
@@ -94,7 +110,7 @@ var
 
 implementation
 
-uses EditOffer, EditInvoice, EditArticle, EditCustomer;
+uses EditOffer, EditInvoice, EditArticle, EditCustomer, ReportInvoice;
 
 Const
   Invoice = 'Invoice';
@@ -166,6 +182,21 @@ begin
   lvwItems.HelpKeyword := btnOffers.HelpKeyword;
   CurrentTable := DBTInvoices;
   Refresh;
+end;
+
+procedure TfrmMain.btnPrintenClick(Sender: TObject);
+begin
+   try
+   frmReporInvoice := TfrmReporInvoice.Create(Self, Integer(lvwItems.Selected.Data), DBTInvoices);
+
+   if frmReporInvoice.frxReport.PrepareReport then
+      frmReporInvoice.frxReport.ShowPreparedReport;
+   //dm.frxReport1.LoadFromFile(curdir + 'personal.fr3');
+    //  if dm.frxReport1.PrepareReport then
+     //   dm.frxReport1.ShowPreparedReport;
+   finally
+   frmReporInvoice.Free;
+  end;
 end;
 
 procedure TfrmMain.LoadData;

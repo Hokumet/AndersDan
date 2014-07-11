@@ -13,7 +13,9 @@ uses
   EditArticle in 'EditArticle.pas' {frmEditArticle},
   HFrame in '..\Commons\HFrame.pas' {frAncestor: TFrame},
   EditInvoiceDetail in 'EditInvoiceDetail.pas' {frmEditInvoiceDetail},
-  EditCustomer in 'EditCustomer.pas' {frmEditCustomer};
+  EditCustomer in 'EditCustomer.pas' {frmEditCustomer},
+  ReportAncestor in '..\Commons\ReportAncestor.pas' {frmReportAnchestor},
+  ReportInvoice in 'ReportInvoice.pas' {frmReporInvoice};
 
 {$R *.res}
 
@@ -22,5 +24,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Anders dan anderen Factuur programma';
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmReportAnchestor, frmReportAnchestor);
+  Application.CreateForm(TfrmReporInvoice, frmReporInvoice);
   Application.Run;
 end.

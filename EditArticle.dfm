@@ -2,7 +2,9 @@ inherited frmEditArticle: TfrmEditArticle
   Caption = 'Product bekijken / wijzigen'
   ClientHeight = 206
   ClientWidth = 438
+  KeyPreview = True
   OldCreateOrder = False
+  Position = poOwnerFormCenter
   ExplicitWidth = 446
   ExplicitHeight = 233
   PixelsPerInch = 96
@@ -15,8 +17,8 @@ inherited frmEditArticle: TfrmEditArticle
     ExplicitWidth = 289
     ExplicitHeight = 286
     object Edit2: TEdit
-      Left = 35
-      Top = 21
+      Left = 16
+      Top = 16
       Width = 121
       Height = 21
       HelpType = htKeyword
@@ -24,8 +26,8 @@ inherited frmEditArticle: TfrmEditArticle
       TabOrder = 1
     end
     object Edit1: TEdit
-      Left = 35
-      Top = 51
+      Left = 16
+      Top = 46
       Width = 238
       Height = 21
       HelpType = htKeyword
@@ -33,8 +35,8 @@ inherited frmEditArticle: TfrmEditArticle
       TabOrder = 0
     end
     object edtPrijs: THCurrencyEdit
-      Left = 35
-      Top = 86
+      Left = 16
+      Top = 76
       Width = 121
       Height = 21
       HelpType = htKeyword

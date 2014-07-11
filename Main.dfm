@@ -25,63 +25,39 @@ inherited frmMain: TfrmMain
       end>
     ExplicitWidth = 1221
     inherited ToolBar: TToolBar
-      Left = 9
       Width = 1212
       Height = 56
       ButtonHeight = 52
       ButtonWidth = 64
-      ExplicitLeft = 9
       ExplicitWidth = 1212
-      ExplicitHeight = 56
       inherited btnNew: TToolButton
         OnClick = btnNewClick
-        ExplicitWidth = 77
-        ExplicitHeight = 52
       end
       inherited btnEdit: TToolButton
         Left = 77
-        ExplicitLeft = 77
-        ExplicitWidth = 64
-        ExplicitHeight = 52
       end
       inherited btnDelete: TToolButton
         Left = 141
-        ExplicitLeft = 141
-        ExplicitWidth = 64
-        ExplicitHeight = 52
       end
-      inherited Seperator: TToolButton
+      inherited btnPrint: TToolButton [3]
         Left = 205
-        ExplicitLeft = 205
-        ExplicitHeight = 52
       end
-      inherited btnPrint: TToolButton
-        Left = 219
-        ExplicitLeft = 219
-        ExplicitWidth = 64
-        ExplicitHeight = 52
+      inherited Seperator: TToolButton [4]
+        Left = 269
       end
       inherited btnPrinten: TToolButton
         Left = 283
-        ExplicitLeft = 283
-        ExplicitWidth = 64
-        ExplicitHeight = 52
       end
-      inherited ToolButton2: TToolButton
+      inherited btnBegin: TToolButton [6]
         Left = 347
-        ExplicitLeft = 347
-        ExplicitHeight = 52
-      end
-      inherited btnBegin: TToolButton
-        Left = 355
         HelpType = htKeyword
         HelpKeyword = 'Invoice'
         Caption = '&Facturen'
         Grouped = True
         Style = tbsCheck
-        ExplicitLeft = 355
-        ExplicitWidth = 64
-        ExplicitHeight = 52
+      end
+      inherited ToolButton2: TToolButton [7]
+        Left = 411
       end
       object btnOffers: TToolButton
         Left = 419
@@ -132,7 +108,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F00F000F00020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F00F400F40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4365,7 +4341,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C01011300F000F00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011300F400F40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5263,6 +5239,69 @@ inherited frmMain: TfrmMain
     end
     object DBTCustomersAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
+    end
+  end
+  object ADODataSet1: TADODataSet
+    Connection = DBCConnection
+    CursorType = ctStatic
+    CommandText = 
+      'select Aanbetaling, AangemaaktDoor, AangemaaktOp, Btw, Factuur, ' +
+      'FactuurDatum, FactuurNr, Id, KlantAdres, KlantNaam, KlantPostCod' +
+      'ePlaats, NogTeBetalen, Subtotaal, Totaal from Facturen'
+    Parameters = <>
+    Left = 504
+    Top = 176
+    object ADODataSet1Aanbetaling: TBCDField
+      FieldName = 'Aanbetaling'
+      Precision = 19
+    end
+    object ADODataSet1AangemaaktDoor: TWideStringField
+      FieldName = 'AangemaaktDoor'
+      Size = 255
+    end
+    object ADODataSet1AangemaaktOp: TDateTimeField
+      FieldName = 'AangemaaktOp'
+    end
+    object ADODataSet1Btw: TBCDField
+      FieldName = 'Btw'
+      Precision = 19
+    end
+    object ADODataSet1Factuur: TBooleanField
+      FieldName = 'Factuur'
+    end
+    object ADODataSet1FactuurDatum: TDateTimeField
+      FieldName = 'FactuurDatum'
+    end
+    object ADODataSet1FactuurNr: TIntegerField
+      FieldName = 'FactuurNr'
+    end
+    object ADODataSet1Id: TAutoIncField
+      FieldName = 'Id'
+      ReadOnly = True
+    end
+    object ADODataSet1KlantAdres: TWideStringField
+      FieldName = 'KlantAdres'
+      Size = 255
+    end
+    object ADODataSet1KlantNaam: TWideStringField
+      FieldName = 'KlantNaam'
+      Size = 255
+    end
+    object ADODataSet1KlantPostCodePlaats: TWideStringField
+      FieldName = 'KlantPostCodePlaats'
+      Size = 255
+    end
+    object ADODataSet1NogTeBetalen: TBCDField
+      FieldName = 'NogTeBetalen'
+      Precision = 19
+    end
+    object ADODataSet1Subtotaal: TBCDField
+      FieldName = 'Subtotaal'
+      Precision = 19
+    end
+    object ADODataSet1Totaal: TBCDField
+      FieldName = 'Totaal'
+      Precision = 19
     end
   end
 end
