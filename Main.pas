@@ -85,6 +85,8 @@ type
     ADODataSet1Totaal: TBCDField;
     DBTInvoicesOfferteNr: TIntegerField;
     DBTOffersOfferteNr: TIntegerField;
+    DBTOffersAanbetaling: TBCDField;
+    DBTOffersNogTeBetalen: TBCDField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -94,6 +96,7 @@ type
     procedure btnPrintenClick(Sender: TObject);
     procedure lvwItemsSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
+      function GetLastNr(Table:TADOTable; FieldId: String): String;
   private
        procedure LoadInvoices;
        procedure LoadData;
@@ -102,12 +105,11 @@ type
        procedure SetCustomerColums;
        procedure SetInvoiceColums;
        procedure SetOfferColums;
-       function GetLastNr(Table:TADOTable; FieldId: String): String;
   protected
         procedure Refresh; override;
         procedure OpenDatasets(); override;
   public
-    { Public declarations }
+      //
   end;
 
 var
@@ -149,14 +151,17 @@ begin
 end;
 
 procedure TfrmMain.btnEditClick(Sender: TObject);
+var faNr: Integer;
 begin
     if lvwItems.HelpKeyword = Invoice then begin
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable, 'FactuurId');
       frmHEdit.Caption := 'Factuur bekijken / wijzigen';
     end
     else if lvwItems.HelpKeyword = Offer then begin
+      faNr := StrToInt(GetLastNr(DBTInvoices, 'FactuurNr'))+ 1;
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'FactuurId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
+      TfrmEditInvoice(frmHEdit).invoiceNr := faNr;
     end
     else if lvwItems.HelpKeyword = Product then
       frmHEdit := TfrmEditArticle.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable)
@@ -166,41 +171,40 @@ begin
 end;
 
 procedure TfrmMain.btnNewClick(Sender: TObject);
-var fNr: Integer;
-    fId: Integer;
+var oNr: Integer;
+    faNr: Integer;
+    Id: Integer;
 begin
+    faNr := StrToInt(GetLastNr(DBTInvoices, 'FactuurNr'))+ 1;
+    oNr := StrToInt(GetLastNr(DBTOffers, 'OfferteNr'))+ 1;
+    DBTQuery.Active := False;
+    DBTQuery.SQL.Clear;
+
     if lvwItems.HelpKeyword = Invoice then begin
-      fNr := StrToInt(GetLastNr(CurrentTable, 'FactuurNr'))+ 1;
-      DBTQuery.Active := False;
-      DBTQuery.SQL.Clear;
-      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(FactuurNr, Factuur) Values(' + IntToStr(fNr) + ', true)';
+      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(FactuurNr, Factuur) Values(' + IntToStr(faNr) + ', true)';
       DBTQuery.ExecSQL;
       CurrentTable.Active := False;
       CurrentTable.Active := True;
-      CurrentTable.Locate('FactuurNr', fNr, []);
-      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable, 'FactuurId')
+      CurrentTable.Locate('FactuurNr', faNr, []);
+      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'FactuurId');
+      frmHEdit.Caption := 'Factuur bekijken / wijzigen';
     end
     else if lvwItems.HelpKeyword = Offer then begin
-      fNr := StrToInt(GetLastNr(CurrentTable, 'OfferteNr'))+ 1;
-      DBTQuery.Active := False;
-      DBTQuery.SQL.Clear;
-      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(OfferteNr) Values(' + IntToStr(fNr) + ')';
+      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(OfferteNr) Values(' + IntToStr(oNr) + ')';
       DBTQuery.ExecSQL;
       CurrentTable.Active := False;
       CurrentTable.Active := True;
-      CurrentTable.Locate('OfferteNr', fNr, []);
-      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'FactuurId')
-    end
-    else if lvwItems.HelpKeyword = Product then begin
-      frmHEdit := TfrmEditArticle.Create(Self, 0, CurrentTable) ;
+      CurrentTable.Locate('OfferteNr', oNr, []);
+      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'FactuurId');
+      frmHEdit.Caption := 'Offerte bekijken / wijzigen';
+      TfrmEditInvoice(frmHEdit).invoiceNr := faNr;
     end;
 
   try
     if frmHEdit.ShowModal = mrOk then
         Refresh
-    else begin
+    else
         CurrentTable.DeleteRecords(arCurrent);
-    end;
   finally
     frmHEdit.Free;
   end;
@@ -209,7 +213,7 @@ end;
 procedure TfrmMain.btnOffersClick(Sender: TObject);
 begin
   lvwItems.HelpKeyword := btnOffers.HelpKeyword;
-  CurrentTable := DBTInvoices;
+  CurrentTable := DBTOffers;
   Refresh;
 end;
 
@@ -317,6 +321,9 @@ end;
 
 procedure TfrmMain.Refresh;
 begin
+  if CurrentTable <> nil then
+    CurrentTable.Filter := '';
+
   if lvwItems.HelpKeyword = Invoice  then begin
     lvwItems.Columns.Clear;
     FieldCaptionAndFieldName.Clear;

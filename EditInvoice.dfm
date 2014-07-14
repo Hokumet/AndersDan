@@ -125,6 +125,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Width = 100
         Height = 17
         HelpType = htKeyword
+        HelpKeyword = 'Factuur'
         Caption = 'Sla als klant op'
         TabOrder = 5
         OnClick = ckbSaveCustomerClick
@@ -159,14 +160,14 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 13
         Caption = 'Subtotaal:'
       end
-      object Label6: TLabel
+      object lblPayed: TLabel
         Left = 393
         Top = 14
         Width = 61
         Height = 13
         Caption = 'Aanbetaling:'
       end
-      object Label7: TLabel
+      object lblToBePayed: TLabel
         Left = 393
         Top = 44
         Width = 75
@@ -191,7 +192,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Width = 145
         Height = 17
         HelpType = htKeyword
-        HelpKeyword = 'Offerte'
+        HelpKeyword = 'Factuur'
         Caption = 'Zet om naar een factuur'
         TabOrder = 1
       end
@@ -241,6 +242,17 @@ inherited frmEditInvoice: TfrmEditInvoice
         TabOrder = 5
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
+      end
+      object ckbInvoicePayed: TCheckBox
+        Left = 681
+        Top = 13
+        Width = 145
+        Height = 17
+        HelpType = htKeyword
+        HelpKeyword = 'Betaald'
+        Caption = 'Factuur is betaald'
+        TabOrder = 6
+        OnClick = ckbInvoicePayedClick
       end
     end
     object Panel4: TPanel

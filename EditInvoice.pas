@@ -25,10 +25,10 @@ type
     Label4: TLabel;
     edtSubtotal: THCurrencyEdit;
     Label5: TLabel;
-    Label6: TLabel;
+    lblPayed: TLabel;
     edtAanbetaling: THCurrencyEdit;
     edtToBePayed: THCurrencyEdit;
-    Label7: TLabel;
+    lblToBePayed: TLabel;
     Label8: TLabel;
     edtCustomerName: TEdit;
     Label9: TLabel;
@@ -37,6 +37,7 @@ type
     Label10: TLabel;
     ckbSaveCustomer: TCheckBox;
     lbxCustomers: TListBox;
+    ckbInvoicePayed: TCheckBox;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -47,20 +48,22 @@ type
     procedure lbxCustomersKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtCustomerNameExit(Sender: TObject);
+    procedure ckbInvoicePayedClick(Sender: TObject);
   private
+    fInvoiceNr: Integer;
     TInvoiceDetails: TADOTable;
     TCustomers: TADOTable;
     procedure SelectCustomer(CustomerId: Integer);
     { Private declarations }
   protected
-        procedure loadFields(); override;
-        procedure loadDetails(); override;
-        procedure loadDetailsTables; override;
-        procedure saveFields(); override;
-        procedure loadOnce(); override;
-        procedure loadOnceAfter(); override;
+    procedure loadFields(); override;
+    procedure loadDetails(); override;
+    procedure loadDetailsTables; override;
+    procedure saveFields(); override;
+    procedure loadOnce(); override;
+    procedure loadOnceAfter(); override;
   public
-    { Public declarations }
+    property invoiceNr:Integer write fInvoiceNr;
   end;
 
 var
@@ -72,6 +75,15 @@ uses Main, EditArticle, EditInvoiceDetail;
 {$R *.dfm}
 
 { TfrmEditInvoice }
+
+procedure TfrmEditInvoice.ckbInvoicePayedClick(Sender: TObject);
+begin
+  if ckbInvoicePayed.Checked then
+    if MessageDlg('Weet je zeker dat je de factuur als betaald wil aanmerken',mtError, mbOKCancel, 0) <> mrOK  then
+      ckbInvoicePayed.Checked := false
+    else
+      edtToBePayed.Value := 0;
+end;
 
 procedure TfrmEditInvoice.ckbSaveCustomerClick(Sender: TObject);
 begin
@@ -230,10 +242,17 @@ begin
   edtAanbetaling.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
   edtToBePayed.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
   ckbInvoice.Visible := Not CurrTable.FieldByName('Factuur').AsBoolean;
+  lblPayed.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
+  lblToBePayed.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
+  ckbInvoicePayed.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
+
+  if CurrTable.FieldByName('Betaald').AsBoolean then
+    edtToBePayed.Value := 0;
 end;
 
 procedure TfrmEditInvoice.saveFields;
 var I: Integer;
+    fNr:Integer;
 begin
   for I := 0 to pnlLabels.ControlCount - 1 do begin
       saveField(pnlLabels.Controls[I]);
@@ -250,7 +269,13 @@ begin
       TCustomers.Post;
       TCustomers.UpdateBatch;
     end;
+    if ckbInvoice.Checked then begin
+     // CurrTable.FieldByName('Factuur').AsBoolean := true;
+      CurrTable.FieldByName('FactuurNr').AsInteger := fInvoiceNr;
+    end;
 
+    //if ckbInvoicePayed.Checked then
+    //  CurrTable.FieldByName('Betaald').AsBoolean := true;
   inherited;
 end;
 

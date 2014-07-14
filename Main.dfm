@@ -20,7 +20,7 @@ inherited frmMain: TfrmMain
       item
         Control = ToolBar
         ImageIndex = -1
-        MinHeight = 64
+        MinHeight = 56
         Width = 1221
       end>
     ExplicitWidth = 1221
@@ -5233,6 +5233,14 @@ inherited frmMain: TfrmMain
     end
     object DBTOffersOfferteNr: TIntegerField
       FieldName = 'OfferteNr'
+    end
+    object DBTOffersAanbetaling: TBCDField
+      FieldName = 'Aanbetaling'
+      Precision = 19
+    end
+    object DBTOffersNogTeBetalen: TBCDField
+      FieldName = 'NogTeBetalen'
+      Precision = 19
     end
   end
   object DBTCustomers: TADOTable
