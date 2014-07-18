@@ -13,9 +13,9 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel4: TPanel;
-    Label1: TLabel;
+    lblNr: TLabel;
     edtInvoiceNr: TEdit;
-    Label2: TLabel;
+    lblDate: TLabel;
     dtpInvoiceDate: TDateTimePicker;
     edtTotal: THCurrencyEdit;
     Label3: TLabel;
@@ -38,6 +38,12 @@ type
     ckbSaveCustomer: TCheckBox;
     lbxCustomers: TListBox;
     ckbInvoicePayed: TCheckBox;
+    edtPhoneNumber: TEdit;
+    Label6: TLabel;
+    lblPayedVia: TLabel;
+    lblToBePayedVia: TLabel;
+    cmbToBepayedVia: TComboBox;
+    cmbPayedVia: TComboBox;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -71,7 +77,7 @@ var
 
 implementation
 
-uses Main, EditArticle, EditInvoiceDetail;
+uses Main, EditArticle, EditInvoiceDetail, ReportInvoice;
 {$R *.dfm}
 
 { TfrmEditInvoice }
@@ -245,9 +251,15 @@ begin
   lblPayed.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
   lblToBePayed.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
   ckbInvoicePayed.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
+  lblPayedVia.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
+  lblToBePayedVia.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
+  cmbPayedVia.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
+  cmbToBepayedVia.Visible := CurrTable.FieldByName('Factuur').AsBoolean;
 
-  if CurrTable.FieldByName('Betaald').AsBoolean then
+  if CurrTable.FieldByName('Factuur').AsBoolean and CurrTable.FieldByName('Betaald').AsBoolean then begin
     edtToBePayed.Value := 0;
+    ckbInvoicePayed.Checked := true;
+  end;
 end;
 
 procedure TfrmEditInvoice.saveFields;
@@ -266,16 +278,23 @@ begin
       TCustomers.FieldByName('Naam').AsString := edtCustomerName.Text;
       TCustomers.FieldByName('Adres').AsString := edtCustomerAddress.Text;
       TCustomers.FieldByName('PostcodePlaats').AsString := edtPostCodeCity.Text;
+      TCustomers.FieldByName('Telefoonnumer').AsString := edtPhoneNumber.Text;
+
       TCustomers.Post;
       TCustomers.UpdateBatch;
     end;
     if ckbInvoice.Checked then begin
-     // CurrTable.FieldByName('Factuur').AsBoolean := true;
+      CurrTable.FieldByName('Factuur').AsBoolean := true;
       CurrTable.FieldByName('FactuurNr').AsInteger := fInvoiceNr;
+      try
+        frmReporInvoice := TfrmReporInvoice.Create(Self, CurrTable.FieldByName('ID').AsInteger, TCustomers);
+        frmReporInvoice.ExportToPdf(TfrmMain(Owner).Inifile.ReadString('Offerte','SaveDir','C:\Ada\'));
+        finally
+          frmReporInvoice.Free;
+      end;
     end;
-
-    //if ckbInvoicePayed.Checked then
-    //  CurrTable.FieldByName('Betaald').AsBoolean := true;
+    if ckbInvoicePayed.Checked then
+      CurrTable.FieldByName('Betaald').AsBoolean := true;
   inherited;
 end;
 

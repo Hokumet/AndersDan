@@ -39,11 +39,19 @@ type
     frxDetailData: TfrxDBDataset;
     frxreport: TfrxReport;
     frxMasterData: TfrxDBDataset;
+    DBTTInvoicesOfferteNr: TIntegerField;
+    DBTTInvoicesOfferte: TBooleanField;
+    DBTTInvoicesKlantTelefoonnummer: TWideStringField;
+    DBTTInvoicesBetaald: TBooleanField;
+    DBTTInvoicesAanbetalingVia: TWideStringField;
+    DBTTInvoicesNogTebetalenVia: TWideStringField;
+    frxPDFExport: TfrxPDFExport;
+    procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
     { Private declarations }
   public
     constructor Create(Owner: TComponent; ID: Integer; MasterTable: TADOTable); overload;
-
+    procedure ExportToPdf(ExportDir: String);
   end;
 
 var
@@ -59,6 +67,9 @@ constructor TfrmReporInvoice.Create(Owner: TComponent; ID: Integer;
   MasterTable: TADOTable);
 begin
   inherited Create(Owner);
+  DBTTInvoices.Connection := MasterTable.Connection;
+  DBTInvoiceDetails.Connection := MasterTable.Connection;
+
   DBTTInvoices.Open;
   DBTInvoiceDetails.Open;
 
@@ -69,6 +80,53 @@ begin
   DBTInvoiceDetails.Filtered := false;
   DBTInvoiceDetails.Filter := 'FactuurId' + '=' + IntToStr(ID);
   DBTInvoiceDetails.Filtered := true;
+end;
+
+procedure TfrmReporInvoice.frxreportGetValue(const VarName: string;
+  var Value: Variant);
+begin
+  if VarName = 'lblAanbetaling' then
+    if DBTTInvoicesAanbetaling.Value >0 then
+      Value := 'Aanbetaling     :'
+    else
+      Value := ''
+  else if VarName = 'PayedVia' then
+    if DBTTInvoicesAanbetaling.Value >0 then
+      Value := DBTTInvoicesAanbetalingVia.Value
+    else
+      Value := ''
+  else if VarName = 'Payed' then
+    if DBTTInvoicesAanbetaling.Value >0 then
+      Value := FormatFloat('0.00', DBTTInvoicesAanbetaling.AsCurrency)
+    else
+      Value := ''
+  else if VarName = 'lblToBePayed' then
+    if DBTTInvoicesAanbetaling.Value >0 then
+      Value := 'Nog te betalen  :'
+    else
+      Value := ''
+  else if VarName = 'ToBePayedVia' then
+    if DBTTInvoicesAanbetaling.Value >0 then
+      Value := DBTTInvoicesNogTebetalenVia.Value
+    else
+      Value := ''
+  else if VarName = 'ToBePayed' then
+    if DBTTInvoicesAanbetaling.Value >0 then
+      Value := FormatFloat('0.00', DBTTInvoicesNogTebetalen.AsCurrency)
+    else
+      Value := ''
+end;
+
+procedure TfrmReporInvoice.ExportToPdf(ExportDir: String);
+var oExportfilter :TfrxCustomExportFilter;
+begin
+  oExportfilter := TfrxCustomExportFilter(frxPDFExport);
+  oExportfilter.DataOnly := false;
+  oExportFilter.ShowDialog := False;
+  oExportfilter.DefaultPath := ExportDir;
+  oExportfilter.FileName := 'OfferteExport-'+DBTTInvoicesId.AsString+'.pdf';
+  frxReport.PrepareReport(True);
+  frxReport.Export(oExportFilter);
 end;
 
 end.

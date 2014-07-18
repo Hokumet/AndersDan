@@ -12,7 +12,41 @@ inherited frmMain: TfrmMain
   TextHeight = 13
   inherited pnlHeader: TPanel
     Width = 1221
+    Height = 31
     ExplicitWidth = 1221
+    ExplicitHeight = 31
+    object lblToBePayed: TLabel [1]
+      Left = 1161
+      Top = 0
+      Width = 60
+      Height = 31
+      Align = alRight
+      Alignment = taRightJustify
+      Caption = 'Zoeken'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitHeight = 19
+    end
+    object ckbPayed: TCheckBox
+      Left = 400
+      Top = 8
+      Width = 97
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Betaald'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = ckbPayedClick
+    end
   end
   inherited CoolBar: TCoolBar
     Width = 1221
@@ -127,14 +161,16 @@ inherited frmMain: TfrmMain
     ExplicitWidth = 1221
   end
   inherited lvwItems: TMyListView
+    Top = 91
     Width = 1221
-    Height = 400
+    Height = 397
+    ExplicitTop = 91
     ExplicitWidth = 1221
-    ExplicitHeight = 400
+    ExplicitHeight = 397
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F00FC00FC0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F001001100120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4367,7 +4403,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C01011300FC00FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113001001100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5108,6 +5144,24 @@ inherited frmMain: TfrmMain
     object DBTInvoicesOfferteNr: TIntegerField
       FieldName = 'OfferteNr'
     end
+    object DBTInvoicesBetaald: TBooleanField
+      FieldName = 'Betaald'
+    end
+    object DBTInvoicesKlantTelefoonnummer: TWideStringField
+      FieldName = 'KlantTelefoonnummer'
+      Size = 255
+    end
+    object DBTInvoicesOfferte: TBooleanField
+      FieldName = 'Offerte'
+    end
+    object DBTInvoicesAanbetalingVia: TWideStringField
+      FieldName = 'AanbetalingVia'
+      Size = 255
+    end
+    object DBTInvoicesNogTeBetalenVia: TWideStringField
+      FieldName = 'NogTeBetalenVia'
+      Size = 255
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -5241,6 +5295,24 @@ inherited frmMain: TfrmMain
     object DBTOffersNogTeBetalen: TBCDField
       FieldName = 'NogTeBetalen'
       Precision = 19
+    end
+    object DBTOffersBetaald: TBooleanField
+      FieldName = 'Betaald'
+    end
+    object DBTOffersKlantTelefoonnummer: TWideStringField
+      FieldName = 'KlantTelefoonnummer'
+      Size = 255
+    end
+    object DBTOffersOfferte: TBooleanField
+      FieldName = 'Offerte'
+    end
+    object DBTOffersAanbetalingVia: TWideStringField
+      FieldName = 'AanbetalingVia'
+      Size = 255
+    end
+    object DBTOffersNogTeBetalenVia: TWideStringField
+      FieldName = 'NogTeBetalenVia'
+      Size = 255
     end
   end
   object DBTCustomers: TADOTable

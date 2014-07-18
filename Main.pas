@@ -87,6 +87,18 @@ type
     DBTOffersOfferteNr: TIntegerField;
     DBTOffersAanbetaling: TBCDField;
     DBTOffersNogTeBetalen: TBCDField;
+    DBTInvoicesBetaald: TBooleanField;
+    DBTOffersBetaald: TBooleanField;
+    DBTInvoicesKlantTelefoonnummer: TWideStringField;
+    DBTOffersKlantTelefoonnummer: TWideStringField;
+    DBTInvoicesOfferte: TBooleanField;
+    DBTOffersOfferte: TBooleanField;
+    DBTInvoicesAanbetalingVia: TWideStringField;
+    DBTInvoicesNogTeBetalenVia: TWideStringField;
+    DBTOffersAanbetalingVia: TWideStringField;
+    DBTOffersNogTeBetalenVia: TWideStringField;
+    lblToBePayed: TLabel;
+    ckbPayed: TCheckBox;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -97,6 +109,7 @@ type
     procedure lvwItemsSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
       function GetLastNr(Table:TADOTable; FieldId: String): String;
+    procedure ckbPayedClick(Sender: TObject);
   private
        procedure LoadInvoices;
        procedure LoadData;
@@ -105,6 +118,7 @@ type
        procedure SetCustomerColums;
        procedure SetInvoiceColums;
        procedure SetOfferColums;
+    procedure LoadInvoicesFiltered(totalPayed: Double; totalTobePayed: Double);
   protected
         procedure Refresh; override;
         procedure OpenDatasets(); override;
@@ -117,7 +131,7 @@ var
 
 implementation
 
-uses EditOffer, EditInvoice, EditArticle, EditCustomer, ReportInvoice;
+uses EditOffer, EditInvoice, EditArticle, EditCustomer, ReportInvoice,ShellApi;
 
 Const
   Invoice = 'Invoice';
@@ -161,6 +175,8 @@ begin
       faNr := StrToInt(GetLastNr(DBTInvoices, 'FactuurNr'))+ 1;
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'FactuurId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
+      TfrmEditInvoice(frmHEdit).lblNr.Caption := 'Offerte nummer:';
+      TfrmEditInvoice(frmHEdit).lblDate.Caption := 'Offerte datum:';
       TfrmEditInvoice(frmHEdit).invoiceNr := faNr;
     end
     else if lvwItems.HelpKeyword = Product then
@@ -218,18 +234,39 @@ begin
 end;
 
 procedure TfrmMain.btnPrintenClick(Sender: TObject);
+var fileName: PWideChar;
+    fileString: String;
 begin
-   try
-   frmReporInvoice := TfrmReporInvoice.Create(Self, Integer(lvwItems.Selected.Data), DBTInvoices);
 
-   if frmReporInvoice.frxReport.PrepareReport then
-      frmReporInvoice.frxReport.ShowPreparedReport;
-   //dm.frxReport1.LoadFromFile(curdir + 'personal.fr3');
-    //  if dm.frxReport1.PrepareReport then
-     //   dm.frxReport1.ShowPreparedReport;
-   finally
-   frmReporInvoice.Free;
+  if lvwItems.HelpKeyword = Invoice  then begin
+   try
+      frmReporInvoice := TfrmReporInvoice.Create(Self, Integer(lvwItems.Selected.Data), DBTInvoices);
+
+      if frmReporInvoice.frxReport.PrepareReport then
+        frmReporInvoice.frxReport.ShowPreparedReport;
+      finally
+        frmReporInvoice.Free;
+    end;
+  end
+  else begin
+    fileString :=Inifile.ReadString('Offerte','SaveDir','C:\Ada\')+'\OfferteExport-'+IntToStr(Integer(lvwItems.Selected.Data))+'.pdf';
+    ShellExecute(0, nil, PChar(fileString), nil, nil, SW_SHOWNORMAL);
   end;
+end;
+
+procedure TfrmMain.ckbPayedClick(Sender: TObject);
+begin
+  if ckbPayed.Checked then  begin
+    CurrentTable.Filtered := false;
+    CurrentTable.Filter := 'Factuur='+QuotedStr('true') + 'AND Betaald=' + QuotedStr('true');
+    CurrentTable.Filtered := true;
+  end
+  else begin
+    CurrentTable.Filtered := false;
+    CurrentTable.Filter := 'Factuur='+QuotedStr('true') + ' AND Betaald=' + QuotedStr('false');
+    CurrentTable.Filtered := true;
+  end;
+  LoadInvoicesFiltered(0,0);
 end;
 
 function TfrmMain.GetLastNr(Table:TADOTable; FieldId: String): String;
@@ -268,34 +305,16 @@ end;
 
 procedure TfrmMain.LoadInvoices;
 var
-  LI: TListItem;
-  I,X: Integer;
-  column: TListColumn;
+  totalTobePayed,totalPayed: Double;
 begin
+  totalPayed:=0;
+  totalTobePayed:=0;
   if lvwItems.HelpKeyword = Invoice  then
-    LoadFiltered('Factuur='+QuotedStr('true'))
+    LoadFiltered('Factuur='+QuotedStr('true')+ ' AND Betaald=' + QuotedStr('false'))
   else
     LoadFiltered('Factuur='+QuotedStr('false'));
 
-  lvwItems.Clear;
-  CurrentTable.Last;
-  for I := 0 to CurrentTable.RecordCount - 1 do
-  begin
-    LI := lvwItems.Items.Add;
-    for X := 0 to lvwItems.Columns.Count -1 do begin
-      column := lvwItems.Columns.Items[X];
-      if X = 0 then
-        LI.Caption := CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString
-      else begin
-        if FieldCaptionAndFieldType.Values[column.DisplayName] = 'curr' then
-          LI.SubItems.Add('€ '+FormatFloat('0.00',CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsFloat))
-        else
-          LI.SubItems.Add(CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString);
-      end;
-    end;
-    LI.Data := Pointer(CurrentTable.FieldByName('ID').asInteger);
-    CurrentTable.Prior;
-  end;
+  LoadInvoicesFiltered(totalPayed, totalTobePayed);
 end;
 
 
@@ -303,7 +322,7 @@ procedure TfrmMain.lvwItemsSelectItem(Sender: TObject; Item: TListItem;
   Selected: Boolean);
 begin
   inherited;
-  if lvwItems.HelpKeyword = Invoice  then
+  if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer)  then
     btnPrinten.Enabled := not(Selected and (lvwItems.Selected.Data = nil))
   else
     btnPrinten.Enabled := false;
@@ -317,6 +336,42 @@ begin
   DBTProducts.Open;
   DBTInvoiceDetails.Open;
   DBTCustomers.Open;
+end;
+
+procedure TfrmMain.LoadInvoicesFiltered(totalPayed: Double; totalTobePayed: Double);
+var
+  X: Integer;
+  I: Integer;
+  LI: TListItem;
+  column: TListColumn;
+begin
+  lvwItems.Clear;
+  CurrentTable.Last;
+  for I := 0 to CurrentTable.RecordCount - 1 do
+  begin
+    LI := lvwItems.Items.Add;
+    for X := 0 to lvwItems.Columns.Count - 1 do
+    begin
+      column := lvwItems.Columns.Items[X];
+      if X = 0 then
+        LI.Caption := CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString
+      else
+      begin
+        if FieldCaptionAndFieldType.Values[column.DisplayName] = 'curr' then
+          LI.SubItems.Add('€ ' + FormatFloat('0.00', CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsFloat))
+        else
+          LI.SubItems.Add(CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString);
+      end;
+    end;
+    LI.Data := Pointer(CurrentTable.FieldByName('ID').asInteger);
+    totalPayed := totalPayed + CurrentTable.FieldByName('Totaal').AsFloat;
+    totalTobePayed := totalTobePayed + CurrentTable.FieldByName('NogTeBetalen').AsFloat;
+    CurrentTable.Prior;
+  end;
+  if ckbPayed.Checked then
+    lblToBePayed.Caption := 'Totaal betaald:     € ' + FormatFloat('0.00', totalPayed) + '     '
+  else
+    lblToBePayed.Caption := 'Totaal openstaand:     € ' + FormatFloat('0.00', totalTobePayed) + '     ';
 end;
 
 procedure TfrmMain.Refresh;
@@ -407,7 +462,7 @@ end;
 procedure TfrmMain.SetOfferColums;
 begin
   addColumn('Offerte nr','OfferteNr', 75);
-  addColumn('Factuur datum','FactuurDatum', 110);
+  addColumn('Offerte datum','FactuurDatum', 110);
   addColumn('Klant naam', 'KlantNaam', 200);
   addColumn('Totaal', 'Totaal', 'curr', 150);
 end;

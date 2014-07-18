@@ -85,6 +85,27 @@ object frmReporInvoice: TfrmReporInvoice
     object DBTTInvoicesAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
     end
+    object DBTTInvoicesOfferteNr: TIntegerField
+      FieldName = 'OfferteNr'
+    end
+    object DBTTInvoicesOfferte: TBooleanField
+      FieldName = 'Offerte'
+    end
+    object DBTTInvoicesKlantTelefoonnummer: TWideStringField
+      FieldName = 'KlantTelefoonnummer'
+      Size = 255
+    end
+    object DBTTInvoicesBetaald: TBooleanField
+      FieldName = 'Betaald'
+    end
+    object DBTTInvoicesAanbetalingVia: TWideStringField
+      FieldName = 'AanbetalingVia'
+      Size = 255
+    end
+    object DBTTInvoicesNogTebetalenVia: TWideStringField
+      FieldName = 'NogTebetalenVia'
+      Size = 255
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -152,18 +173,20 @@ object frmReporInvoice: TfrmReporInvoice
     Version = '4.11.17'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Buttons = [pbPrint, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbNavigator, pbExportQuick]
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
+    ReportOptions.Author = 'Anders dan Andere factuur programma'
     ReportOptions.CreateDate = 41831.598576145840000000
-    ReportOptions.LastChange = 41831.766718576390000000
+    ReportOptions.LastChange = 41838.634860000000000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
       'begin'
       ''
       'end.')
+    OnGetValue = frxreportGetValue
     Left = 72
     Top = 24
     Datasets = <
@@ -175,7 +198,35 @@ object frmReporInvoice: TfrmReporInvoice
         DataSet = frxMasterData
         DataSetName = 'frxMasterDataU'
       end>
-    Variables = <>
+    Variables = <
+      item
+        Name = ' aanbetaling'
+        Value = Null
+      end
+      item
+        Name = 'lblAanbetaling'
+        Value = ''
+      end
+      item
+        Name = 'PayedVia'
+        Value = ''
+      end
+      item
+        Name = 'Payed'
+        Value = ''
+      end
+      item
+        Name = 'lblToBePayed'
+        Value = ''
+      end
+      item
+        Name = 'ToBePayedVia'
+        Value = ''
+      end
+      item
+        Name = 'ToBePayed'
+        Value = ''
+      end>
     Style = <>
     object Data: TfrxDataPage
       Height = 1000.000000000000000000
@@ -359,6 +410,18 @@ object frmReporInvoice: TfrmReporInvoice
             'FACTUUR')
           ParentFont = False
         end
+        object frxMasterDataUKlantTelefoonnummer: TfrxMemoView
+          Left = 34.015770000000000000
+          Top = 128.504020000000000000
+          Width = 400.630180000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'KlantTelefoonnummer'
+          DataSet = frxMasterData
+          DataSetName = 'frxMasterDataU'
+          Memo.UTF8W = (
+            '[frxMasterDataU."KlantTelefoonnummer"]')
+        end
       end
       object DetailData1: TfrxDetailData
         Height = 22.677180000000000000
@@ -527,18 +590,16 @@ object frmReporInvoice: TfrmReporInvoice
           Memo.UTF8W = (
             'Btw                    :')
         end
-        object Memo16: TfrxMemoView
+        object frxMasterDataUAanbetaling: TfrxMemoView
           Left = 604.724743860000000000
           Top = 122.448902500000000000
           Width = 94.488188980000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'Aanbetaling'
           DataSet = frxMasterData
           DataSetName = 'frxMasterDataU'
           DisplayFormat.DecimalSeparator = ','
           DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -546,18 +607,18 @@ object frmReporInvoice: TfrmReporInvoice
           Font.Style = []
           HAlign = haRight
           Memo.UTF8W = (
-            '[frxMasterDataU."Aanbetaling"]')
+            '[Payed]')
           ParentFont = False
           VAlign = vaBottom
         end
-        object Memo17: TfrxMemoView
-          Left = 491.338900000000000000
-          Top = 123.393785000000000000
-          Width = 105.448818900000000000
+        object lblPayed: TfrxMemoView
+          Left = 388.338900000000000000
+          Top = 122.448902500000000000
+          Width = 109.228348900000000000
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (
-            'Aanbetaling       :')
+            '[lblAanbetaling]')
         end
         object Memo18: TfrxMemoView
           Left = 604.724743860000000000
@@ -565,12 +626,10 @@ object frmReporInvoice: TfrmReporInvoice
           Width = 94.488188980000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'NogTeBetalen'
           DataSet = frxMasterData
           DataSetName = 'frxMasterDataU'
           DisplayFormat.DecimalSeparator = ','
           DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -578,18 +637,18 @@ object frmReporInvoice: TfrmReporInvoice
           Font.Style = []
           HAlign = haRight
           Memo.UTF8W = (
-            '[frxMasterDataU."NogTeBetalen"]')
+            '[ToBePayed]')
           ParentFont = False
           VAlign = vaBottom
         end
         object Memo19: TfrxMemoView
-          Left = 491.338900000000000000
+          Left = 388.338900000000000000
           Top = 151.299320000000000000
           Width = 105.448818900000000000
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (
-            'Nog te voldaan  :')
+            '[lblToBePayed]')
         end
         object frxMasterDataUSubtotaal: TfrxMemoView
           Left = 604.724800000000000000
@@ -616,6 +675,28 @@ object frmReporInvoice: TfrmReporInvoice
           Memo.UTF8W = (
             'Subtotaal           :')
         end
+        object frxMasterDataUAanbetalingVia: TfrxMemoView
+          Left = 506.457020000000000000
+          Top = 122.448902500000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataSet = frxMasterData
+          DataSetName = 'frxMasterDataU'
+          Memo.UTF8W = (
+            '[PayedVia]')
+        end
+        object frxMasterDataUNogTebetalenVia: TfrxMemoView
+          Left = 506.457020000000000000
+          Top = 151.299320000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataSet = frxMasterData
+          DataSetName = 'frxMasterDataU'
+          Memo.UTF8W = (
+            '[ToBePayedVia]')
+        end
       end
     end
   end
@@ -636,10 +717,38 @@ object frmReporInvoice: TfrmReporInvoice
       'KlantAdres=KlantAdres'
       'KlantPostCodePlaats=KlantPostCodePlaats'
       'AangemaaktDoor=AangemaaktDoor'
-      'AangemaaktOp=AangemaaktOp')
+      'AangemaaktOp=AangemaaktOp'
+      'OfferteNr=OfferteNr'
+      'Offerte=Offerte'
+      'KlantTelefoonnummer=KlantTelefoonnummer'
+      'Betaald=Betaald'
+      'AanbetalingVia=AanbetalingVia'
+      'NogTebetalenVia=NogTebetalenVia')
     DataSet = DBTTInvoices
     BCDToCurrency = False
     Left = 144
     Top = 24
+  end
+  object frxPDFExport: TfrxPDFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    Creator = 'Ada'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    Left = 96
+    Top = 224
   end
 end
