@@ -40,11 +40,11 @@ object frmReporInvoice: TfrmReporInvoice
     object DBTTInvoicesFactuurNr: TIntegerField
       FieldName = 'FactuurNr'
     end
+    object DBTTInvoicesOfferteNr: TIntegerField
+      FieldName = 'OfferteNr'
+    end
     object DBTTInvoicesFactuurDatum: TDateTimeField
       FieldName = 'FactuurDatum'
-    end
-    object DBTTInvoicesFactuur: TBooleanField
-      FieldName = 'Factuur'
     end
     object DBTTInvoicesSubtotaal: TBCDField
       FieldName = 'Subtotaal'
@@ -62,9 +62,17 @@ object frmReporInvoice: TfrmReporInvoice
       FieldName = 'Aanbetaling'
       Precision = 19
     end
+    object DBTTInvoicesAanbetalingVia: TWideStringField
+      FieldName = 'AanbetalingVia'
+      Size = 255
+    end
     object DBTTInvoicesNogTeBetalen: TBCDField
       FieldName = 'NogTeBetalen'
       Precision = 19
+    end
+    object DBTTInvoicesNogTeBetalenVia: TWideStringField
+      FieldName = 'NogTeBetalenVia'
+      Size = 255
     end
     object DBTTInvoicesKlantNaam: TWideStringField
       FieldName = 'KlantNaam'
@@ -78,6 +86,10 @@ object frmReporInvoice: TfrmReporInvoice
       FieldName = 'KlantPostCodePlaats'
       Size = 255
     end
+    object DBTTInvoicesKlantTelefoonnummer: TWideStringField
+      FieldName = 'KlantTelefoonnummer'
+      Size = 255
+    end
     object DBTTInvoicesAangemaaktDoor: TWideStringField
       FieldName = 'AangemaaktDoor'
       Size = 255
@@ -85,26 +97,8 @@ object frmReporInvoice: TfrmReporInvoice
     object DBTTInvoicesAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
     end
-    object DBTTInvoicesOfferteNr: TIntegerField
-      FieldName = 'OfferteNr'
-    end
-    object DBTTInvoicesOfferte: TBooleanField
-      FieldName = 'Offerte'
-    end
-    object DBTTInvoicesKlantTelefoonnummer: TWideStringField
-      FieldName = 'KlantTelefoonnummer'
-      Size = 255
-    end
     object DBTTInvoicesBetaald: TBooleanField
       FieldName = 'Betaald'
-    end
-    object DBTTInvoicesAanbetalingVia: TWideStringField
-      FieldName = 'AanbetalingVia'
-      Size = 255
-    end
-    object DBTTInvoicesNogTebetalenVia: TWideStringField
-      FieldName = 'NogTebetalenVia'
-      Size = 255
     end
   end
   object DBTInvoiceDetails: TADOTable
@@ -706,24 +700,22 @@ object frmReporInvoice: TfrmReporInvoice
     FieldAliases.Strings = (
       'Id=Id'
       'FactuurNr=FactuurNr'
+      'OfferteNr=OfferteNr'
       'FactuurDatum=FactuurDatum'
-      'Factuur=Factuur'
       'Subtotaal=Subtotaal'
       'Btw=Btw'
       'Totaal=Totaal'
       'Aanbetaling=Aanbetaling'
+      'AanbetalingVia=AanbetalingVia'
       'NogTeBetalen=NogTeBetalen'
+      'NogTeBetalenVia=NogTebetalenVia'
       'KlantNaam=KlantNaam'
       'KlantAdres=KlantAdres'
       'KlantPostCodePlaats=KlantPostCodePlaats'
+      'KlantTelefoonnummer=KlantTelefoonnummer'
       'AangemaaktDoor=AangemaaktDoor'
       'AangemaaktOp=AangemaaktOp'
-      'OfferteNr=OfferteNr'
-      'Offerte=Offerte'
-      'KlantTelefoonnummer=KlantTelefoonnummer'
-      'Betaald=Betaald'
-      'AanbetalingVia=AanbetalingVia'
-      'NogTebetalenVia=NogTebetalenVia')
+      'Betaald=Betaald')
     DataSet = DBTTInvoices
     BCDToCurrency = False
     Left = 144

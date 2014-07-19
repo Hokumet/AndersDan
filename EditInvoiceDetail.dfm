@@ -1,5 +1,5 @@
 inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
-  Caption = 'Factuur details wijzigen'
+  Caption = 'Details wijzigen'
   ClientHeight = 267
   ClientWidth = 437
   KeyPreview = True

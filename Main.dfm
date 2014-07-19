@@ -5096,11 +5096,18 @@ inherited frmMain: TfrmMain
     object DBTInvoicesFactuurNr: TIntegerField
       FieldName = 'FactuurNr'
     end
+    object DBTInvoicesOfferteNr: TIntegerField
+      FieldName = 'OfferteNr'
+    end
     object DBTInvoicesFactuurDatum: TDateTimeField
       FieldName = 'FactuurDatum'
     end
     object DBTInvoicesSubtotaal: TBCDField
       FieldName = 'Subtotaal'
+      Precision = 19
+    end
+    object DBTInvoicesBtw: TBCDField
+      FieldName = 'Btw'
       Precision = 19
     end
     object DBTInvoicesTotaal: TBCDField
@@ -5111,27 +5118,21 @@ inherited frmMain: TfrmMain
       FieldName = 'Aanbetaling'
       Precision = 19
     end
+    object DBTInvoicesAanbetalingVia: TWideStringField
+      FieldName = 'AanbetalingVia'
+      Size = 255
+    end
     object DBTInvoicesNogTeBetalen: TBCDField
       FieldName = 'NogTeBetalen'
       Precision = 19
     end
+    object DBTInvoicesNogTeBetalenVia: TWideStringField
+      FieldName = 'NogTeBetalenVia'
+      Size = 255
+    end
     object DBTInvoicesKlantNaam: TWideStringField
       FieldName = 'KlantNaam'
       Size = 255
-    end
-    object DBTInvoicesAangemaaktDoor: TWideStringField
-      FieldName = 'AangemaaktDoor'
-      Size = 255
-    end
-    object DBTInvoicesAangemaaktOp: TDateTimeField
-      FieldName = 'AangemaaktOp'
-    end
-    object DBTInvoicesFactuur: TBooleanField
-      FieldName = 'Factuur'
-    end
-    object DBTInvoicesBtw: TBCDField
-      FieldName = 'Btw'
-      Precision = 19
     end
     object DBTInvoicesKlantAdres: TWideStringField
       FieldName = 'KlantAdres'
@@ -5141,26 +5142,19 @@ inherited frmMain: TfrmMain
       FieldName = 'KlantPostCodePlaats'
       Size = 255
     end
-    object DBTInvoicesOfferteNr: TIntegerField
-      FieldName = 'OfferteNr'
-    end
-    object DBTInvoicesBetaald: TBooleanField
-      FieldName = 'Betaald'
-    end
     object DBTInvoicesKlantTelefoonnummer: TWideStringField
       FieldName = 'KlantTelefoonnummer'
       Size = 255
     end
-    object DBTInvoicesOfferte: TBooleanField
-      FieldName = 'Offerte'
-    end
-    object DBTInvoicesAanbetalingVia: TWideStringField
-      FieldName = 'AanbetalingVia'
+    object DBTInvoicesAangemaaktDoor: TWideStringField
+      FieldName = 'AangemaaktDoor'
       Size = 255
     end
-    object DBTInvoicesNogTeBetalenVia: TWideStringField
-      FieldName = 'NogTeBetalenVia'
-      Size = 255
+    object DBTInvoicesAangemaaktOp: TDateTimeField
+      FieldName = 'AangemaaktOp'
+    end
+    object DBTInvoicesBetaald: TBooleanField
+      FieldName = 'Betaald'
     end
   end
   object DBTInvoiceDetails: TADOTable
@@ -5238,21 +5232,25 @@ inherited frmMain: TfrmMain
   object DBTOffers: TADOTable
     Connection = DBCConnection
     CursorType = ctStatic
-    TableName = 'Facturen'
+    TableName = 'Offertes'
     Left = 312
     Top = 168
     object DBTOffersId: TAutoIncField
       FieldName = 'Id'
       ReadOnly = True
     end
-    object DBTOffersFactuurNr: TIntegerField
-      FieldName = 'FactuurNr'
+    object DBTOffersOfferteNr: TIntegerField
+      FieldName = 'OfferteNr'
     end
-    object DBTOffersFactuurDatum: TDateTimeField
-      FieldName = 'FactuurDatum'
+    object DBTOffersOfferteDatum: TDateTimeField
+      FieldName = 'OfferteDatum'
     end
     object DBTOffersSubtotaal: TBCDField
       FieldName = 'Subtotaal'
+      Precision = 19
+    end
+    object DBTOffersBtw: TBCDField
+      FieldName = 'Btw'
       Precision = 19
     end
     object DBTOffersTotaal: TBCDField
@@ -5263,20 +5261,6 @@ inherited frmMain: TfrmMain
       FieldName = 'KlantNaam'
       Size = 255
     end
-    object DBTOffersAangemaaktDoor: TWideStringField
-      FieldName = 'AangemaaktDoor'
-      Size = 255
-    end
-    object DBTOffersAangemaaktOp: TDateTimeField
-      FieldName = 'AangemaaktOp'
-    end
-    object DBTOffersFactuur: TBooleanField
-      FieldName = 'Factuur'
-    end
-    object DBTOffersBtw: TBCDField
-      FieldName = 'Btw'
-      Precision = 19
-    end
     object DBTOffersKlantAdres: TWideStringField
       FieldName = 'KlantAdres'
       Size = 255
@@ -5285,34 +5269,16 @@ inherited frmMain: TfrmMain
       FieldName = 'KlantPostCodePlaats'
       Size = 255
     end
-    object DBTOffersOfferteNr: TIntegerField
-      FieldName = 'OfferteNr'
-    end
-    object DBTOffersAanbetaling: TBCDField
-      FieldName = 'Aanbetaling'
-      Precision = 19
-    end
-    object DBTOffersNogTeBetalen: TBCDField
-      FieldName = 'NogTeBetalen'
-      Precision = 19
-    end
-    object DBTOffersBetaald: TBooleanField
-      FieldName = 'Betaald'
-    end
     object DBTOffersKlantTelefoonnummer: TWideStringField
       FieldName = 'KlantTelefoonnummer'
       Size = 255
     end
-    object DBTOffersOfferte: TBooleanField
-      FieldName = 'Offerte'
-    end
-    object DBTOffersAanbetalingVia: TWideStringField
-      FieldName = 'AanbetalingVia'
+    object DBTOffersAangemaaktDoor: TWideStringField
+      FieldName = 'AangemaaktDoor'
       Size = 255
     end
-    object DBTOffersNogTeBetalenVia: TWideStringField
-      FieldName = 'NogTeBetalenVia'
-      Size = 255
+    object DBTOffersAangemaaktOp: TDateTimeField
+      FieldName = 'AangemaaktOp'
     end
   end
   object DBTCustomers: TADOTable
