@@ -8,14 +8,15 @@ uses
   EditAncestor in '..\Commons\EditAncestor.pas' {frmEditAncestor},
   HEdit in '..\Commons\HEdit.pas' {frmHEdit},
   Main in 'Main.pas' {frmMain},
-  EditInvoice in 'EditInvoice.pas' {frmEditInvoice},
   EditOffer in 'EditOffer.pas' {frmEditOffer},
   EditArticle in 'EditArticle.pas' {frmEditArticle},
   HFrame in '..\Commons\HFrame.pas' {frAncestor: TFrame},
   EditInvoiceDetail in 'EditInvoiceDetail.pas' {frmEditInvoiceDetail},
   EditCustomer in 'EditCustomer.pas' {frmEditCustomer},
   ReportAncestor in '..\Commons\ReportAncestor.pas' {frmReportAnchestor},
-  ReportInvoice in 'ReportInvoice.pas' {frmReporInvoice};
+  ReportOffer in 'ReportOffer.pas' {frmReportOffer},
+  ReportInvoice in 'ReportInvoice.pas' {frmreportInvoice},
+  EditInvoice in 'EditInvoice.pas' {frmEditInvoice};
 
 {$R *.res}
 
@@ -25,6 +26,8 @@ begin
   Application.Title := 'Anders dan anderen Factuur programma';
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmReportAnchestor, frmReportAnchestor);
-  Application.CreateForm(TfrmReporInvoice, frmReporInvoice);
+  Application.CreateForm(TfrmReportOffer, frmReportOffer);
+  Application.CreateForm(TfrmreportInvoice, frmreportInvoice);
+  Application.CreateForm(TfrmEditInvoice, frmEditInvoice);
   Application.Run;
 end.

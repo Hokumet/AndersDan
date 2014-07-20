@@ -59,54 +59,45 @@ inherited frmMain: TfrmMain
       end>
     ExplicitWidth = 1221
     inherited ToolBar: TToolBar
-      Left = 9
       Width = 1212
       Height = 56
       ButtonHeight = 52
       ButtonWidth = 99
-      ExplicitLeft = 9
       ExplicitWidth = 1212
       ExplicitHeight = 56
       inherited btnNew: TToolButton
         OnClick = btnNewClick
         ExplicitWidth = 112
-        ExplicitHeight = 52
       end
       inherited btnEdit: TToolButton
         Left = 112
         ExplicitLeft = 112
         ExplicitWidth = 99
-        ExplicitHeight = 52
       end
       inherited btnDelete: TToolButton
         Left = 211
         ExplicitLeft = 211
         ExplicitWidth = 99
-        ExplicitHeight = 52
       end
       inherited Seperator: TToolButton
         Left = 310
         ExplicitLeft = 310
-        ExplicitHeight = 52
       end
       inherited btnPrint: TToolButton
         Left = 324
         Visible = False
         ExplicitLeft = 324
         ExplicitWidth = 99
-        ExplicitHeight = 52
       end
       inherited btnPrinten: TToolButton
         Left = 423
         Enabled = False
         ExplicitLeft = 423
         ExplicitWidth = 99
-        ExplicitHeight = 52
       end
       inherited ToolButton2: TToolButton
         Left = 522
         ExplicitLeft = 522
-        ExplicitHeight = 52
       end
       inherited btnBegin: TToolButton
         Left = 530
@@ -117,7 +108,6 @@ inherited frmMain: TfrmMain
         Style = tbsCheck
         ExplicitLeft = 530
         ExplicitWidth = 99
-        ExplicitHeight = 52
       end
       object btnOffers: TToolButton
         Left = 629
@@ -170,7 +160,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F001001100120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F001801180120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4403,7 +4393,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113001001100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113001801180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5280,6 +5270,9 @@ inherited frmMain: TfrmMain
     object DBTOffersAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
     end
+    object DBTOffersOmgezet: TBooleanField
+      FieldName = 'Omgezet'
+    end
   end
   object DBTCustomers: TADOTable
     Connection = DBCConnection
@@ -5380,6 +5373,48 @@ inherited frmMain: TfrmMain
     object ADODataSet1Totaal: TBCDField
       FieldName = 'Totaal'
       Precision = 19
+    end
+  end
+  object DBTOfferDetails: TADOTable
+    Connection = DBCConnection
+    CursorType = ctStatic
+    TableName = 'OfferteDetails'
+    Left = 312
+    Top = 240
+    object DBTOfferDetailsId: TAutoIncField
+      FieldName = 'Id'
+      ReadOnly = True
+    end
+    object DBTOfferDetailsOfferteId: TIntegerField
+      FieldName = 'OfferteId'
+    end
+    object DBTOfferDetailsProductNr: TIntegerField
+      FieldName = 'ProductNr'
+    end
+    object DBTOfferDetailsProductNaam: TWideStringField
+      FieldName = 'ProductNaam'
+      Size = 255
+    end
+    object DBTOfferDetailsAantal: TIntegerField
+      FieldName = 'Aantal'
+    end
+    object DBTOfferDetailsPrijs: TBCDField
+      FieldName = 'Prijs'
+      Precision = 19
+    end
+    object DBTOfferDetailsOpmaat: TBooleanField
+      FieldName = 'Opmaat'
+    end
+    object DBTOfferDetailsTotaal: TBCDField
+      FieldName = 'Totaal'
+      Precision = 19
+    end
+    object DBTOfferDetailsAangemaaktDoor: TWideStringField
+      FieldName = 'AangemaaktDoor'
+      Size = 255
+    end
+    object DBTOfferDetailsAangemaaktOp: TDateTimeField
+      FieldName = 'AangemaaktOp'
     end
   end
 end

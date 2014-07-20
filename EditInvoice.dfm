@@ -215,18 +215,9 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Totaal'
         ReadOnly = True
-        TabOrder = 5
+        TabOrder = 4
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
-      end
-      object ckbInvoice: TCheckBox
-        Left = 393
-        Top = 70
-        Width = 145
-        Height = 17
-        HelpType = htKeyword
-        Caption = 'Zet om naar een factuur'
-        TabOrder = 1
       end
       object edtBtw: THCurrencyEdit
         Left = 169
@@ -236,7 +227,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Btw'
         ReadOnly = True
-        TabOrder = 7
+        TabOrder = 6
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
       end
@@ -248,7 +239,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Subtotaal'
         ReadOnly = True
-        TabOrder = 6
+        TabOrder = 5
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
       end
@@ -271,7 +262,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'NogTeBetalen'
-        TabOrder = 8
+        TabOrder = 7
         Alignment = taRightJustify
         MaxValue = 999999.000000000000000000
       end
@@ -282,7 +273,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 17
         HelpType = htKeyword
         Caption = 'Factuur is betaald'
-        TabOrder = 2
+        TabOrder = 1
         OnClick = ckbInvoicePayedClick
       end
       object cmbToBepayedVia: TComboBox
@@ -293,7 +284,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Hint = 'BetalingsTypes'
         HelpType = htKeyword
         HelpKeyword = 'NogTeBetalenVia'
-        TabOrder = 4
+        TabOrder = 3
         TextHint = 'Type'
       end
       object cmbPayedVia: TComboBox
@@ -304,7 +295,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Hint = 'BetalingsTypes'
         HelpType = htKeyword
         HelpKeyword = 'AanbetalingVia'
-        TabOrder = 3
+        TabOrder = 2
         TextHint = 'Type'
       end
     end

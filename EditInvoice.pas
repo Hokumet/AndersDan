@@ -19,7 +19,6 @@ type
     dtpInvoiceDate: TDateTimePicker;
     edtTotal: THCurrencyEdit;
     Label3: TLabel;
-    ckbInvoice: TCheckBox;
     frameInvoiceDetails: TfrAncestor;
     edtBtw: THCurrencyEdit;
     Label4: TLabel;
@@ -68,7 +67,6 @@ type
     procedure loadDetailsTables; override;
     procedure saveFields(); override;
     procedure loadOnce(); override;
-    //procedure loadOnceAfter(); override;
   public
     property invoiceNr:Integer write fInvoiceNr;
   end;
@@ -78,7 +76,7 @@ var
 
 implementation
 
-uses Main, EditArticle, EditInvoiceDetail, ReportInvoice;
+uses Main, EditArticle, EditInvoiceDetail, ReportInvoice, ReportOffer;
 {$R *.dfm}
 
 { TfrmEditInvoice }
@@ -106,7 +104,7 @@ end;
 
 procedure TfrmEditInvoice.edtCustomerNameExit(Sender: TObject);
 begin
-  if TCustomers.RecordCount =1 then
+  if TCustomers.RecordCount = 1 then
     SelectCustomer(TCustomers.FieldByName('ID').AsInteger);
 end;
 
@@ -151,7 +149,6 @@ end;
 
 procedure TfrmEditInvoice.frameInvoiceDetailsbtnNewClick(Sender: TObject);
 begin
-
   frmEditInvoiceDetail := TfrmEditInvoiceDetail.Create(Self,0, TInvoiceDetails , ID, MasterKey);
   try
     if frmEditInvoiceDetail.ShowModal = mrOK then
@@ -217,9 +214,6 @@ begin
     if pnlLabels.Controls[I].Visible then
       loadField(pnlLabels.Controls[I]);
   end;
-
-  edtAanbetaling.Visible := not ckbInvoice.Visible;
-  edtToBePayed.Visible := not ckbInvoice.Visible;
 end;
 
 procedure TfrmEditInvoice.loadOnce;
@@ -238,23 +232,7 @@ begin
   TCustomers := TfrmMain(Owner).DBTCustomers;
   TInvoices := TfrmMain(Owner).DBTInvoices;
 
-  if Not (CurrTable.TableName = 'Factuur') then begin
-    edtInvoiceNr.HelpKeyword := 'OfferteNr';
-    dtpInvoiceDate.HelpKeyword := 'OfferteDatum'
-  end;
-
-  edtAanbetaling.Visible := CurrTable.TableName = 'Factuur';
-  edtToBePayed.Visible := CurrTable.TableName = 'Factuur';
-  ckbInvoice.Visible := Not (CurrTable.TableName = 'Factuur');
-  lblPayed.Visible := CurrTable.TableName = 'Factuur';
-  lblToBePayed.Visible := CurrTable.TableName = 'Factuur';
-  ckbInvoicePayed.Visible := CurrTable.TableName = 'Factuur';
-  lblPayedVia.Visible := CurrTable.TableName = 'Factuur';
-  lblToBePayedVia.Visible := CurrTable.TableName = 'Factuur';
-  cmbPayedVia.Visible := CurrTable.TableName = 'Factuur';
-  cmbToBepayedVia.Visible := CurrTable.TableName = 'Factuur';
-
-  if (CurrTable.TableName = 'Factuur') and CurrTable.FieldByName('Betaald').AsBoolean then begin
+  if CurrTable.FieldByName('Betaald').AsBoolean then begin
     edtToBePayed.Value := 0;
     ckbInvoicePayed.Checked := true;
   end;
@@ -263,13 +241,7 @@ end;
 
 procedure TfrmEditInvoice.saveFields;
 var I: Integer;
-    fNr:Integer;
 begin
-  if CurrTable.FieldByName('Omgezet').AsBoolean then begin
-    CurrTable.Cancel;
-    exit;
-  end;
-
   for I := 0 to pnlLabels.ControlCount - 1 do begin
     if pnlLabels.Controls[I].Visible then
       saveField(pnlLabels.Controls[I]);
@@ -287,32 +259,6 @@ begin
 
       TCustomers.Post;
       TCustomers.UpdateBatch;
-    end;
-    if ckbInvoice.Checked then begin
-      TInvoices.Insert;
-      TInvoices.FieldByName('FactuurNr').AsInteger := fInvoiceNr;
-      TInvoices.FieldByName('OfferteNr').AsInteger := StrToInt(edtInvoiceNr.Text);
-      TInvoices.FieldByName('FactuurDatum').AsDateTime := Date;
-      TInvoices.FieldByName('SubTotaal').AsCurrency := edtSubtotal.Value;
-      TInvoices.FieldByName('Btw').AsCurrency := edtBtw.Value;
-      TInvoices.FieldByName('Totaal').AsCurrency := edtTotal.Value;
-      TInvoices.FieldByName('KlantNaam').AsString := edtCustomerName.Text;
-      TInvoices.FieldByName('KlantAdres').AsString := edtCustomerAddress.Text;
-      TInvoices.FieldByName('KlantPostCodePlaats').AsString := edtPostCodeCity.Text;
-      TInvoices.FieldByName('KlantTelefoonnummer').AsString := edtPhoneNumber.Text;
-
-      TInvoices.Post;
-      TInvoices.UpdateBatch;
-
-      TInvoices.Active := False;
-      TInvoices.Active := True;
-      try
-        frmReporInvoice := TfrmReporInvoice.Create(Self, CurrTable.FieldByName('ID').AsInteger, TCustomers);
-        frmReporInvoice.ExportToPdf(TfrmMain(Owner).Inifile.ReadString('Offerte','SaveDir','C:\Ada\'));
-        finally
-          frmReporInvoice.Free;
-      end;
-      CurrTable.FieldByName('Omgezet').AsBoolean := true;
     end;
     if ckbInvoicePayed.Checked then
       CurrTable.FieldByName('Betaald').AsBoolean := true;

@@ -1,7 +1,7 @@
-object frmreportInvoice: TfrmreportInvoice
+object frmReportOffer: TfrmReportOffer
   Left = 0
   Top = 0
-  Caption = 'Factuur printen'
+  Caption = 'Offerte Printen'
   ClientHeight = 384
   ClientWidth = 604
   Color = clBtnFace
@@ -14,6 +14,7 @@ object frmreportInvoice: TfrmreportInvoice
   PixelsPerInch = 96
   TextHeight = 13
   object DBCConnection: TADOConnection
+    Connected = True
     ConnectionString = 
       'Provider=Microsoft.ACE.OLEDB.12.0;Password="";Data Source=G:\ADA' +
       'FactuurProgramma.accdb;Persist Security Info=True;Jet OLEDB:Data' +
@@ -25,122 +26,104 @@ object frmreportInvoice: TfrmreportInvoice
     Left = 64
     Top = 104
   end
-  object DBTTInvoices: TADOTable
+  object DBTOffers: TADOTable
+    Active = True
     Connection = DBCConnection
     CursorType = ctStatic
     MaxRecords = 1
-    IndexName = 'FactuurNr'
-    TableName = 'Facturen'
+    IndexName = 'OfferteNr'
+    TableName = 'Offertes'
     Left = 144
     Top = 104
-    object DBTTInvoicesId: TAutoIncField
+    object DBTOffersId: TAutoIncField
       FieldName = 'Id'
       ReadOnly = True
     end
-    object DBTTInvoicesFactuurNr: TIntegerField
-      FieldName = 'FactuurNr'
-    end
-    object DBTTInvoicesOfferteNr: TIntegerField
+    object DBTOffersOfferteNr: TIntegerField
       FieldName = 'OfferteNr'
     end
-    object DBTTInvoicesFactuurDatum: TDateTimeField
-      FieldName = 'FactuurDatum'
+    object DBTOffersOfferteDatum: TDateTimeField
+      FieldName = 'OfferteDatum'
     end
-    object DBTTInvoicesSubtotaal: TBCDField
+    object DBTOffersSubtotaal: TBCDField
       FieldName = 'Subtotaal'
       Precision = 19
     end
-    object DBTTInvoicesBtw: TBCDField
+    object DBTOffersBtw: TBCDField
       FieldName = 'Btw'
       Precision = 19
     end
-    object DBTTInvoicesTotaal: TBCDField
+    object DBTOffersTotaal: TBCDField
       FieldName = 'Totaal'
       Precision = 19
     end
-    object DBTTInvoicesAanbetaling: TBCDField
-      FieldName = 'Aanbetaling'
-      Precision = 19
-    end
-    object DBTTInvoicesAanbetalingVia: TWideStringField
-      FieldName = 'AanbetalingVia'
-      Size = 255
-    end
-    object DBTTInvoicesNogTeBetalen: TBCDField
-      FieldName = 'NogTeBetalen'
-      Precision = 19
-    end
-    object DBTTInvoicesNogTeBetalenVia: TWideStringField
-      FieldName = 'NogTeBetalenVia'
-      Size = 255
-    end
-    object DBTTInvoicesKlantNaam: TWideStringField
+    object DBTOffersKlantNaam: TWideStringField
       FieldName = 'KlantNaam'
       Size = 255
     end
-    object DBTTInvoicesKlantAdres: TWideStringField
+    object DBTOffersKlantAdres: TWideStringField
       FieldName = 'KlantAdres'
       Size = 255
     end
-    object DBTTInvoicesKlantPostCodePlaats: TWideStringField
+    object DBTOffersKlantPostCodePlaats: TWideStringField
       FieldName = 'KlantPostCodePlaats'
       Size = 255
     end
-    object DBTTInvoicesKlantTelefoonnummer: TWideStringField
+    object DBTOffersKlantTelefoonnummer: TWideStringField
       FieldName = 'KlantTelefoonnummer'
       Size = 255
     end
-    object DBTTInvoicesAangemaaktDoor: TWideStringField
+    object DBTOffersAangemaaktDoor: TWideStringField
       FieldName = 'AangemaaktDoor'
       Size = 255
     end
-    object DBTTInvoicesAangemaaktOp: TDateTimeField
+    object DBTOffersAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
     end
-    object DBTTInvoicesBetaald: TBooleanField
-      FieldName = 'Betaald'
+    object DBTOffersOmgezet: TBooleanField
+      FieldName = 'Omgezet'
     end
   end
-  object DBTInvoiceDetails: TADOTable
+  object DBTOfferDetails: TADOTable
     Connection = DBCConnection
     CursorType = ctStatic
     MaxRecords = 999
-    TableName = 'FactuurDetails'
+    TableName = 'OfferteDetails'
     Left = 232
     Top = 104
-    object DBTInvoiceDetailsId: TAutoIncField
+    object DBTOfferDetailsId: TAutoIncField
       FieldName = 'Id'
       ReadOnly = True
     end
-    object DBTInvoiceDetailsFactuurId: TIntegerField
-      FieldName = 'FactuurId'
+    object DBTOfferDetailsOfferteId: TIntegerField
+      FieldName = 'OfferteId'
     end
-    object DBTInvoiceDetailsProductNr: TIntegerField
+    object DBTOfferDetailsProductNr: TIntegerField
       FieldName = 'ProductNr'
     end
-    object DBTInvoiceDetailsProductNaam: TWideStringField
+    object DBTOfferDetailsProductNaam: TWideStringField
       FieldName = 'ProductNaam'
       Size = 255
     end
-    object DBTInvoiceDetailsAantal: TIntegerField
+    object DBTOfferDetailsAantal: TIntegerField
       FieldName = 'Aantal'
     end
-    object DBTInvoiceDetailsPrijs: TBCDField
+    object DBTOfferDetailsPrijs: TBCDField
       FieldName = 'Prijs'
       Precision = 19
     end
-    object DBTInvoiceDetailsOpmaat: TBooleanField
+    object DBTOfferDetailsOpmaat: TBooleanField
       FieldName = 'Opmaat'
     end
-    object DBTInvoiceDetailsTotaal: TBCDField
+    object DBTOfferDetailsTotaal: TBCDField
       FieldName = 'Totaal'
       Precision = 19
     end
-    object DBTInvoiceDetailsAangemaaktDoor: TWideStringField
+    object DBTOfferDetailsAangemaaktDoor: TWideStringField
       FieldName = 'AangemaaktDoor'
       Size = 255
     end
-    object DBTInvoiceDetailsAangemaaktOp: TDateTimeField
+    object DBTOfferDetailsAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
     end
   end
@@ -158,10 +141,54 @@ object frmreportInvoice: TfrmreportInvoice
       'Totaal=Totaal'
       'AangemaaktDoor=AangemaaktDoor'
       'AangemaaktOp=AangemaaktOp')
-    DataSet = DBTInvoiceDetails
+    DataSet = DBTOfferDetails
     BCDToCurrency = False
     Left = 222
     Top = 24
+  end
+  object frxMasterData: TfrxDBDataset
+    UserName = 'frxMasterDataU'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'Id=Id'
+      'OfferteNr=OfferteNr'
+      'OfferteDatum=OfferteDatum'
+      'Subtotaal=Subtotaal'
+      'Btw=Btw'
+      'Totaal=Totaal'
+      'KlantNaam=KlantNaam'
+      'KlantAdres=KlantAdres'
+      'KlantPostCodePlaats=KlantPostCodePlaats'
+      'KlantTelefoonnummer=KlantTelefoonnummer'
+      'AangemaaktDoor=AangemaaktDoor'
+      'AangemaaktOp=AangemaaktOp'
+      'Omgezet=Omgezet')
+    DataSet = DBTOffers
+    BCDToCurrency = False
+    Left = 144
+    Top = 24
+  end
+  object frxPDFExport: TfrxPDFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    Creator = 'Ada'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    Left = 64
+    Top = 160
   end
   object frxreport: TfrxReport
     Version = '4.11.17'
@@ -180,6 +207,7 @@ object frmreportInvoice: TfrmreportInvoice
       'begin'
       ''
       'end.')
+    OnBeforePrint = frxreportBeforePrint
     OnGetValue = frxreportGetValue
     Left = 72
     Top = 24
@@ -244,18 +272,6 @@ object frmreportInvoice: TfrmreportInvoice
         Top = 128.504020000000000000
         Width = 718.110700000000000000
         RowCount = 1
-        object frxMasterDataUFactuurNr: TfrxMemoView
-          Left = 604.724426540000000000
-          Top = 58.677180000000000000
-          Width = 94.488188980000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'FactuurNr'
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          Memo.UTF8W = (
-            '[frxMasterDataU."FactuurNr"]')
-        end
         object Memo2: TfrxMemoView
           Left = 491.338582680000000000
           Top = 58.677180000000000000
@@ -263,19 +279,7 @@ object frmreportInvoice: TfrmreportInvoice
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (
-            'Factuur nummer:')
-        end
-        object frxMasterDataUFactuurDatum: TfrxMemoView
-          Left = 604.724426540000000000
-          Top = 81.472480000000000000
-          Width = 94.488188980000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'FactuurDatum'
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          Memo.UTF8W = (
-            '[frxMasterDataU."FactuurDatum"]')
+            'Offerte nummer:')
         end
         object Memo3: TfrxMemoView
           Left = 491.338900000000000000
@@ -284,7 +288,7 @@ object frmreportInvoice: TfrmreportInvoice
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (
-            'Factuur datum   :')
+            'Offerte datum   :')
         end
         object frxMasterDataUKlantNaam: TfrxMemoView
           Left = 34.015770000000000000
@@ -416,6 +420,30 @@ object frmreportInvoice: TfrmreportInvoice
           Memo.UTF8W = (
             '[frxMasterDataU."KlantTelefoonnummer"]')
         end
+        object frxMasterDataUOfferteNr: TfrxMemoView
+          Left = 604.724426540000000000
+          Top = 58.677180000000000000
+          Width = 94.488188980000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'OfferteNr'
+          DataSet = frxMasterData
+          DataSetName = 'frxMasterDataU'
+          Memo.UTF8W = (
+            '[frxMasterDataU."OfferteNr"]')
+        end
+        object frxMasterDataUOfferteDatum: TfrxMemoView
+          Left = 604.724426540000000000
+          Top = 81.472480000000000000
+          Width = 94.488188980000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'OfferteDatum'
+          DataSet = frxMasterData
+          DataSetName = 'frxMasterDataU'
+          Memo.UTF8W = (
+            '[frxMasterDataU."OfferteDatum"]')
+        end
       end
       object DetailData1: TfrxDetailData
         Height = 22.677180000000000000
@@ -507,13 +535,13 @@ object frmreportInvoice: TfrmreportInvoice
         end
       end
       object PageFooter: TfrxPageFooter
-        Height = 347.716760000000000000
-        Top = 449.764070000000000000
+        Height = 260.787338110000000000
+        Top = 536.692976850000000000
         Width = 718.110700000000000000
         PrintOnFirstPage = False
         object Memo8: TfrxMemoView
-          Left = 604.724743860000000000
-          Top = 34.803185000000000000
+          Left = 604.724409448818900000
+          Top = 31.023655000000000000
           Width = 94.488188980000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -535,8 +563,8 @@ object frmreportInvoice: TfrmreportInvoice
           VAlign = vaBottom
         end
         object Memo13: TfrxMemoView
-          Left = 491.338900000000000000
-          Top = 57.149660000000000000
+          Left = 491.338582677165400000
+          Top = 53.370130000000000000
           Width = 113.007878900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -552,8 +580,8 @@ object frmreportInvoice: TfrmreportInvoice
           ParentFont = False
         end
         object Memo14: TfrxMemoView
-          Left = 604.724743860000000000
-          Top = 57.425247500000000000
+          Left = 604.724409448818900000
+          Top = 53.370130000000000000
           Width = 94.488188980000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -577,77 +605,17 @@ object frmreportInvoice: TfrmreportInvoice
           VAlign = vaBottom
         end
         object Memo15: TfrxMemoView
-          Left = 491.338900000000000000
-          Top = 34.244125000000000000
+          Left = 491.338582677165400000
+          Top = 30.464595000000000000
           Width = 105.448818900000000000
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (
             'Btw                    :')
         end
-        object frxMasterDataUAanbetaling: TfrxMemoView
-          Left = 604.724743860000000000
-          Top = 111.110312500000000000
-          Width = 94.488188980000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2n'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[Payed]')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object lblPayed: TfrxMemoView
-          Left = 388.338900000000000000
-          Top = 111.110312500000000000
-          Width = 109.228348900000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Memo.UTF8W = (
-            '[lblAanbetaling]')
-        end
-        object Memo18: TfrxMemoView
-          Left = 604.724743860000000000
-          Top = 139.960730000000000000
-          Width = 94.488188980000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2n'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[ToBePayed]')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo19: TfrxMemoView
-          Left = 388.338900000000000000
-          Top = 139.960730000000000000
-          Width = 105.448818900000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Memo.UTF8W = (
-            '[lblToBePayed]')
-        end
         object frxMasterDataUSubtotaal: TfrxMemoView
-          Left = 604.724800000000000000
-          Top = 7.559059999999999000
+          Left = 604.724409450000000000
+          Top = 3.779530000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -662,86 +630,15 @@ object frmreportInvoice: TfrmreportInvoice
             '[frxMasterDataU."Subtotaal"]')
         end
         object Memo1: TfrxMemoView
-          Left = 491.338900000000000000
-          Top = 7.559059999999999000
+          Left = 491.338582677165400000
+          Top = 3.779530000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (
             'Subtotaal           :')
         end
-        object frxMasterDataUAanbetalingVia: TfrxMemoView
-          Left = 506.457020000000000000
-          Top = 111.110312500000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          Memo.UTF8W = (
-            '[PayedVia]')
-        end
-        object frxMasterDataUNogTebetalenVia: TfrxMemoView
-          Left = 506.457020000000000000
-          Top = 139.960730000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          Memo.UTF8W = (
-            '[ToBePayedVia]')
-        end
       end
     end
-  end
-  object frxMasterData: TfrxDBDataset
-    UserName = 'frxMasterDataU'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'Id=Id'
-      'FactuurNr=FactuurNr'
-      'OfferteNr=OfferteNr'
-      'FactuurDatum=FactuurDatum'
-      'Subtotaal=Subtotaal'
-      'Btw=Btw'
-      'Totaal=Totaal'
-      'Aanbetaling=Aanbetaling'
-      'AanbetalingVia=AanbetalingVia'
-      'NogTeBetalen=NogTeBetalen'
-      'NogTeBetalenVia=NogTebetalenVia'
-      'KlantNaam=KlantNaam'
-      'KlantAdres=KlantAdres'
-      'KlantPostCodePlaats=KlantPostCodePlaats'
-      'KlantTelefoonnummer=KlantTelefoonnummer'
-      'AangemaaktDoor=AangemaaktDoor'
-      'AangemaaktOp=AangemaaktOp'
-      'Betaald=Betaald')
-    DataSet = DBTTInvoices
-    BCDToCurrency = False
-    Left = 144
-    Top = 24
-  end
-  object frxPDFExport: TfrxPDFExport
-    UseFileCache = True
-    ShowProgress = True
-    OverwritePrompt = False
-    DataOnly = False
-    PrintOptimized = False
-    Outline = False
-    Background = False
-    HTMLTags = True
-    Author = 'FastReport'
-    Subject = 'FastReport PDF export'
-    Creator = 'Ada'
-    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
-    HideToolbar = False
-    HideMenubar = False
-    HideWindowUI = False
-    FitWindow = False
-    CenterWindow = False
-    PrintScaling = False
-    Left = 96
-    Top = 224
   end
 end

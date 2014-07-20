@@ -59,18 +59,6 @@ type
     ADODataSet1Totaal: TBCDField;
     lblToBePayed: TLabel;
     ckbPayed: TCheckBox;
-    DBTOffersId: TAutoIncField;
-    DBTOffersOfferteNr: TIntegerField;
-    DBTOffersOfferteDatum: TDateTimeField;
-    DBTOffersSubtotaal: TBCDField;
-    DBTOffersBtw: TBCDField;
-    DBTOffersTotaal: TBCDField;
-    DBTOffersKlantNaam: TWideStringField;
-    DBTOffersKlantAdres: TWideStringField;
-    DBTOffersKlantPostCodePlaats: TWideStringField;
-    DBTOffersKlantTelefoonnummer: TWideStringField;
-    DBTOffersAangemaaktDoor: TWideStringField;
-    DBTOffersAangemaaktOp: TDateTimeField;
     DBTInvoicesId: TAutoIncField;
     DBTInvoicesFactuurNr: TIntegerField;
     DBTInvoicesOfferteNr: TIntegerField;
@@ -89,6 +77,30 @@ type
     DBTInvoicesAangemaaktDoor: TWideStringField;
     DBTInvoicesAangemaaktOp: TDateTimeField;
     DBTInvoicesBetaald: TBooleanField;
+    DBTOfferDetails: TADOTable;
+    DBTOfferDetailsId: TAutoIncField;
+    DBTOfferDetailsOfferteId: TIntegerField;
+    DBTOfferDetailsProductNr: TIntegerField;
+    DBTOfferDetailsProductNaam: TWideStringField;
+    DBTOfferDetailsAantal: TIntegerField;
+    DBTOfferDetailsPrijs: TBCDField;
+    DBTOfferDetailsOpmaat: TBooleanField;
+    DBTOfferDetailsTotaal: TBCDField;
+    DBTOfferDetailsAangemaaktDoor: TWideStringField;
+    DBTOfferDetailsAangemaaktOp: TDateTimeField;
+    DBTOffersId: TAutoIncField;
+    DBTOffersOfferteNr: TIntegerField;
+    DBTOffersOfferteDatum: TDateTimeField;
+    DBTOffersSubtotaal: TBCDField;
+    DBTOffersBtw: TBCDField;
+    DBTOffersTotaal: TBCDField;
+    DBTOffersKlantNaam: TWideStringField;
+    DBTOffersKlantAdres: TWideStringField;
+    DBTOffersKlantPostCodePlaats: TWideStringField;
+    DBTOffersKlantTelefoonnummer: TWideStringField;
+    DBTOffersAangemaaktDoor: TWideStringField;
+    DBTOffersAangemaaktOp: TDateTimeField;
+    DBTOffersOmgezet: TBooleanField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -121,7 +133,8 @@ var
 
 implementation
 
-uses EditOffer, EditInvoice, EditArticle, EditCustomer, ReportInvoice,ShellApi;
+uses EditOffer, EditInvoice, EditArticle, EditCustomer, ReportInvoice,ShellApi,
+  ReportOffer;
 
 Const
   Invoice = 'Invoice';
@@ -159,15 +172,11 @@ var faNr: Integer;
 begin
     if lvwItems.HelpKeyword = Invoice then begin
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable, 'FactuurId');
-      frmHEdit.Caption := 'Factuur bekijken / wijzigen';
     end
     else if lvwItems.HelpKeyword = Offer then begin
       faNr := GetLastNr(DBTInvoices, 'FactuurNr')+ 1;
-      frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'FactuurId');
-      frmHEdit.Caption := 'Offerte bekijken / wijzigen';
-      TfrmEditInvoice(frmHEdit).lblNr.Caption := 'Offerte nummer:';
-      TfrmEditInvoice(frmHEdit).lblDate.Caption := 'Offerte datum:';
-      TfrmEditInvoice(frmHEdit).invoiceNr := faNr;
+      frmHEdit := TfrmEditOffer.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'OfferteId');
+      TfrmEditOffer(frmHEdit).invoiceNr := faNr;
     end
     else if lvwItems.HelpKeyword = Product then
       frmHEdit := TfrmEditArticle.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable)
@@ -226,21 +235,32 @@ end;
 procedure TfrmMain.btnPrintenClick(Sender: TObject);
 var fileName: PWideChar;
     fileString: String;
+    Id: Integer;
 begin
-
+  Id := Integer(lvwItems.Selected.Data);
   if lvwItems.HelpKeyword = Invoice  then begin
-   try
-      frmReporInvoice := TfrmReporInvoice.Create(Self, Integer(lvwItems.Selected.Data), DBTInvoices);
+    try
+      frmReportInvoice := TfrmReportInvoice.Create(Self, Id, DBTInvoices);
 
-      if frmReporInvoice.frxReport.PrepareReport then
-        frmReporInvoice.frxReport.ShowPreparedReport;
-      finally
-        frmReporInvoice.Free;
+      if frmReportInvoice.frxReport.PrepareReport then
+        frmReportInvoice.frxReport.ShowPreparedReport;
+    finally
+      frmReportInvoice.Free;
     end;
   end
   else begin
-    fileString :=Inifile.ReadString('Offerte','SaveDir','C:\Ada\')+'\OfferteExport-'+IntToStr(Integer(lvwItems.Selected.Data))+'.pdf';
-    ShellExecute(0, nil, PChar(fileString), nil, nil, SW_SHOWNORMAL);
+    fileString :=Inifile.ReadString('Offerte','SaveDir','C:\Ada\')+'\OfferteExport-'+IntToStr(Id)+'.pdf';
+    if FileExists(fileString) then
+      ShellExecute(0, nil, PChar(fileString), nil, nil, SW_SHOWNORMAL)
+    else begin
+      try
+        frmReportOffer := TfrmReportOffer.Create(Self, Id, DBTOffers);
+        if frmReportOffer.frxReport.PrepareReport then
+          frmReportOffer.frxReport.ShowPreparedReport;
+      finally
+        frmReportOffer.Free;
+      end;
+    end;
   end;
 end;
 
@@ -323,6 +343,7 @@ begin
   DBTOffers.Open;
   DBTProducts.Open;
   DBTInvoiceDetails.Open;
+  DBTOfferDetails.Open;
   DBTCustomers.Open;
 end;
 

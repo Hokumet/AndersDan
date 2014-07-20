@@ -8,7 +8,7 @@ uses
   frxDBSet, Data.DB, Data.Win.ADODB;
 
 type
-  TfrmReporInvoice = class(TForm)
+  TfrmreportInvoice = class(TForm)
     DBCConnection: TADOConnection;
     DBTTInvoices: TADOTable;
     DBTInvoiceDetails: TADOTable;
@@ -46,14 +46,12 @@ type
     DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
-    { Private declarations }
   public
     constructor Create(Owner: TComponent; ID: Integer; MasterTable: TADOTable); overload;
-    procedure ExportToPdf(ExportDir: String);
   end;
 
 var
-  frmReporInvoice: TfrmReporInvoice;
+  frmreportInvoice: TfrmreportInvoice;
 
 implementation
 
@@ -61,8 +59,9 @@ implementation
 
 { TfrmReporInvoice }
 
-constructor TfrmReporInvoice.Create(Owner: TComponent; ID: Integer;
+constructor TfrmreportInvoice.Create(Owner: TComponent; ID: Integer;
   MasterTable: TADOTable);
+var footer: TfrxPageFooter;
 begin
   inherited Create(Owner);
   DBTTInvoices.Connection := MasterTable.Connection;
@@ -78,9 +77,14 @@ begin
   DBTInvoiceDetails.Filtered := false;
   DBTInvoiceDetails.Filter := 'FactuurId' + '=' + IntToStr(ID);
   DBTInvoiceDetails.Filtered := true;
+
+  footer := TfrxPageFooter(frxreport.FindComponent('PageFooter'));
+  if DBTInvoiceDetails.RecordCount < 20 then begin
+    footer.PrintOnFirstPage := true;
+  end;
 end;
 
-procedure TfrmReporInvoice.frxreportGetValue(const VarName: string;
+procedure TfrmreportInvoice.frxreportGetValue(const VarName: string;
   var Value: Variant);
 begin
   if VarName = 'lblAanbetaling' then
@@ -113,18 +117,6 @@ begin
       Value := FormatFloat('0.00', DBTTInvoicesNogTebetalen.AsCurrency)
     else
       Value := ''
-end;
-
-procedure TfrmReporInvoice.ExportToPdf(ExportDir: String);
-var oExportfilter :TfrxCustomExportFilter;
-begin
-  oExportfilter := TfrxCustomExportFilter(frxPDFExport);
-  oExportfilter.DataOnly := false;
-  oExportFilter.ShowDialog := False;
-  oExportfilter.DefaultPath := ExportDir;
-  oExportfilter.FileName := 'OfferteExport-'+DBTTInvoicesId.AsString+'.pdf';
-  frxReport.PrepareReport(True);
-  frxReport.Export(oExportFilter);
 end;
 
 end.
