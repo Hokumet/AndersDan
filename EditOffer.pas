@@ -35,6 +35,7 @@ type
     lbxCustomers: TListBox;
     edtPhoneNumber: TEdit;
     Label6: TLabel;
+    edtComment: TMemo;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure ckbSaveCustomerClick(Sender: TObject);
@@ -44,6 +45,7 @@ type
     procedure lbxCustomersKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtCustomerNameExit(Sender: TObject);
+    procedure frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TOfferDetails: TADOTable;
@@ -114,6 +116,13 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmEditOffer.frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
+begin
+  inherited;
+  frameInvoiceDetails.btnDeleteClick(Sender);
+  loadDetails;
 end;
 
 procedure TfrmEditOffer.frameInvoiceDetailsbtnEditClick(Sender: TObject);

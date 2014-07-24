@@ -14,7 +14,6 @@ object frmReportOffer: TfrmReportOffer
   PixelsPerInch = 96
   TextHeight = 13
   object DBCConnection: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=Microsoft.ACE.OLEDB.12.0;Password="";Data Source=G:\ADA' +
       'FactuurProgramma.accdb;Persist Security Info=True;Jet OLEDB:Data' +
@@ -27,8 +26,6 @@ object frmReportOffer: TfrmReportOffer
     Top = 104
   end
   object DBTOffers: TADOTable
-    Active = True
-    Connection = DBCConnection
     CursorType = ctStatic
     MaxRecords = 1
     IndexName = 'OfferteNr'
@@ -83,9 +80,12 @@ object frmReportOffer: TfrmReportOffer
     object DBTOffersOmgezet: TBooleanField
       FieldName = 'Omgezet'
     end
+    object DBTOffersOpmerking: TWideMemoField
+      FieldName = 'Opmerking'
+      BlobType = ftWideMemo
+    end
   end
   object DBTOfferDetails: TADOTable
-    Connection = DBCConnection
     CursorType = ctStatic
     MaxRecords = 999
     TableName = 'OfferteDetails'
@@ -162,7 +162,8 @@ object frmReportOffer: TfrmReportOffer
       'KlantTelefoonnummer=KlantTelefoonnummer'
       'AangemaaktDoor=AangemaaktDoor'
       'AangemaaktOp=AangemaaktOp'
-      'Omgezet=Omgezet')
+      'Omgezet=Omgezet'
+      'Opmerking=Opmerking')
     DataSet = DBTOffers
     BCDToCurrency = False
     Left = 144
@@ -405,7 +406,7 @@ object frmReportOffer: TfrmReportOffer
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Memo.UTF8W = (
-            'FACTUUR')
+            'OFFERTE')
           ParentFont = False
         end
         object frxMasterDataUKlantTelefoonnummer: TfrxMemoView
@@ -535,13 +536,13 @@ object frmReportOffer: TfrmReportOffer
         end
       end
       object PageFooter: TfrxPageFooter
-        Height = 260.787338110000000000
-        Top = 536.692976850000000000
+        Height = 264.566868110000000000
+        Top = 532.913446850000000000
         Width = 718.110700000000000000
         PrintOnFirstPage = False
         object Memo8: TfrxMemoView
-          Left = 604.724409448818900000
-          Top = 31.023655000000000000
+          Left = 604.724409450000000000
+          Top = 34.803185000000000000
           Width = 94.488188980000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -564,7 +565,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo13: TfrxMemoView
           Left = 491.338582677165400000
-          Top = 53.370130000000000000
+          Top = 57.149660000000000000
           Width = 113.007878900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -580,8 +581,8 @@ object frmReportOffer: TfrmReportOffer
           ParentFont = False
         end
         object Memo14: TfrxMemoView
-          Left = 604.724409448818900000
-          Top = 53.370130000000000000
+          Left = 604.724409450000000000
+          Top = 57.149660000000000000
           Width = 94.488188980000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -606,7 +607,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo15: TfrxMemoView
           Left = 491.338582677165400000
-          Top = 30.464595000000000000
+          Top = 34.244125000000000000
           Width = 105.448818900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -615,7 +616,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object frxMasterDataUSubtotaal: TfrxMemoView
           Left = 604.724409450000000000
-          Top = 3.779530000000000000
+          Top = 7.559060000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -630,13 +631,47 @@ object frmReportOffer: TfrmReportOffer
             '[frxMasterDataU."Subtotaal"]')
         end
         object Memo1: TfrxMemoView
-          Left = 491.338582677165400000
-          Top = 3.779530000000000000
+          Left = 491.338582680000000000
+          Top = 7.559060000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (
             'Subtotaal           :')
+        end
+        object Memo5: TfrxMemoView
+          Top = 4.559343150000000000
+          Width = 718.110700000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop]
+          ParentFont = False
+        end
+        object frxMasterDataUOpmerking: TfrxMemoView
+          Left = 34.015770000000000000
+          Top = 7.559343150000000000
+          Width = 347.716760000000000000
+          Height = 215.433210000000000000
+          ShowHint = False
+          DataField = 'Opmerking'
+          DataSet = frxMasterData
+          DataSetName = 'frxMasterDataU'
+          Memo.UTF8W = (
+            '[frxMasterDataU."Opmerking"]')
+        end
+        object Page: TfrxMemoView
+          Left = 377.952755910000000000
+          Top = 238.110236220000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Memo.UTF8W = (
+            '[Page]/[TotalPages]')
         end
       end
     end

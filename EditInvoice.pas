@@ -43,6 +43,7 @@ type
     lblToBePayedVia: TLabel;
     cmbToBepayedVia: TComboBox;
     cmbPayedVia: TComboBox;
+    edtComment: TMemo;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -54,6 +55,7 @@ type
       Shift: TShiftState);
     procedure edtCustomerNameExit(Sender: TObject);
     procedure ckbInvoicePayedClick(Sender: TObject);
+    procedure frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TInvoiceDetails: TADOTable;
@@ -136,6 +138,13 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmEditInvoice.frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
+begin
+  inherited;
+  frameInvoiceDetails.btnDeleteClick(Sender);
+  loadDetails;
 end;
 
 procedure TfrmEditInvoice.frameInvoiceDetailsbtnEditClick(Sender: TObject);

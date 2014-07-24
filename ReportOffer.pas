@@ -39,6 +39,7 @@ type
     DBTOfferDetailsTotaal: TBCDField;
     DBTOfferDetailsAangemaaktDoor: TWideStringField;
     DBTOfferDetailsAangemaaktOp: TDateTimeField;
+    DBTOffersOpmerking: TWideMemoField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
     procedure frxreportBeforePrint(Sender: TfrxReportComponent);
   private
@@ -69,7 +70,7 @@ begin
 
   DBTOffers.Filtered := false;
   DBTOffers.Filter := 'ID' + '=' + IntToStr(ID);
-  DBTOfferDetails.Filtered := true;
+  DBTOffers.Filtered := true;
 
   DBTOfferDetails.Filtered := false;
   DBTOfferDetails.Filter := 'OfferteId' + '=' + IntToStr(ID);
@@ -84,11 +85,6 @@ end;
 procedure TfrmReportOffer.frxreportBeforePrint(Sender: TfrxReportComponent);
 var footer: TfrxPageFooter;
 begin
- // if frxreport.PreviewPages.Count = 1 then begin
-  //  frxreport.PagesCount;
- //   footer := TfrxPageFooter(frxreport.FindComponent('PageFooter'));
-  //  footer.PrintOnFirstPage := true;
- // end;
 end;
 
 procedure TfrmReportOffer.frxreportGetValue(const VarName: string;

@@ -101,6 +101,8 @@ type
     DBTOffersAangemaaktDoor: TWideStringField;
     DBTOffersAangemaaktOp: TDateTimeField;
     DBTOffersOmgezet: TBooleanField;
+    DBTInvoicesOpmerking: TWideMemoField;
+    DBTOffersOpmerking: TWideMemoField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -196,7 +198,7 @@ begin
     DBTQuery.SQL.Clear;
 
     if lvwItems.HelpKeyword = Invoice then begin
-      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(FactuurNr, Factuur) Values(' + IntToStr(faNr) + ', true)';
+      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(FactuurNr) Values(' + IntToStr(faNr) + ')';
       DBTQuery.ExecSQL;
       CurrentTable.Active := False;
       CurrentTable.Active := True;
@@ -210,7 +212,7 @@ begin
       CurrentTable.Active := False;
       CurrentTable.Active := True;
       CurrentTable.Locate('OfferteNr', oNr, []);
-      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'FactuurId');
+      frmHEdit := TfrmEditOffer.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'OfferteId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
       TfrmEditInvoice(frmHEdit).invoiceNr := faNr;
     end;

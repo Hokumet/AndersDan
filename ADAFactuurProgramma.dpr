@@ -25,9 +25,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Anders dan anderen Factuur programma';
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmReportAnchestor, frmReportAnchestor);
-  Application.CreateForm(TfrmReportOffer, frmReportOffer);
-  Application.CreateForm(TfrmreportInvoice, frmreportInvoice);
-  Application.CreateForm(TfrmEditInvoice, frmEditInvoice);
   Application.Run;
 end.

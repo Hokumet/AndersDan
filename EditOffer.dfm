@@ -236,23 +236,23 @@ inherited frmEditOffer: TfrmEditOffer
       inline frameInvoiceDetails: TfrAncestor
         Left = 1
         Top = 1
-        Width = 1063
+        Width = 760
         Height = 241
-        Align = alClient
+        Align = alLeft
         Color = 2068964
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
         ExplicitLeft = 1
         ExplicitTop = 1
-        ExplicitWidth = 1063
+        ExplicitWidth = 760
         ExplicitHeight = 241
         inherited lblTitel: TLabel
-          Width = 1063
+          Width = 760
         end
         inherited Panel1: TPanel
           Top = 176
-          Width = 1063
+          Width = 760
           ExplicitTop = 176
           ExplicitWidth = 1063
           inherited btnNew: TButton
@@ -267,15 +267,28 @@ inherited frmEditOffer: TfrmEditOffer
           end
           inherited btnDelete: TButton
             Left = 250
+            OnClick = frameInvoiceDetailsbtnDeleteClick
             ExplicitLeft = 250
           end
         end
         inherited lvwItems: TListView
-          Width = 1063
+          Width = 760
           Height = 163
           ExplicitWidth = 1063
           ExplicitHeight = 163
         end
+      end
+      object edtComment: TMemo
+        Left = 761
+        Top = 1
+        Width = 303
+        Height = 241
+        HelpType = htKeyword
+        HelpKeyword = 'Opmerking'
+        Align = alClient
+        TabOrder = 1
+        ExplicitLeft = 640
+        ExplicitWidth = 424
       end
     end
   end

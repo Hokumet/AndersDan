@@ -44,6 +44,7 @@ type
     DBTInvoiceDetailsTotaal: TBCDField;
     DBTInvoiceDetailsAangemaaktDoor: TWideStringField;
     DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
+    DBTTInvoicesOpmerking: TWideMemoField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
   public

@@ -60,11 +60,8 @@ inherited frmMain: TfrmMain
     ExplicitWidth = 1221
     inherited ToolBar: TToolBar
       Width = 1212
-      Height = 56
-      ButtonHeight = 52
       ButtonWidth = 99
       ExplicitWidth = 1212
-      ExplicitHeight = 56
       inherited btnNew: TToolButton
         OnClick = btnNewClick
         ExplicitWidth = 112
@@ -160,7 +157,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F001801180120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F001C011C0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4393,7 +4390,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113001801180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113001C011C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5146,6 +5143,10 @@ inherited frmMain: TfrmMain
     object DBTInvoicesBetaald: TBooleanField
       FieldName = 'Betaald'
     end
+    object DBTInvoicesOpmerking: TWideMemoField
+      FieldName = 'Opmerking'
+      BlobType = ftWideMemo
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -5272,6 +5273,10 @@ inherited frmMain: TfrmMain
     end
     object DBTOffersOmgezet: TBooleanField
       FieldName = 'Omgezet'
+    end
+    object DBTOffersOpmerking: TWideMemoField
+      FieldName = 'Opmerking'
+      BlobType = ftWideMemo
     end
   end
   object DBTCustomers: TADOTable

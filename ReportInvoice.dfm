@@ -100,6 +100,10 @@ object frmreportInvoice: TfrmreportInvoice
     object DBTTInvoicesBetaald: TBooleanField
       FieldName = 'Betaald'
     end
+    object DBTTInvoicesOpmerking: TWideMemoField
+      FieldName = 'Opmerking'
+      BlobType = ftWideMemo
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -507,7 +511,7 @@ object frmreportInvoice: TfrmreportInvoice
         end
       end
       object PageFooter: TfrxPageFooter
-        Height = 347.716760000000000000
+        Height = 268.346630000000000000
         Top = 449.764070000000000000
         Width = 718.110700000000000000
         PrintOnFirstPage = False
@@ -647,7 +651,7 @@ object frmreportInvoice: TfrmreportInvoice
         end
         object frxMasterDataUSubtotaal: TfrxMemoView
           Left = 604.724800000000000000
-          Top = 7.559059999999999000
+          Top = 7.559060000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -663,7 +667,7 @@ object frmreportInvoice: TfrmreportInvoice
         end
         object Memo1: TfrxMemoView
           Left = 491.338900000000000000
-          Top = 7.559059999999999000
+          Top = 7.559060000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -692,6 +696,41 @@ object frmreportInvoice: TfrmreportInvoice
           Memo.UTF8W = (
             '[ToBePayedVia]')
         end
+        object Memo5: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 718.110700000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop]
+          ParentFont = False
+        end
+        object frxMasterDataUOpmerking: TfrxMemoView
+          Left = 34.015748030000000000
+          Top = 7.559060000000000000
+          Width = 306.141930000000000000
+          Height = 222.992270000000000000
+          ShowHint = False
+          DataField = 'Opmerking'
+          DataSet = frxMasterData
+          DataSetName = 'frxMasterDataU'
+          Memo.UTF8W = (
+            '[frxMasterDataU."Opmerking"]')
+        end
+        object Page: TfrxMemoView
+          Left = 377.953000000000000000
+          Top = 238.110390000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Page]/[TotalPages]')
+        end
       end
     end
   end
@@ -716,7 +755,8 @@ object frmreportInvoice: TfrmreportInvoice
       'KlantTelefoonnummer=KlantTelefoonnummer'
       'AangemaaktDoor=AangemaaktDoor'
       'AangemaaktOp=AangemaaktOp'
-      'Betaald=Betaald')
+      'Betaald=Betaald'
+      'Opmerking=Opmerking')
     DataSet = DBTTInvoices
     BCDToCurrency = False
     Left = 144
