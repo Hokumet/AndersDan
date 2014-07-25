@@ -190,15 +190,14 @@ begin
   TInvoiceDetails.First;
   for I := 0 to TInvoiceDetails.RecordCount-1 do begin
     Item := frameInvoiceDetails.lvwItems.Items.Add;
-    Item.Caption := TInvoiceDetails.FieldByName('ProductNr').AsString;
-    Item.SubItems.Add(TInvoiceDetails.FieldByName('ProductNaam').AsString);
+    Item.Caption :=TInvoiceDetails.FieldByName('Omschrijving').AsString;
+    Item.SubItems.Add(FloatToStr(TInvoiceDetails.FieldByName('Aantal').AsFloat));
     Item.SubItems.Add(CurrToStrF(TInvoiceDetails.FieldByName('Prijs').AsCurrency, ffCurrency ,2));
-    Item.SubItems.Add(IntToStr(TInvoiceDetails.FieldByName('Aantal').AsInteger));
-    Item.SubItems.Add(CurrToStrF(TInvoiceDetails.FieldByName('Totaal').AsCurrency, ffCurrency ,2));
+    Item.SubItems.Add(CurrToStrF(TInvoiceDetails.FieldByName('Bedrag').AsCurrency, ffCurrency ,2));
 
     Item.Data := Pointer(TInvoiceDetails.FieldByName('ID').AsInteger);
 
-    Total := Total + TInvoiceDetails.FieldByName('Totaal').AsFloat;
+    Total := Total + TInvoiceDetails.FieldByName('Bedrag').AsFloat;
 
     TInvoiceDetails.Next;
   end;
@@ -232,11 +231,10 @@ begin
   frameInvoiceDetails.FTable := TInvoiceDetails;
   frameInvoiceDetails.EForm := frmEditArticle;
 
-  frameInvoiceDetails.addColumn('ProductId', 75);
-  frameInvoiceDetails.addColumn('ProductNaam', 200 );
-  frameInvoiceDetails.addAlignColumn('Prijs', 75, taRightJustify);
+  frameInvoiceDetails.addColumn('Omschrijving', 200 );
   frameInvoiceDetails.addColumn('Aantal', 75);
-  frameInvoiceDetails.addAlignColumn('Totaal', 100, taRightJustify);
+  frameInvoiceDetails.addAlignColumn('Prijs', 75, taRightJustify);
+  frameInvoiceDetails.addAlignColumn('Bedrag', 100, taRightJustify);
 
   TCustomers := TfrmMain(Owner).DBTCustomers;
   TInvoices := TfrmMain(Owner).DBTInvoices;

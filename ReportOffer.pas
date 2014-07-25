@@ -29,17 +29,16 @@ type
     DBTOffersAangemaaktOp: TDateTimeField;
     DBTOffersOmgezet: TBooleanField;
     frxreport: TfrxReport;
+    DBTOffersOpmerking: TWideMemoField;
     DBTOfferDetailsId: TAutoIncField;
     DBTOfferDetailsOfferteId: TIntegerField;
-    DBTOfferDetailsProductNr: TIntegerField;
-    DBTOfferDetailsProductNaam: TWideStringField;
-    DBTOfferDetailsAantal: TIntegerField;
+    DBTOfferDetailsOmschrijving: TWideStringField;
     DBTOfferDetailsPrijs: TBCDField;
     DBTOfferDetailsOpmaat: TBooleanField;
-    DBTOfferDetailsTotaal: TBCDField;
+    DBTOfferDetailsBedrag: TBCDField;
     DBTOfferDetailsAangemaaktDoor: TWideStringField;
     DBTOfferDetailsAangemaaktOp: TDateTimeField;
-    DBTOffersOpmerking: TWideMemoField;
+    DBTOfferDetailsAantal: TFloatField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
     procedure frxreportBeforePrint(Sender: TfrxReportComponent);
   private

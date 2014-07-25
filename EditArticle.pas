@@ -11,8 +11,6 @@ type
   TfrmEditArticle = class(TfrmHEdit)
     Label2: TLabel;
     Label5: TLabel;
-    Label3: TLabel;
-    Edit2: TEdit;
     Edit1: TEdit;
     edtPrijs: THCurrencyEdit;
     procedure btnSaveClick(Sender: TObject);

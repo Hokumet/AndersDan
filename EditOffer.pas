@@ -169,14 +169,13 @@ begin
   TOfferDetails.First;
   for I := 0 to TOfferDetails.RecordCount-1 do begin
     Item := frameInvoiceDetails.lvwItems.Items.Add;
-    Item.Caption := TOfferDetails.FieldByName('ProductNr').AsString;
-    Item.SubItems.Add(TOfferDetails.FieldByName('ProductNaam').AsString);
+    Item.Caption :=TOfferDetails.FieldByName('Omschrijving').AsString;
+    Item.SubItems.Add(FloatToStr(TOfferDetails.FieldByName('Aantal').AsFloat));
     Item.SubItems.Add(CurrToStrF(TOfferDetails.FieldByName('Prijs').AsCurrency, ffCurrency ,2));
-    Item.SubItems.Add(IntToStr(TOfferDetails.FieldByName('Aantal').AsInteger));
-    Item.SubItems.Add(CurrToStrF(TOfferDetails.FieldByName('Totaal').AsCurrency, ffCurrency ,2));
+    Item.SubItems.Add(CurrToStrF(TOfferDetails.FieldByName('Bedrag').AsCurrency, ffCurrency ,2));
 
     Item.Data := Pointer(TOfferDetails.FieldByName('ID').AsInteger);
-    Total := Total + TOfferDetails.FieldByName('Totaal').AsFloat;
+    Total := Total + TOfferDetails.FieldByName('Bedrag').AsFloat;
     TOfferDetails.Next;
   end;
     edtTotal.Value := Total;
@@ -208,11 +207,10 @@ begin
   frameInvoiceDetails.FTable := TOfferDetails;
   frameInvoiceDetails.EForm := frmEditArticle;
 
-  frameInvoiceDetails.addColumn('ProductId', 75);
-  frameInvoiceDetails.addColumn('ProductNaam', 200 );
-  frameInvoiceDetails.addAlignColumn('Prijs', 75, taRightJustify);
+  frameInvoiceDetails.addColumn('Omschrijving', 200 );
   frameInvoiceDetails.addColumn('Aantal', 75);
-  frameInvoiceDetails.addAlignColumn('Totaal', 100, taRightJustify);
+  frameInvoiceDetails.addAlignColumn('Prijs', 75, taRightJustify);
+  frameInvoiceDetails.addAlignColumn('Bedrag', 100, taRightJustify);
 
   TCustomers := TfrmMain(Owner).DBTCustomers;
   TInvoices := TfrmMain(Owner).DBTInvoices;
@@ -270,11 +268,10 @@ begin
     for I := 0 to TOfferDetails.RecordCount - 1 do begin
       TInvoiceDetails.Insert;
       TInvoiceDetails.FieldByName('FactuurId').AsInteger := TInvoices.FieldByName('Id').AsInteger;
-      TInvoiceDetails.FieldByName('ProductNr').AsString := TInvoiceDetails.FieldByName('ProductNr').AsString;
-      TInvoiceDetails.FieldByName('ProductNaam').AsString := TOfferDetails.FieldByName('ProductNaam').AsString;
+      TInvoiceDetails.FieldByName('Omschrijving').AsString := TOfferDetails.FieldByName('Omschrijving').AsString;
       TInvoiceDetails.FieldByName('Prijs').AsFloat := TOfferDetails.FieldByName('Prijs').AsFloat;
-      TInvoiceDetails.FieldByName('Aantal').AsInteger := TOfferDetails.FieldByName('Aantal').AsInteger;
-      TInvoiceDetails.FieldByName('Totaal').AsFloat := TOfferDetails.FieldByName('Totaal').AsFloat;
+      TInvoiceDetails.FieldByName('Aantal').AsFloat := TOfferDetails.FieldByName('Aantal').AsFloat;
+      TInvoiceDetails.FieldByName('Bedrag').AsFloat := TOfferDetails.FieldByName('Bedrag').AsFloat;
       TInvoiceDetails.Post;
       TOfferDetails.Next;
     end;

@@ -10,9 +10,7 @@ uses
 
 type
   TfrmEditInvoiceDetail = class(TfrmHEdit)
-    Label1: TLabel;
     Label2: TLabel;
-    edtProductNr: TEdit;
     edtProductName: TEdit;
     Label3: TLabel;
     Label4: TLabel;
@@ -29,8 +27,6 @@ type
     procedure lbxProductsKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure lbxProductsDblClick(Sender: TObject);
-    procedure edtProductNrKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
   private
     TProducts: TADOTable;
     procedure selectProduct(ProductId: Integer);
@@ -50,31 +46,6 @@ implementation
 {$R *.dfm}
 
 uses Main, EditInvoice;
-
-procedure TfrmEditInvoiceDetail.edtProductNrKeyUp(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
-var I: Integer;
-begin
-  if (Key = VK_DOWN) or (key = VK_TAB) then begin
-    if lbxProducts.Visible then begin
-      lbxProducts.SetFocus;
-      lbxProducts.ItemIndex :=0;
-    end;
-  end
-  else begin
-    lbxProducts.Items.Clear;
-    TProducts.Filtered := False;
-    lbxProducts.Top := 36;
-    if(edtProductName.Text <> '') then begin
-      TFilter := TProducts;
-      filterTable('ID', StrToInt(edtProductNr.Text));
-      lbxProducts.Visible := TProducts.RecordCount > 1;
-      if TProducts.RecordCount > 1 then
-        fillProducts(TProducts);
-    end;
-  end;
-
-end;
 
 procedure TfrmEditInvoiceDetail.edtProductNameExit(Sender: TObject);
 begin
@@ -150,9 +121,8 @@ begin
 
     if TProducts.RecordCount = 0 then begin
       TProducts.Insert;
-      TProducts.FieldByName('Nr').AsString := edtProductNr.Text;
       TProducts.FieldByName('Naam').AsString := edtProductName.Text;
-      TProducts.FieldByName('Prijs').AsString := edtPrice.Text;
+      TProducts.FieldByName('Prijs').AsCurrency := edtPrice.Value;
       TProducts.Post;
       TProducts.UpdateBatch;
     end;
@@ -162,7 +132,6 @@ procedure TfrmEditInvoiceDetail.SelectProduct(ProductId: Integer);
 begin
   TFilter := TProducts;
   filterTable('Id', ProductId);
-  edtProductNr.Text := TFilter.FieldByName('Nr').AsString;
   edtProductName.Text := TFilter.FieldByName('Naam').AsString;
   edtPrice.Value := TFilter.FieldByName('Prijs').AsCurrency;
   lbxProducts.Visible := false;

@@ -2,39 +2,65 @@ inherited frmEditInvoice: TfrmEditInvoice
   ActiveControl = btnReset
   Align = alClient
   Caption = 'Factuur bekijken / wijzigen'
-  ClientHeight = 573
+  ClientHeight = 555
   ClientWidth = 1070
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -85
   ExplicitWidth = 1078
-  ExplicitHeight = 600
+  ExplicitHeight = 582
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
-    Top = 494
+    Top = 503
     Width = 1070
-    ExplicitTop = 486
+    Height = 52
+    ExplicitTop = 503
     ExplicitWidth = 1070
+    ExplicitHeight = 52
+    inherited LblAangemaakDoor: TLabel
+      Top = 33
+      ExplicitTop = 33
+    end
     inherited lblAangemaaktOp: TLabel
-      Left = 277
-      ExplicitLeft = 277
+      Left = 352
+      Top = 33
+      ExplicitLeft = 352
+      ExplicitTop = 33
+    end
+    inherited btnCancel: TBitBtn
+      Left = 661
+      Top = 7
+      BiDiMode = bdRightToLeft
+      ParentBiDiMode = False
+      ExplicitLeft = 661
+      ExplicitTop = 7
+    end
+    inherited btnSave: TBitBtn
+      Top = 7
+      ExplicitTop = 7
+    end
+    inherited btnReset: TBitBtn
+      Left = 352
+      Top = 7
+      ExplicitLeft = 352
+      ExplicitTop = 7
     end
   end
   inherited pnlLabels: TPanel
     Width = 1069
-    Height = 494
+    Height = 503
     Alignment = taLeftJustify
     ExplicitWidth = 1069
-    ExplicitHeight = 486
+    ExplicitHeight = 503
     object Panel1: TPanel
       Left = 0
       Top = 0
       Width = 1069
       Height = 137
       Align = alTop
-      BorderStyle = bsSingle
+      Color = 1807588
+      ParentBackground = False
       TabOrder = 0
       object lblNr: TLabel
         Left = 41
@@ -153,13 +179,13 @@ inherited frmEditInvoice: TfrmEditInvoice
     end
     object Panel2: TPanel
       Left = 0
-      Top = 392
+      Top = 401
       Width = 1069
       Height = 102
       Align = alBottom
-      BorderStyle = bsSingle
+      Color = 1807588
+      ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 384
       object Label3: TLabel
         Left = 41
         Top = 74
@@ -305,81 +331,90 @@ inherited frmEditInvoice: TfrmEditInvoice
       Left = 0
       Top = 137
       Width = 1069
-      Height = 255
+      Height = 264
       Align = alClient
       BorderStyle = bsSingle
       TabOrder = 2
-      ExplicitHeight = 247
       inline frameInvoiceDetails: TfrAncestor
         Left = 1
         Top = 1
         Width = 760
-        Height = 249
+        Height = 258
         Align = alLeft
-        Color = 2068964
+        Color = 60138
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
         ExplicitLeft = 1
         ExplicitTop = 1
         ExplicitWidth = 760
-        ExplicitHeight = 249
+        ExplicitHeight = 258
         inherited lblTitel: TLabel
           Width = 760
+          Color = 60138
         end
         inherited Panel1: TPanel
-          Top = 184
+          Top = 215
           Width = 760
-          ExplicitTop = 176
-          ExplicitWidth = 1063
+          Height = 43
+          Color = 60138
+          ParentBackground = False
+          ExplicitTop = 215
+          ExplicitWidth = 760
+          ExplicitHeight = 43
           inherited btnNew: TButton
-            Left = 42
+            Left = 40
+            Top = 7
             OnClick = frameInvoiceDetailsbtnNewClick
-            ExplicitLeft = 42
+            ExplicitLeft = 40
+            ExplicitTop = 7
           end
           inherited btnEdit: TButton
-            Left = 146
+            Left = 349
+            Top = 7
             OnClick = frameInvoiceDetailsbtnEditClick
-            ExplicitLeft = 146
+            ExplicitLeft = 349
+            ExplicitTop = 7
           end
           inherited btnDelete: TButton
-            Left = 250
+            Left = 658
+            Top = 7
             OnClick = frameInvoiceDetailsbtnDeleteClick
-            ExplicitLeft = 250
+            ExplicitLeft = 658
+            ExplicitTop = 7
           end
         end
         inherited lvwItems: TListView
           Width = 760
-          Height = 171
-          ExplicitWidth = 1063
-          ExplicitHeight = 163
+          Height = 202
+          ExplicitWidth = 760
+          ExplicitHeight = 202
         end
       end
       object edtComment: TMemo
         Left = 761
         Top = 1
         Width = 303
-        Height = 249
+        Height = 258
         HelpType = htKeyword
         HelpKeyword = 'Opmerking'
         Align = alClient
+        BorderStyle = bsNone
         TabOrder = 1
-        ExplicitLeft = 712
-        ExplicitWidth = 352
       end
     end
   end
   inherited pnlFields: TPanel
     Left = 1069
     Width = 1
-    Height = 494
+    Height = 503
     Alignment = taRightJustify
     ExplicitLeft = 1069
     ExplicitWidth = 1
-    ExplicitHeight = 486
+    ExplicitHeight = 503
   end
   object lbxCustomers: TListBox [3]
-    Left = 523
+    Left = 521
     Top = 38
     Width = 240
     Height = 59

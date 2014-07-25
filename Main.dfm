@@ -31,18 +31,32 @@ inherited frmMain: TfrmMain
       ParentFont = False
       ExplicitHeight = 19
     end
+    object Label1: TLabel [2]
+      Left = 420
+      Top = 9
+      Width = 49
+      Height = 16
+      Caption = 'Betaald'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object ckbPayed: TCheckBox
-      Left = 400
+      Left = 472
       Top = 8
-      Width = 97
+      Width = 25
       Height = 17
       Alignment = taLeftJustify
-      Caption = 'Betaald'
+      Color = clBlue
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
+      ParentColor = False
       ParentFont = False
       TabOrder = 1
       OnClick = ckbPayedClick
@@ -157,7 +171,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F001C011C0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F002C012C0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4390,7 +4404,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113001C011C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113002C012C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5161,15 +5175,9 @@ inherited frmMain: TfrmMain
     object DBTInvoiceDetailsFactuurId: TIntegerField
       FieldName = 'FactuurId'
     end
-    object DBTInvoiceDetailsProductNr: TIntegerField
-      FieldName = 'ProductNr'
-    end
-    object DBTInvoiceDetailsProductNaam: TWideStringField
-      FieldName = 'ProductNaam'
+    object DBTInvoiceDetailsOmschrijving: TWideStringField
+      FieldName = 'Omschrijving'
       Size = 255
-    end
-    object DBTInvoiceDetailsAantal: TIntegerField
-      FieldName = 'Aantal'
     end
     object DBTInvoiceDetailsPrijs: TBCDField
       FieldName = 'Prijs'
@@ -5178,8 +5186,8 @@ inherited frmMain: TfrmMain
     object DBTInvoiceDetailsOpmaat: TBooleanField
       FieldName = 'Opmaat'
     end
-    object DBTInvoiceDetailsTotaal: TBCDField
-      FieldName = 'Totaal'
+    object DBTInvoiceDetailsBedrag: TBCDField
+      FieldName = 'Bedrag'
       Precision = 19
     end
     object DBTInvoiceDetailsAangemaaktDoor: TWideStringField
@@ -5188,6 +5196,9 @@ inherited frmMain: TfrmMain
     end
     object DBTInvoiceDetailsAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
+    end
+    object DBTInvoiceDetailsAantal: TFloatField
+      FieldName = 'Aantal'
     end
   end
   object DBTProducts: TADOTable
@@ -5200,12 +5211,8 @@ inherited frmMain: TfrmMain
       FieldName = 'Id'
       ReadOnly = True
     end
-    object DBTProductsNr: TWideStringField
-      FieldName = 'Nr'
-      Size = 255
-    end
-    object DBTProductsNaam: TWideStringField
-      FieldName = 'Naam'
+    object DBTProductsOmschrijving: TWideStringField
+      FieldName = 'Omschrijving'
       Size = 255
     end
     object DBTProductsPrijs: TBCDField
@@ -5393,15 +5400,9 @@ inherited frmMain: TfrmMain
     object DBTOfferDetailsOfferteId: TIntegerField
       FieldName = 'OfferteId'
     end
-    object DBTOfferDetailsProductNr: TIntegerField
-      FieldName = 'ProductNr'
-    end
-    object DBTOfferDetailsProductNaam: TWideStringField
-      FieldName = 'ProductNaam'
+    object DBTOfferDetailsOmschrijving: TWideStringField
+      FieldName = 'Omschrijving'
       Size = 255
-    end
-    object DBTOfferDetailsAantal: TIntegerField
-      FieldName = 'Aantal'
     end
     object DBTOfferDetailsPrijs: TBCDField
       FieldName = 'Prijs'
@@ -5410,8 +5411,8 @@ inherited frmMain: TfrmMain
     object DBTOfferDetailsOpmaat: TBooleanField
       FieldName = 'Opmaat'
     end
-    object DBTOfferDetailsTotaal: TBCDField
-      FieldName = 'Totaal'
+    object DBTOfferDetailsBedrag: TBCDField
+      FieldName = 'Bedrag'
       Precision = 19
     end
     object DBTOfferDetailsAangemaaktDoor: TWideStringField
@@ -5420,6 +5421,9 @@ inherited frmMain: TfrmMain
     end
     object DBTOfferDetailsAangemaaktOp: TDateTimeField
       FieldName = 'AangemaaktOp'
+    end
+    object DBTOfferDetailsAantal: TFloatField
+      FieldName = 'Aantal'
     end
   end
 end

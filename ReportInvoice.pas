@@ -34,17 +34,16 @@ type
     DBTTInvoicesAangemaaktDoor: TWideStringField;
     DBTTInvoicesAangemaaktOp: TDateTimeField;
     DBTTInvoicesBetaald: TBooleanField;
+    DBTTInvoicesOpmerking: TWideMemoField;
     DBTInvoiceDetailsId: TAutoIncField;
     DBTInvoiceDetailsFactuurId: TIntegerField;
-    DBTInvoiceDetailsProductNr: TIntegerField;
-    DBTInvoiceDetailsProductNaam: TWideStringField;
-    DBTInvoiceDetailsAantal: TIntegerField;
+    DBTInvoiceDetailsOmschrijving: TWideStringField;
     DBTInvoiceDetailsPrijs: TBCDField;
     DBTInvoiceDetailsOpmaat: TBooleanField;
-    DBTInvoiceDetailsTotaal: TBCDField;
+    DBTInvoiceDetailsBedrag: TBCDField;
     DBTInvoiceDetailsAangemaaktDoor: TWideStringField;
     DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
-    DBTTInvoicesOpmerking: TWideMemoField;
+    DBTInvoiceDetailsAantal: TFloatField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
   public
@@ -90,7 +89,7 @@ procedure TfrmreportInvoice.frxreportGetValue(const VarName: string;
 begin
   if VarName = 'lblAanbetaling' then
     if DBTTInvoicesAanbetaling.Value >0 then
-      Value := 'Aanbetaling     :'
+      Value := 'Betaald             :'
     else
       Value := ''
   else if VarName = 'PayedVia' then

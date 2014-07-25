@@ -1,79 +1,63 @@
 inherited frmEditArticle: TfrmEditArticle
   Caption = 'Product bekijken / wijzigen'
-  ClientHeight = 206
+  ClientHeight = 165
   ClientWidth = 438
   KeyPreview = True
   OldCreateOrder = False
   Position = poOwnerFormCenter
   ExplicitWidth = 446
-  ExplicitHeight = 233
+  ExplicitHeight = 192
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlFields: TPanel [0]
     Left = 149
     Width = 289
-    Height = 127
+    Height = 86
     ExplicitLeft = 149
     ExplicitWidth = 289
-    ExplicitHeight = 286
-    object Edit2: TEdit
-      Left = 16
-      Top = 16
-      Width = 121
-      Height = 21
-      HelpType = htKeyword
-      HelpKeyword = 'Nr'
-      TabOrder = 1
-    end
+    ExplicitHeight = 127
     object Edit1: TEdit
       Left = 16
-      Top = 46
+      Top = 13
       Width = 238
       Height = 21
       HelpType = htKeyword
-      HelpKeyword = 'Naam'
+      HelpKeyword = 'Omschrijving'
       TabOrder = 0
     end
     object edtPrijs: THCurrencyEdit
       Left = 16
-      Top = 76
+      Top = 43
       Width = 121
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Prijs'
-      TabOrder = 2
+      TabOrder = 1
       Alignment = taRightJustify
       MaxValue = 999999.000000000000000000
     end
   end
   inherited Panel3: TPanel [1]
-    Top = 127
+    Top = 86
     Width = 438
-    ExplicitTop = 286
+    ExplicitTop = 127
     ExplicitWidth = 438
   end
   inherited pnlLabels: TPanel [2]
     Width = 149
-    Height = 127
+    Height = 86
     ExplicitWidth = 149
-    ExplicitHeight = 286
+    ExplicitHeight = 127
     object Label2: TLabel
       Left = 41
-      Top = 54
-      Width = 63
+      Top = 21
+      Width = 65
       Height = 13
-      Caption = 'Artikel naam:'
-    end
-    object Label3: TLabel
-      Left = 41
-      Top = 24
-      Width = 75
-      Height = 13
-      Caption = 'Artikel nummer:'
+      Caption = 'Omschrijving:'
     end
     object Label5: TLabel
       Left = 41
-      Top = 84
+      Top = 51
       Width = 57
       Height = 13
       Caption = 'Artikel prijs:'
