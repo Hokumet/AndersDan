@@ -74,7 +74,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Prijs'
-      TabOrder = 1
+      TabOrder = 2
       OnExit = edtPriceExit
       Alignment = taRightJustify
       MinValue = -99999.000000000000000000
@@ -88,7 +88,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
       HelpType = htKeyword
       HelpKeyword = 'Aantal'
       FloatFormat = '0.00'
-      TabOrder = 2
+      TabOrder = 1
       OnExit = edtPriceExit
       NumberOfDecimals = 2
       Alignment = taRightJustify

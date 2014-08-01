@@ -44,6 +44,7 @@ type
     DBTInvoiceDetailsAangemaaktDoor: TWideStringField;
     DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
     DBTInvoiceDetailsAantal: TFloatField;
+    DBTTInvoicesKlantEmail: TWideStringField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
   public
@@ -62,6 +63,8 @@ implementation
 constructor TfrmreportInvoice.Create(Owner: TComponent; ID: Integer;
   MasterTable: TADOTable);
 var footer: TfrxPageFooter;
+    phoneNr: TfrxMemoView;
+    email: TfrxMemoView;
 begin
   inherited Create(Owner);
   DBTTInvoices.Connection := MasterTable.Connection;
@@ -82,6 +85,7 @@ begin
   if DBTInvoiceDetails.RecordCount < 20 then begin
     footer.PrintOnFirstPage := true;
   end;
+  // 9,40   0,60
 end;
 
 procedure TfrmreportInvoice.frxreportGetValue(const VarName: string;
@@ -117,6 +121,18 @@ begin
       Value := FormatFloat('0.00', DBTTInvoicesNogTebetalen.AsCurrency)
     else
       Value := ''
+  else if VarName = 'Email' then
+    if DBTTInvoicesKlantEmail.AsString <>'' then
+      Value := 'Email adres        :' + DBTTInvoicesKlantEmail.AsString
+    else
+      Value := ''
+  else if VarName = 'PhoneNr' then
+    if DBTTInvoicesKlantTelefoonnummer.AsString <>'' then
+      Value := 'Telefoon nr.       :' +DBTTInvoicesKlantTelefoonnummer.AsString
+    else
+      Value := ''
 end;
 
 end.
+
+

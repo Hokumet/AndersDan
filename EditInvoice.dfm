@@ -3,20 +3,20 @@ inherited frmEditInvoice: TfrmEditInvoice
   Align = alClient
   Caption = 'Factuur bekijken / wijzigen'
   ClientHeight = 555
-  ClientWidth = 1070
+  ClientWidth = 1120
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitWidth = 1078
+  ExplicitWidth = 1128
   ExplicitHeight = 582
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
     Top = 503
-    Width = 1070
+    Width = 1120
     Height = 52
     ExplicitTop = 503
-    ExplicitWidth = 1070
+    ExplicitWidth = 1120
     ExplicitHeight = 52
     inherited LblAangemaakDoor: TLabel
       Top = 33
@@ -48,15 +48,15 @@ inherited frmEditInvoice: TfrmEditInvoice
     end
   end
   inherited pnlLabels: TPanel
-    Width = 1069
+    Width = 1119
     Height = 503
     Alignment = taLeftJustify
-    ExplicitWidth = 1069
+    ExplicitWidth = 1119
     ExplicitHeight = 503
     object Panel1: TPanel
       Left = 0
       Top = 0
-      Width = 1069
+      Width = 1119
       Height = 137
       Align = alTop
       Color = 1807588
@@ -180,7 +180,7 @@ inherited frmEditInvoice: TfrmEditInvoice
     object Panel2: TPanel
       Left = 0
       Top = 401
-      Width = 1069
+      Width = 1119
       Height = 102
       Align = alBottom
       Color = 1807588
@@ -330,7 +330,7 @@ inherited frmEditInvoice: TfrmEditInvoice
     object Panel4: TPanel
       Left = 0
       Top = 137
-      Width = 1069
+      Width = 1119
       Height = 264
       Align = alClient
       BorderStyle = bsSingle
@@ -394,7 +394,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       object edtComment: TMemo
         Left = 761
         Top = 1
-        Width = 303
+        Width = 183
         Height = 258
         HelpType = htKeyword
         HelpKeyword = 'Opmerking'
@@ -402,14 +402,34 @@ inherited frmEditInvoice: TfrmEditInvoice
         BorderStyle = bsNone
         TabOrder = 1
       end
+      object Panel5: TPanel
+        Left = 944
+        Top = 1
+        Width = 170
+        Height = 258
+        Align = alRight
+        Caption = 'Panel5'
+        Color = 60138
+        ParentBackground = False
+        TabOrder = 2
+        object MonthCalendar1: TMonthCalendar
+          Left = 1
+          Top = 1
+          Width = 168
+          Height = 256
+          Align = alClient
+          Date = 41846.947612719910000000
+          TabOrder = 0
+        end
+      end
     end
   end
   inherited pnlFields: TPanel
-    Left = 1069
+    Left = 1119
     Width = 1
     Height = 503
     Alignment = taRightJustify
-    ExplicitLeft = 1069
+    ExplicitLeft = 1119
     ExplicitWidth = 1
     ExplicitHeight = 503
   end

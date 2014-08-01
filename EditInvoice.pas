@@ -44,6 +44,8 @@ type
     cmbToBepayedVia: TComboBox;
     cmbPayedVia: TComboBox;
     edtComment: TMemo;
+    Panel5: TPanel;
+    MonthCalendar1: TMonthCalendar;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -279,6 +281,7 @@ begin
   edtCustomerName.Text := TFilter.FieldByName('Naam').AsString;
   edtCustomerAddress.Text := TFilter.FieldByName('Adres').AsString;
   edtPostCodeCity.Text := TFilter.FieldByName('PostcodePlaats').AsString;
+  edtPhoneNumber.Text := TFilter.FieldByName('TelefoonNummer').AsString;
   lbxCustomers.Visible := false;
 end;
 

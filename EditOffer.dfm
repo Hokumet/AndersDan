@@ -3,20 +3,21 @@ inherited frmEditOffer: TfrmEditOffer
   Align = alClient
   Caption = 'Offerte bekijken / wijzigen'
   ClientHeight = 565
-  ClientWidth = 1070
+  ClientWidth = 1226
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitWidth = 1078
+  ExplicitLeft = -293
+  ExplicitWidth = 1234
   ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
     Top = 513
-    Width = 1070
+    Width = 1226
     Height = 52
     ExplicitTop = 513
-    ExplicitWidth = 1070
+    ExplicitWidth = 1226
     ExplicitHeight = 52
     inherited LblAangemaakDoor: TLabel
       Top = 33
@@ -46,15 +47,15 @@ inherited frmEditOffer: TfrmEditOffer
     end
   end
   inherited pnlLabels: TPanel
-    Width = 1069
+    Width = 1225
     Height = 513
     Alignment = taLeftJustify
-    ExplicitWidth = 1069
+    ExplicitWidth = 1225
     ExplicitHeight = 513
     object Panel1: TPanel
       Left = 0
       Top = 0
-      Width = 1069
+      Width = 1225
       Height = 137
       Align = alTop
       Color = 1807588
@@ -178,7 +179,7 @@ inherited frmEditOffer: TfrmEditOffer
     object Panel2: TPanel
       Left = 0
       Top = 411
-      Width = 1069
+      Width = 1225
       Height = 102
       Align = alBottom
       Color = 1807588
@@ -254,7 +255,7 @@ inherited frmEditOffer: TfrmEditOffer
     object Panel4: TPanel
       Left = 0
       Top = 137
-      Width = 1069
+      Width = 1225
       Height = 274
       Align = alClient
       TabOrder = 2
@@ -317,21 +318,44 @@ inherited frmEditOffer: TfrmEditOffer
       object edtComment: TMemo
         Left = 761
         Top = 1
-        Width = 307
+        Width = 295
         Height = 272
         HelpType = htKeyword
         HelpKeyword = 'Opmerking'
         Align = alClient
         TabOrder = 1
+        ExplicitWidth = 127
+      end
+      object Panel5: TPanel
+        Left = 1056
+        Top = 1
+        Width = 168
+        Height = 272
+        Align = alRight
+        Caption = 'Panel5'
+        Color = 60138
+        ParentBackground = False
+        TabOrder = 2
+        object MonthCalendar1: TMonthCalendar
+          Left = 1
+          Top = 1
+          Width = 166
+          Height = 270
+          Align = alClient
+          Date = 41846.729659664350000000
+          TabOrder = 0
+          ExplicitLeft = 0
+          ExplicitWidth = 162
+        end
       end
     end
   end
   inherited pnlFields: TPanel
-    Left = 1069
+    Left = 1225
     Width = 1
     Height = 513
     Alignment = taRightJustify
-    ExplicitLeft = 1069
+    ExplicitLeft = 1225
     ExplicitWidth = 1
     ExplicitHeight = 513
   end

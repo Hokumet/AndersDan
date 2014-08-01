@@ -15,7 +15,7 @@ inherited frmEditArticle: TfrmEditArticle
     Height = 86
     ExplicitLeft = 149
     ExplicitWidth = 289
-    ExplicitHeight = 127
+    ExplicitHeight = 86
     object Edit1: TEdit
       Left = 16
       Top = 13
@@ -40,14 +40,15 @@ inherited frmEditArticle: TfrmEditArticle
   inherited Panel3: TPanel [1]
     Top = 86
     Width = 438
-    ExplicitTop = 127
+    ExplicitTop = 86
     ExplicitWidth = 438
   end
   inherited pnlLabels: TPanel [2]
     Width = 149
     Height = 86
+    Color = 60138
     ExplicitWidth = 149
-    ExplicitHeight = 127
+    ExplicitHeight = 86
     object Label2: TLabel
       Left = 41
       Top = 21

@@ -84,6 +84,10 @@ object frmReportOffer: TfrmReportOffer
       FieldName = 'Opmerking'
       BlobType = ftWideMemo
     end
+    object DBTOffersKlantEmail: TWideStringField
+      FieldName = 'KlantEmail'
+      Size = 255
+    end
   end
   object DBTOfferDetails: TADOTable
     CursorType = ctStatic
@@ -260,17 +264,17 @@ object frmReportOffer: TfrmReportOffer
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
-        Height = 50.236240000000000000
+        Height = 118.299212600000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
       end
       object MasterData1: TfrxMasterData
-        Height = 204.094620000000000000
-        Top = 128.504020000000000000
+        Height = 200.976500000000000000
+        Top = 185.196850390000000000
         Width = 718.110700000000000000
         RowCount = 1
         object Memo2: TfrxMemoView
-          Left = 491.338582680000000000
+          Left = 447.496062992126000000
           Top = 58.677180000000000000
           Width = 105.448818900000000000
           Height = 18.897650000000000000
@@ -279,8 +283,8 @@ object frmReportOffer: TfrmReportOffer
             'Offerte nummer:')
         end
         object Memo3: TfrxMemoView
-          Left = 491.338900000000000000
-          Top = 81.472480000000000000
+          Left = 447.496062992126000000
+          Top = 78.472480000000000000
           Width = 105.448818900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -289,7 +293,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object frxMasterDataUKlantNaam: TfrxMemoView
           Left = 34.015770000000000000
-          Top = 58.677180000000000000
+          Top = 58.677180000000050000
           Width = 400.630180000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -301,7 +305,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object frxMasterDataUKlantAdres: TfrxMemoView
           Left = 34.015770000000000000
-          Top = 81.472480000000000000
+          Top = 78.472480000000000000
           Width = 400.630180000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -313,7 +317,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object frxMasterDataUKlantPostCodePlaats: TfrxMemoView
           Left = 34.015770000000000000
-          Top = 105.267780000000000000
+          Top = 98.267780000000000000
           Width = 400.630180000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -325,11 +329,11 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo9: TfrxMemoView
           Left = 34.015770000000000000
-          Top = 182.078850000000000000
+          Top = 182.078850000000100000
           Width = 283.464750000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          Color = 16777180
+          Color = 15000804
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -342,11 +346,11 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo10: TfrxMemoView
           Left = 317.480520000000000000
-          Top = 182.078850000000000000
+          Top = 182.078850000000100000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          Color = 16777180
+          Color = 15000804
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -360,11 +364,11 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo11: TfrxMemoView
           Left = 396.850650000000000000
-          Top = 182.078850000000000000
+          Top = 182.078850000000100000
           Width = 173.858380000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          Color = 16777180
+          Color = 15000804
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -377,12 +381,12 @@ object frmReportOffer: TfrmReportOffer
           ParentFont = False
         end
         object Memo12: TfrxMemoView
-          Left = 570.708661417322800000
+          Left = 570.708661420000000000
           Top = 182.078850000000000000
-          Width = 128.503937007874000000
-          Height = 22.677180000000000000
+          Width = 128.503937010000000000
+          Height = 18.897650000000000000
           ShowHint = False
-          Color = 16777180
+          Color = 15000804
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -395,7 +399,7 @@ object frmReportOffer: TfrmReportOffer
           ParentFont = False
         end
         object Memo4: TfrxMemoView
-          Left = 491.338900000000000000
+          Left = 447.496062992126000000
           Top = 11.338590000000000000
           Width = 207.874150000000000000
           Height = 34.015770000000000000
@@ -409,22 +413,10 @@ object frmReportOffer: TfrmReportOffer
             'OFFERTE')
           ParentFont = False
         end
-        object frxMasterDataUKlantTelefoonnummer: TfrxMemoView
-          Left = 34.015770000000000000
-          Top = 128.504020000000000000
-          Width = 400.630180000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'KlantTelefoonnummer'
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          Memo.UTF8W = (
-            '[frxMasterDataU."KlantTelefoonnummer"]')
-        end
         object frxMasterDataUOfferteNr: TfrxMemoView
-          Left = 604.724426540000000000
-          Top = 58.677180000000000000
-          Width = 94.488188980000000000
+          Left = 559.724426540000000000
+          Top = 58.677180000000050000
+          Width = 136.063018980000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'OfferteNr'
@@ -434,35 +426,40 @@ object frmReportOffer: TfrmReportOffer
             '[frxMasterDataU."OfferteNr"]')
         end
         object frxMasterDataUOfferteDatum: TfrxMemoView
-          Left = 604.724426540000000000
+          Left = 559.724426540000000000
           Top = 81.472480000000000000
-          Width = 94.488188980000000000
+          Width = 136.063018980000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'OfferteDatum'
           DataSet = frxMasterData
           DataSetName = 'frxMasterDataU'
+          DisplayFormat.FormatStr = 'dd-mm-yyyy'
+          DisplayFormat.Kind = fkDateTime
           Memo.UTF8W = (
             '[frxMasterDataU."OfferteDatum"]')
         end
-        object Memo6: TfrxMemoView
-          Left = 34.015770000000000000
-          Top = 200.315090000000000000
-          Width = 665.196850390000000000
-          Height = 22.677180000000000000
+        object Email: TfrxMemoView
+          Left = 447.496062992126000000
+          Top = 135.606489610000000000
+          Width = 249.448980000000000000
+          Height = 18.897650000000000000
           ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftTop]
-          ParentFont = False
+          Memo.UTF8W = (
+            '[Email]')
+        end
+        object PhoneNr: TfrxMemoView
+          Left = 447.496062992126000000
+          Top = 117.165549610000000000
+          Width = 249.448980000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Memo.UTF8W = (
+            '[PhoneNr]')
         end
       end
       object DetailData1: TfrxDetailData
-        Height = 23.677180000000000000
-        Top = 355.275820000000000000
+        Height = 19.897650000000000000
+        Top = 408.188976377952800000
         Width = 718.110700000000000000
         DataSet = frxDetailData
         DataSetName = 'frxDatailsDataU'
@@ -470,7 +467,7 @@ object frmReportOffer: TfrmReportOffer
         object frxDatailsDataUAantal: TfrxMemoView
           Left = 298.582870000000000000
           Width = 83.149660000000000000
-          Height = 22.677180000000000000
+          Height = 18.897637795275590000
           ShowHint = False
           DataField = 'Aantal'
           DataSet = frxDetailData
@@ -489,7 +486,7 @@ object frmReportOffer: TfrmReportOffer
         object frxDatailsDataUPrijs: TfrxMemoView
           Left = 396.850650000000000000
           Width = 109.606370000000000000
-          Height = 22.677180000000000000
+          Height = 18.897637795275590000
           ShowHint = False
           DataField = 'Prijs'
           DataSet = frxDetailData
@@ -511,7 +508,7 @@ object frmReportOffer: TfrmReportOffer
         object frxDatailsDataUOmschrijving: TfrxMemoView
           Left = 34.015770000000000000
           Width = 264.567100000000000000
-          Height = 22.677165350000000000
+          Height = 18.897637795275590000
           ShowHint = False
           DataField = 'Omschrijving'
           DataSet = frxDetailData
@@ -523,9 +520,8 @@ object frmReportOffer: TfrmReportOffer
         object frxDatailsDataUBedrag: TfrxMemoView
           Left = 570.708661420000000000
           Width = 128.503937010000000000
-          Height = 23.811023620000000000
+          Height = 18.897637795275590000
           ShowHint = False
-          Color = 16777180
           DataSet = frxDetailData
           DataSetName = 'frxDatailsDataU'
           DisplayFormat.FormatStr = '%2.2n'
@@ -543,17 +539,17 @@ object frmReportOffer: TfrmReportOffer
         end
       end
       object PageFooter: TfrxPageFooter
-        Height = 264.566868110000000000
-        Top = 532.913446850000000000
+        Height = 241.889688110000000000
+        Top = 767.244306850000000000
         Width = 718.110700000000000000
         PrintOnFirstPage = False
         object Memo8: TfrxMemoView
           Left = 570.708661420000000000
-          Top = 23.464595000000000000
+          Top = 17.464595000000000000
           Width = 128.503937010000000000
           Height = 30.236240000000000000
           ShowHint = False
-          Color = 16777180
+          Color = 15000804
           DataField = 'Btw'
           DataSet = frxMasterData
           DataSetName = 'frxMasterDataU'
@@ -573,7 +569,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo13: TfrxMemoView
           Left = 491.338582680000000000
-          Top = 57.149660000000000000
+          Top = 48.149660000000000000
           Width = 78.992108900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -581,7 +577,7 @@ object frmReportOffer: TfrmReportOffer
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Style = fsDouble
           Frame.Typ = [ftBottom]
           Memo.UTF8W = (
@@ -590,11 +586,11 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo14: TfrxMemoView
           Left = 570.708661420000000000
-          Top = 53.370130000000000000
+          Top = 48.149660000000000000
           Width = 128.503937010000000000
-          Height = 22.677180000000000000
+          Height = 18.897650000000000000
           ShowHint = False
-          Color = 16777180
+          Color = 15000804
           DataField = 'Totaal'
           DataSet = frxMasterData
           DataSetName = 'frxMasterDataU'
@@ -605,7 +601,7 @@ object frmReportOffer: TfrmReportOffer
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Style = fsDouble
           Frame.Typ = [ftBottom]
           HAlign = haRight
@@ -616,7 +612,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo15: TfrxMemoView
           Left = 491.338582680000000000
-          Top = 34.244125000000000000
+          Top = 28.244125000000050000
           Width = 67.653518900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -634,7 +630,7 @@ object frmReportOffer: TfrmReportOffer
           Width = 128.503937010000000000
           Height = 26.456710000000000000
           ShowHint = False
-          Color = 16777180
+          Color = 15000804
           DataField = 'Subtotaal'
           DataSet = frxMasterData
           DataSetName = 'frxMasterDataU'
@@ -654,7 +650,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo1: TfrxMemoView
           Left = 491.338582680000000000
-          Top = 7.559060000000000000
+          Top = 7.559060000000054000
           Width = 67.653543310000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -692,15 +688,6 @@ object frmReportOffer: TfrmReportOffer
           DataSetName = 'frxMasterDataU'
           Memo.UTF8W = (
             '[frxMasterDataU."Opmerking"]')
-        end
-        object Page: TfrxMemoView
-          Left = 377.952755910000000000
-          Top = 238.110236220000000000
-          Width = 79.370130000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Memo.UTF8W = (
-            '[Page]/[TotalPages]')
         end
       end
     end

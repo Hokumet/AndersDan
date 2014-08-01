@@ -39,8 +39,9 @@ type
     DBTOfferDetailsAangemaaktDoor: TWideStringField;
     DBTOfferDetailsAangemaaktOp: TDateTimeField;
     DBTOfferDetailsAantal: TFloatField;
-    procedure frxreportGetValue(const VarName: string; var Value: Variant);
+    DBTOffersKlantEmail: TWideStringField;
     procedure frxreportBeforePrint(Sender: TfrxReportComponent);
+    procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
   public
     constructor Create(Owner: TComponent; ID: Integer; MasterTable: TADOTable); overload;
@@ -81,18 +82,6 @@ begin
   end;
 end;
 
-procedure TfrmReportOffer.frxreportBeforePrint(Sender: TfrxReportComponent);
-var footer: TfrxPageFooter;
-begin
-end;
-
-procedure TfrmReportOffer.frxreportGetValue(const VarName: string;
-  var Value: Variant);
-begin
-  if VarName = 'lblAanbetaling' then
-      Value := 'Aanbetaling     :'
-end;
-
 procedure TfrmReportOffer.exportToPdf(ExportDir: String);
 var oExportfilter :TfrxCustomExportFilter;
 begin
@@ -103,6 +92,40 @@ begin
   oExportfilter.FileName := 'OfferteExport-'+DBTOffersOfferteNr.AsString+'.pdf';
   frxReport.PrepareReport(True);
   frxReport.Export(oExportFilter);
+end;
+
+procedure TfrmReportOffer.frxreportBeforePrint(Sender: TfrxReportComponent);
+
+var footer: TfrxPageFooter;
+    rightShape: TfrxShapeView;
+    detailData: TfrxDetailData;
+    //reportSummary1: TfrxReportSummary;
+begin          //  DetailData1
+//  footer := TfrxPageFooter(frxreport.FindComponent('PageFooter'));
+//  detailData := TfrxDetailData(frxreport.FindComponent('DetailData1'));
+//
+//  rightShape := TfrxShapeView(frxreport.FindComponent('Shape1'));
+//  //rightShape.CalcHeight;
+//  rightShape.Top := detailData.Top-100;
+//
+//  //rightShape := TfrxShapeView(frxreport.FindComponent('RightBalk'));
+//  //reportSummary1.Height := footer.Top - rightShape.Top;
+//  rightShape.Height := footer.Top - rightShape.Top + 100;
+end;
+
+procedure TfrmReportOffer.frxreportGetValue(const VarName: string;
+  var Value: Variant);
+begin
+ if VarName = 'Email' then
+    if DBTOffersKlantEmail.AsString <>'' then
+      Value := 'Email adres        :' + DBTOffersKlantEmail.AsString
+    else
+      Value := ''
+  else if VarName = 'PhoneNr' then
+    if DBTOffersKlantTelefoonnummer.AsString <>'' then
+      Value := 'Telefoon nr.       :' +DBTOffersKlantTelefoonnummer.AsString
+    else
+      Value := ''
 end;
 
 end.

@@ -67,7 +67,7 @@ begin
     TProducts.Filtered := False;
     if(edtProductName.Text <> '') then begin
       TFilter := TProducts;
-      filterTable('Naam', ' like ', edtProductName.Text);
+      filterTable('Omschrijving', ' like ', edtProductName.Text);
       lbxProducts.Visible := TProducts.RecordCount > 1;
       lbxProducts.Top := 68;
       if TProducts.RecordCount > 1 then
@@ -117,11 +117,11 @@ procedure TfrmEditInvoiceDetail.saveFields;
 begin
   inherited;
   if ckbSaveProduct.Checked then
-    filterTable('Naam', ' = ', edtProductName.Text);
+    filterTable('Omschrijving', ' = ', edtProductName.Text);
 
     if TProducts.RecordCount = 0 then begin
       TProducts.Insert;
-      TProducts.FieldByName('Naam').AsString := edtProductName.Text;
+      TProducts.FieldByName('Omschrijving').AsString := edtProductName.Text;
       TProducts.FieldByName('Prijs').AsCurrency := edtPrice.Value;
       TProducts.Post;
       TProducts.UpdateBatch;

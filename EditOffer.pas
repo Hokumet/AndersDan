@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, HEdit, Vcl.ComCtrls,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, EditAncestor, Data.DB,
-  HolderEdits, HFrame, AdoDB, HSearchEdit, ListBoxEx, HControls, ListViewEx;
+  HolderEdits, HFrame, AdoDB, HSearchEdit, ListBoxEx, HControls, ListViewEx,
+  IdBaseComponent, IdNetworkCalculator;
 
 type
   TfrmEditOffer = class(TfrmHEdit)
@@ -36,6 +37,8 @@ type
     edtPhoneNumber: TEdit;
     Label6: TLabel;
     edtComment: TMemo;
+    Panel5: TPanel;
+    MonthCalendar1: TMonthCalendar;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure ckbSaveCustomerClick(Sender: TObject);

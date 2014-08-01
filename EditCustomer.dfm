@@ -9,9 +9,12 @@ inherited frmEditCustomer: TfrmEditCustomer
   TextHeight = 13
   inherited Panel3: TPanel
     Top = 186
+    ExplicitTop = 186
   end
   inherited pnlLabels: TPanel
     Height = 186
+    Color = 60138
+    ExplicitHeight = 186
     object Label1: TLabel
       Left = 36
       Top = 32
@@ -50,6 +53,7 @@ inherited frmEditCustomer: TfrmEditCustomer
   end
   inherited pnlFields: TPanel
     Height = 186
+    ExplicitHeight = 186
     object Edit1: TEdit
       Left = 40
       Top = 16

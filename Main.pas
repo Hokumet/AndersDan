@@ -101,6 +101,8 @@ type
     Label1: TLabel;
     DBTOfferDetailsAantal: TFloatField;
     DBTInvoiceDetailsAantal: TFloatField;
+    DBTInvoicesKlantEmail: TWideStringField;
+    DBTOffersKlantEmail: TWideStringField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -266,17 +268,19 @@ end;
 
 procedure TfrmMain.ckbPayedClick(Sender: TObject);
 begin
-  if ckbPayed.Checked then  begin
-    CurrentTable.Filtered := false;
-    CurrentTable.Filter := 'Betaald=' + QuotedStr('true');
-    CurrentTable.Filtered := true;
-  end
-  else begin
-    CurrentTable.Filtered := false;
-    CurrentTable.Filter := 'Betaald=' + QuotedStr('false');
-    CurrentTable.Filtered := true;
+  if lvwItems.HelpKeyword = Invoice  then begin
+    if ckbPayed.Checked then  begin
+      CurrentTable.Filtered := false;
+      CurrentTable.Filter := 'Betaald=' + QuotedStr('true');
+      CurrentTable.Filtered := true;
+    end
+    else begin
+      CurrentTable.Filtered := false;
+      CurrentTable.Filter := 'Betaald=' + QuotedStr('false');
+      CurrentTable.Filtered := true;
+    end;
+    LoadInvoicesFiltered(0,0);
   end;
-  LoadInvoicesFiltered(0,0);
 end;
 
 function TfrmMain.GetLastNr(Table:TADOTable; FieldId: String): Integer;
@@ -446,8 +450,7 @@ end;
 
 procedure TfrmMain.SetArticleColums;
 begin
-  addColumn('Nr','Nr', 75);
-  addColumn('Naam', 'Naam', 200);
+  addColumn('Omschrijving', 'Omschrijving', 200);
   addColumn('Prijs', 'Prijs', 'curr', 130);
 end;
 
