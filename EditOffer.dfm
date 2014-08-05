@@ -1,5 +1,5 @@
 inherited frmEditOffer: TfrmEditOffer
-  ActiveControl = btnReset
+  ActiveControl = Panel1
   Align = alClient
   Caption = 'Offerte bekijken / wijzigen'
   ClientHeight = 565
@@ -7,7 +7,7 @@ inherited frmEditOffer: TfrmEditOffer
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitLeft = -293
+  ExplicitTop = -71
   ExplicitWidth = 1234
   ExplicitHeight = 592
   PixelsPerInch = 96
@@ -32,16 +32,19 @@ inherited frmEditOffer: TfrmEditOffer
     inherited btnCancel: TBitBtn
       Left = 661
       Top = 7
+      TabOrder = 2
       ExplicitLeft = 661
       ExplicitTop = 7
     end
     inherited btnSave: TBitBtn
       Top = 7
+      TabOrder = 0
       ExplicitTop = 7
     end
     inherited btnReset: TBitBtn
       Left = 353
       Top = 7
+      TabOrder = 1
       ExplicitLeft = 353
       ExplicitTop = 7
     end
@@ -56,9 +59,9 @@ inherited frmEditOffer: TfrmEditOffer
       Left = 0
       Top = 0
       Width = 1225
-      Height = 137
+      Height = 141
       Align = alTop
-      Color = 1807588
+      Color = 60138
       ParentBackground = False
       TabOrder = 0
       object lblNr: TLabel
@@ -70,7 +73,7 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object lblDate: TLabel
         Left = 41
-        Top = 54
+        Top = 48
         Width = 73
         Height = 13
         Caption = 'Offerte datum:'
@@ -84,28 +87,35 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object Label9: TLabel
         Left = 393
-        Top = 54
+        Top = 48
         Width = 32
         Height = 13
         Caption = 'Adres:'
       end
       object Label10: TLabel
         Left = 393
-        Top = 79
+        Top = 72
         Width = 87
         Height = 13
         Caption = 'Postcode / Plaats:'
       end
       object Label6: TLabel
         Left = 393
-        Top = 106
+        Top = 96
         Width = 84
         Height = 13
         Caption = 'Telefoonnummer:'
       end
+      object Label1: TLabel
+        Left = 393
+        Top = 120
+        Width = 58
+        Height = 13
+        Caption = 'Email adres:'
+      end
       object dtpInvoiceDate: TDateTimePicker
         Left = 169
-        Top = 46
+        Top = 40
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -137,7 +147,7 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object edtCustomerAddress: TEdit
         Left = 521
-        Top = 46
+        Top = 40
         Width = 240
         Height = 21
         HelpType = htKeyword
@@ -146,7 +156,7 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object edtPostCodeCity: TEdit
         Left = 521
-        Top = 76
+        Top = 64
         Width = 240
         Height = 21
         HelpType = htKeyword
@@ -155,23 +165,34 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object ckbSaveCustomer: TCheckBox
         Left = 781
-        Top = 75
+        Top = 64
         Width = 100
         Height = 17
         HelpType = htKeyword
         HelpKeyword = 'Factuur'
         Caption = 'Sla als klant op'
-        TabOrder = 6
+        TabOrder = 7
         OnClick = ckbSaveCustomerClick
       end
       object edtPhoneNumber: TEdit
         Left = 521
-        Top = 98
+        Top = 88
         Width = 240
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'KlantTelefoonnummer'
         TabOrder = 5
+        OnExit = edtCustomerNameExit
+        OnKeyUp = edtCustomerNameKeyUp
+      end
+      object edtEmail: TEdit
+        Left = 521
+        Top = 112
+        Width = 240
+        Height = 21
+        HelpType = htKeyword
+        HelpKeyword = 'KlantEmail'
+        TabOrder = 6
         OnExit = edtCustomerNameExit
         OnKeyUp = edtCustomerNameKeyUp
       end
@@ -182,33 +203,33 @@ inherited frmEditOffer: TfrmEditOffer
       Width = 1225
       Height = 102
       Align = alBottom
-      Color = 1807588
+      Color = 60138
       ParentBackground = False
       TabOrder = 1
       object Label3: TLabel
         Left = 41
-        Top = 74
+        Top = 72
         Width = 34
         Height = 13
         Caption = 'Totaal:'
       end
       object Label4: TLabel
         Left = 41
-        Top = 44
+        Top = 48
         Width = 22
         Height = 13
         Caption = 'Btw:'
       end
       object Label5: TLabel
         Left = 41
-        Top = 14
+        Top = 24
         Width = 50
         Height = 13
         Caption = 'Subtotaal:'
       end
       object edtTotal: THCurrencyEdit
         Left = 169
-        Top = 66
+        Top = 64
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -220,7 +241,7 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object ckbInvoice: TCheckBox
         Left = 393
-        Top = 70
+        Top = 64
         Width = 145
         Height = 17
         HelpType = htKeyword
@@ -229,7 +250,7 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object edtBtw: THCurrencyEdit
         Left = 169
-        Top = 36
+        Top = 40
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -241,7 +262,7 @@ inherited frmEditOffer: TfrmEditOffer
       end
       object edtSubtotal: THCurrencyEdit
         Left = 169
-        Top = 6
+        Top = 16
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -254,36 +275,34 @@ inherited frmEditOffer: TfrmEditOffer
     end
     object Panel4: TPanel
       Left = 0
-      Top = 137
+      Top = 141
       Width = 1225
-      Height = 274
+      Height = 270
       Align = alClient
       TabOrder = 2
       inline frameInvoiceDetails: TfrAncestor
         Left = 1
         Top = 1
         Width = 760
-        Height = 272
+        Height = 268
         Align = alLeft
-        Color = 60138
+        Color = 16291591
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
         ExplicitLeft = 1
         ExplicitTop = 1
         ExplicitWidth = 760
-        ExplicitHeight = 272
+        ExplicitHeight = 268
         inherited lblTitel: TLabel
           Width = 760
-          Color = 60138
+          Font.Color = clWhite
         end
         inherited Panel1: TPanel
-          Top = 229
+          Top = 225
           Width = 760
           Height = 43
-          Color = 60138
-          ParentBackground = False
-          ExplicitTop = 229
+          ExplicitTop = 225
           ExplicitWidth = 760
           ExplicitHeight = 43
           inherited btnNew: TButton
@@ -310,42 +329,39 @@ inherited frmEditOffer: TfrmEditOffer
         end
         inherited lvwItems: TListView
           Width = 760
-          Height = 216
+          Height = 212
           ExplicitWidth = 760
-          ExplicitHeight = 216
+          ExplicitHeight = 212
         end
       end
       object edtComment: TMemo
         Left = 761
         Top = 1
         Width = 295
-        Height = 272
+        Height = 268
         HelpType = htKeyword
         HelpKeyword = 'Opmerking'
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 127
       end
       object Panel5: TPanel
         Left = 1056
         Top = 1
         Width = 168
-        Height = 272
+        Height = 268
         Align = alRight
         Caption = 'Panel5'
-        Color = 60138
+        Color = 16291591
         ParentBackground = False
         TabOrder = 2
         object MonthCalendar1: TMonthCalendar
           Left = 1
           Top = 1
           Width = 166
-          Height = 270
+          Height = 266
           Align = alClient
-          Date = 41846.729659664350000000
+          Date = 41846.937142118050000000
           TabOrder = 0
-          ExplicitLeft = 0
-          ExplicitWidth = 162
         end
       end
     end
@@ -360,8 +376,8 @@ inherited frmEditOffer: TfrmEditOffer
     ExplicitHeight = 513
   end
   object lbxCustomers: TListBox [3]
-    Left = 523
-    Top = 38
+    Left = 521
+    Top = 35
     Width = 240
     Height = 59
     ItemHeight = 13

@@ -114,6 +114,8 @@ type
       Selected: Boolean);
       function GetLastNr(Table:TADOTable; FieldId: String): Integer;
     procedure ckbPayedClick(Sender: TObject);
+    procedure lvwItemsCustomDrawItem(Sender: TCustomListView; Item: TListItem;
+      State: TCustomDrawState; var DefaultDraw: Boolean);
   private
        procedure LoadInvoices;
        procedure LoadData;
@@ -192,10 +194,12 @@ var oNr: Integer;
     faNr: Integer;
     Id: Integer;
 begin
-    faNr := GetLastNr(DBTInvoices, 'FactuurNr')+ 1;
-    oNr := GetLastNr(DBTOffers, 'OfferteNr')+ 1;
-    DBTQuery.Active := False;
-    DBTQuery.SQL.Clear;
+    if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then begin
+      faNr := GetLastNr(DBTInvoices, 'FactuurNr')+ 1;
+      oNr := GetLastNr(DBTOffers, 'OfferteNr')+ 1;
+      DBTQuery.Active := False;
+      DBTQuery.SQL.Clear;
+    end;
 
     if lvwItems.HelpKeyword = Invoice then begin
       DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(FactuurNr) Values(' + IntToStr(faNr) + ')';
@@ -215,13 +219,21 @@ begin
       frmHEdit := TfrmEditOffer.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'OfferteId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
       TfrmEditInvoice(frmHEdit).invoiceNr := faNr;
+    end
+    else if lvwItems.HelpKeyword = Customer then begin
+      frmHEdit := TfrmEditCustomer.Create(Self, 0, CurrentTable);
+    end
+    else if lvwItems.HelpKeyword = Product then begin
+      frmHEdit := TfrmEditArticle.Create(Self, 0, CurrentTable);
     end;
 
   try
     if frmHEdit.ShowModal = mrOk then
         Refresh
     else
+      if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then begin
         CurrentTable.DeleteRecords(arCurrent);
+      end;
   finally
     frmHEdit.Free;
   end;
@@ -329,6 +341,31 @@ begin
   LoadInvoicesFiltered(totalPayed, totalTobePayed);
 end;
 
+function myHexToColor(AValue: String): TColor;
+var
+  iRed: Integer;
+  iGreen: Integer;
+  iBlue: Integer;
+begin
+  iRed := StrToInt('$' + AValue[1] + AValue[2]);
+  iGreen := StrToInt('$' + AValue[3] + AValue[4]);
+  iBlue := StrToInt('$' + AValue[5] + AValue[6]);
+  Result := RGB(iRed, iGreen, iBlue);
+//myresult:=IntToStr(Result);
+end;
+
+procedure TfrmMain.lvwItemsCustomDrawItem(Sender: TCustomListView;
+  Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
+begin
+  inherited;
+  if (Item.Index mod 2) = 0 then begin
+    Sender.Canvas.Brush.Color :=  myHexToColor('ebf1fa');
+  end
+  else begin
+    Sender.Canvas.Brush.Color := clWhite;
+  end;
+
+end;
 
 procedure TfrmMain.lvwItemsSelectItem(Sender: TObject; Item: TListItem;
   Selected: Boolean);
@@ -451,7 +488,7 @@ end;
 procedure TfrmMain.SetArticleColums;
 begin
   addColumn('Omschrijving', 'Omschrijving', 200);
-  addColumn('Prijs', 'Prijs', 'curr', 130);
+  addColumn('Prijs', 'Prijs', 'curr', 130, true);
 end;
 
 procedure TfrmMain.SetCustomerColums;
@@ -460,7 +497,7 @@ begin
   addColumn('Adres', 'Adres', 200);
   addColumn('Postcode en plaats', 'PostcodePlaats', 200);
   addColumn('Telefoonnummer', 'Telefoonnummer', 200);
-  addColumn('Emailadres', 'Emailadres', 200);
+  addColumn('Emailadres', 'Emailadres', 'niks', 200,  true);
 end;
 
 procedure TfrmMain.SetInvoiceColums;
@@ -470,7 +507,7 @@ begin
   addColumn('Klant naam', 'KlantNaam', 200);
   addColumn('Totaal', 'Totaal', 'curr', 150);
   addColumn('Aanbetaling', 'Aanbetaling', 'curr', 150);
-  addColumn('Nog te betalen', 'NogTeBetalen', 'curr', 150);
+  addColumn('Nog te betalen', 'NogTeBetalen', 'curr', 150, true);
 end;
 
 procedure TfrmMain.SetOfferColums;
@@ -478,7 +515,7 @@ begin
   addColumn('Offerte nr','OfferteNr', 75);
   addColumn('Offerte datum','OfferteDatum', 110);
   addColumn('Klant naam', 'KlantNaam', 200);
-  addColumn('Totaal', 'Totaal', 'curr', 150);
+  addColumn('Totaal', 'Totaal', 'curr', 150, true);
 end;
 
 end.

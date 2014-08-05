@@ -1,59 +1,72 @@
 inherited frmEditCustomer: TfrmEditCustomer
+  ActiveControl = pnlFields
   Caption = 'Klant wijzigen'
-  ClientHeight = 265
+  ClientHeight = 221
   KeyPreview = True
   Position = poOwnerFormCenter
   ExplicitWidth = 407
-  ExplicitHeight = 292
+  ExplicitHeight = 248
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
-    Top = 186
-    ExplicitTop = 186
+    Top = 148
+    Height = 73
+    ExplicitTop = 148
+    ExplicitHeight = 73
+    inherited btnCancel: TBitBtn
+      TabOrder = 2
+    end
+    inherited btnSave: TBitBtn
+      TabOrder = 0
+    end
+    inherited btnReset: TBitBtn
+      TabOrder = 1
+    end
   end
   inherited pnlLabels: TPanel
-    Height = 186
+    Height = 148
     Color = 60138
-    ExplicitHeight = 186
+    ExplicitHeight = 148
     object Label1: TLabel
       Left = 36
-      Top = 32
+      Top = 24
       Width = 31
       Height = 13
       Caption = 'Naam:'
     end
     object Label2: TLabel
       Left = 36
-      Top = 54
+      Top = 48
       Width = 32
       Height = 13
       Caption = 'Adres:'
     end
     object Label3: TLabel
       Left = 36
-      Top = 84
+      Top = 72
       Width = 121
       Height = 13
       Caption = 'Postcode en woonplaats:'
     end
     object Label4: TLabel
-      Left = 39
-      Top = 114
+      Left = 36
+      Top = 96
       Width = 84
       Height = 13
       Caption = 'Telefoonnummer:'
     end
     object Label5: TLabel
-      Left = 39
-      Top = 144
+      Left = 36
+      Top = 120
       Width = 55
       Height = 13
       Caption = 'Emailadres:'
     end
   end
   inherited pnlFields: TPanel
-    Height = 186
-    ExplicitHeight = 186
+    Height = 148
+    Color = 16291591
+    ExplicitHeight = 148
     object Edit1: TEdit
       Left = 40
       Top = 16
@@ -65,7 +78,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit2: TEdit
       Left = 40
-      Top = 46
+      Top = 40
       Width = 184
       Height = 21
       HelpType = htKeyword
@@ -74,7 +87,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit3: TEdit
       Left = 40
-      Top = 76
+      Top = 64
       Width = 184
       Height = 21
       HelpType = htKeyword
@@ -83,7 +96,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit4: TEdit
       Left = 40
-      Top = 106
+      Top = 88
       Width = 184
       Height = 21
       HelpType = htKeyword
@@ -92,12 +105,16 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
     object Edit5: TEdit
       Left = 40
-      Top = 136
+      Top = 112
       Width = 184
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Emailadres'
       TabOrder = 4
     end
+  end
+  inherited CurrQuery: TADOQuery
+    Left = 88
+    Top = 8
   end
 end

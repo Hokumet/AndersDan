@@ -13,6 +13,7 @@ inherited frmMain: TfrmMain
   inherited pnlHeader: TPanel
     Width = 1221
     Height = 31
+    Color = 16291591
     ExplicitWidth = 1221
     ExplicitHeight = 31
     object lblToBePayed: TLabel [1]
@@ -29,7 +30,7 @@ inherited frmMain: TfrmMain
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitHeight = 19
+      ExplicitTop = 5
     end
     object Label1: TLabel [2]
       Left = 420
@@ -50,7 +51,7 @@ inherited frmMain: TfrmMain
       Width = 25
       Height = 17
       Alignment = taLeftJustify
-      Color = clBlue
+      Color = 16291591
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -11
@@ -115,6 +116,7 @@ inherited frmMain: TfrmMain
         HelpType = htKeyword
         HelpKeyword = 'Invoice'
         Caption = '&Facturen'
+        Down = True
         Grouped = True
         Style = tbsCheck
         ExplicitLeft = 530
@@ -165,13 +167,14 @@ inherited frmMain: TfrmMain
     Top = 91
     Width = 1221
     Height = 397
+    OnCustomDrawItem = lvwItemsCustomDrawItem
     ExplicitTop = 91
     ExplicitWidth = 1221
     ExplicitHeight = 397
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F003801380120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F004001400120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4404,7 +4407,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113003801380110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113004001400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

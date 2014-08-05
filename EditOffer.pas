@@ -39,6 +39,8 @@ type
     edtComment: TMemo;
     Panel5: TPanel;
     MonthCalendar1: TMonthCalendar;
+    Label1: TLabel;
+    edtEmail: TEdit;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure ckbSaveCustomerClick(Sender: TObject);
@@ -245,6 +247,7 @@ begin
     TCustomers.FieldByName('Adres').AsString := edtCustomerAddress.Text;
     TCustomers.FieldByName('PostcodePlaats').AsString := edtPostCodeCity.Text;
     TCustomers.FieldByName('Telefoonnummer').AsString := edtPhoneNumber.Text;
+    TCustomers.FieldByName('EmailAdres').AsString := edtEmail.Text;
 
     TCustomers.Post;
     TCustomers.UpdateBatch;

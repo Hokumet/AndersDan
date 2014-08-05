@@ -1,21 +1,22 @@
 inherited frmEditInvoice: TfrmEditInvoice
-  ActiveControl = btnReset
+  ActiveControl = Panel1
   Align = alClient
   Caption = 'Factuur bekijken / wijzigen'
-  ClientHeight = 555
+  ClientHeight = 570
   ClientWidth = 1120
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
+  ExplicitTop = -76
   ExplicitWidth = 1128
-  ExplicitHeight = 582
+  ExplicitHeight = 597
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
-    Top = 503
+    Top = 518
     Width = 1120
     Height = 52
-    ExplicitTop = 503
+    ExplicitTop = 518
     ExplicitWidth = 1120
     ExplicitHeight = 52
     inherited LblAangemaakDoor: TLabel
@@ -33,33 +34,36 @@ inherited frmEditInvoice: TfrmEditInvoice
       Top = 7
       BiDiMode = bdRightToLeft
       ParentBiDiMode = False
+      TabOrder = 2
       ExplicitLeft = 661
       ExplicitTop = 7
     end
     inherited btnSave: TBitBtn
       Top = 7
+      TabOrder = 0
       ExplicitTop = 7
     end
     inherited btnReset: TBitBtn
       Left = 352
       Top = 7
+      TabOrder = 1
       ExplicitLeft = 352
       ExplicitTop = 7
     end
   end
   inherited pnlLabels: TPanel
     Width = 1119
-    Height = 503
+    Height = 518
     Alignment = taLeftJustify
     ExplicitWidth = 1119
-    ExplicitHeight = 503
+    ExplicitHeight = 518
     object Panel1: TPanel
       Left = 0
       Top = 0
       Width = 1119
-      Height = 137
+      Height = 141
       Align = alTop
-      Color = 1807588
+      Color = 60138
       ParentBackground = False
       TabOrder = 0
       object lblNr: TLabel
@@ -71,7 +75,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object lblDate: TLabel
         Left = 41
-        Top = 54
+        Top = 48
         Width = 74
         Height = 13
         Caption = 'Factuur datum:'
@@ -85,28 +89,35 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object Label9: TLabel
         Left = 393
-        Top = 54
+        Top = 48
         Width = 32
         Height = 13
         Caption = 'Adres:'
       end
       object Label10: TLabel
         Left = 393
-        Top = 79
+        Top = 72
         Width = 87
         Height = 13
         Caption = 'Postcode / Plaats:'
       end
       object Label6: TLabel
         Left = 393
-        Top = 106
+        Top = 96
         Width = 84
         Height = 13
         Caption = 'Telefoonnummer:'
       end
+      object Label1: TLabel
+        Left = 393
+        Top = 120
+        Width = 58
+        Height = 13
+        Caption = 'Email adres:'
+      end
       object dtpInvoiceDate: TDateTimePicker
         Left = 169
-        Top = 46
+        Top = 40
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -138,7 +149,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object edtCustomerAddress: TEdit
         Left = 521
-        Top = 46
+        Top = 40
         Width = 240
         Height = 21
         HelpType = htKeyword
@@ -147,7 +158,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object edtPostCodeCity: TEdit
         Left = 521
-        Top = 76
+        Top = 64
         Width = 240
         Height = 21
         HelpType = htKeyword
@@ -162,12 +173,12 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Factuur'
         Caption = 'Sla als klant op'
-        TabOrder = 6
+        TabOrder = 7
         OnClick = ckbSaveCustomerClick
       end
       object edtPhoneNumber: TEdit
         Left = 521
-        Top = 98
+        Top = 88
         Width = 240
         Height = 21
         HelpType = htKeyword
@@ -176,68 +187,79 @@ inherited frmEditInvoice: TfrmEditInvoice
         OnExit = edtCustomerNameExit
         OnKeyUp = edtCustomerNameKeyUp
       end
+      object edtEmail: TEdit
+        Left = 521
+        Top = 112
+        Width = 240
+        Height = 21
+        HelpType = htKeyword
+        HelpKeyword = 'KlantEmail'
+        TabOrder = 6
+        OnExit = edtCustomerNameExit
+        OnKeyUp = edtCustomerNameKeyUp
+      end
     end
     object Panel2: TPanel
       Left = 0
-      Top = 401
+      Top = 416
       Width = 1119
       Height = 102
       Align = alBottom
-      Color = 1807588
+      Color = 60138
       ParentBackground = False
       TabOrder = 1
       object Label3: TLabel
         Left = 41
-        Top = 74
+        Top = 72
         Width = 34
         Height = 13
         Caption = 'Totaal:'
       end
       object Label4: TLabel
         Left = 41
-        Top = 44
+        Top = 48
         Width = 22
         Height = 13
         Caption = 'Btw:'
       end
       object Label5: TLabel
         Left = 41
-        Top = 14
+        Top = 24
         Width = 50
         Height = 13
         Caption = 'Subtotaal:'
       end
       object lblPayed: TLabel
         Left = 393
-        Top = 14
+        Top = 24
         Width = 61
         Height = 13
         Caption = 'Aanbetaling:'
       end
       object lblToBePayed: TLabel
         Left = 393
-        Top = 44
+        Top = 48
         Width = 75
         Height = 13
         Caption = 'Nog te betalen:'
       end
       object lblPayedVia: TLabel
         Left = 699
-        Top = 14
+        Top = 24
         Width = 72
         Height = 13
         Caption = 'Betalings type:'
       end
       object lblToBePayedVia: TLabel
         Left = 699
-        Top = 74
+        Top = 72
         Width = 72
         Height = 13
         Caption = 'Betalings type:'
       end
       object edtTotal: THCurrencyEdit
         Left = 169
-        Top = 66
+        Top = 64
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -249,7 +271,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object edtBtw: THCurrencyEdit
         Left = 169
-        Top = 36
+        Top = 40
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -261,7 +283,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object edtSubtotal: THCurrencyEdit
         Left = 169
-        Top = 6
+        Top = 16
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -273,7 +295,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object edtAanbetaling: THCurrencyEdit
         Left = 521
-        Top = 6
+        Top = 16
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -285,7 +307,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object edtToBePayed: THCurrencyEdit
         Left = 521
-        Top = 36
+        Top = 40
         Width = 121
         Height = 21
         HelpType = htKeyword
@@ -296,7 +318,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object ckbInvoicePayed: TCheckBox
         Left = 393
-        Top = 70
+        Top = 68
         Width = 145
         Height = 17
         HelpType = htKeyword
@@ -306,7 +328,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object cmbToBepayedVia: TComboBox
         Left = 781
-        Top = 66
+        Top = 64
         Width = 145
         Height = 21
         Hint = 'BetalingsTypes'
@@ -317,7 +339,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object cmbPayedVia: TComboBox
         Left = 781
-        Top = 6
+        Top = 16
         Width = 145
         Height = 21
         Hint = 'BetalingsTypes'
@@ -329,9 +351,9 @@ inherited frmEditInvoice: TfrmEditInvoice
     end
     object Panel4: TPanel
       Left = 0
-      Top = 137
+      Top = 141
       Width = 1119
-      Height = 264
+      Height = 275
       Align = alClient
       BorderStyle = bsSingle
       TabOrder = 2
@@ -339,27 +361,25 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 1
         Top = 1
         Width = 760
-        Height = 258
+        Height = 269
         Align = alLeft
-        Color = 60138
+        Color = 16291591
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
         ExplicitLeft = 1
         ExplicitTop = 1
         ExplicitWidth = 760
-        ExplicitHeight = 258
+        ExplicitHeight = 269
         inherited lblTitel: TLabel
           Width = 760
-          Color = 60138
+          Font.Color = clWhite
         end
         inherited Panel1: TPanel
-          Top = 215
+          Top = 226
           Width = 760
           Height = 43
-          Color = 60138
-          ParentBackground = False
-          ExplicitTop = 215
+          ExplicitTop = 226
           ExplicitWidth = 760
           ExplicitHeight = 43
           inherited btnNew: TButton
@@ -386,16 +406,16 @@ inherited frmEditInvoice: TfrmEditInvoice
         end
         inherited lvwItems: TListView
           Width = 760
-          Height = 202
+          Height = 213
           ExplicitWidth = 760
-          ExplicitHeight = 202
+          ExplicitHeight = 213
         end
       end
       object edtComment: TMemo
         Left = 761
         Top = 1
         Width = 183
-        Height = 258
+        Height = 269
         HelpType = htKeyword
         HelpKeyword = 'Opmerking'
         Align = alClient
@@ -406,19 +426,19 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 944
         Top = 1
         Width = 170
-        Height = 258
+        Height = 269
         Align = alRight
         Caption = 'Panel5'
-        Color = 60138
+        Color = 16291591
         ParentBackground = False
         TabOrder = 2
         object MonthCalendar1: TMonthCalendar
           Left = 1
           Top = 1
           Width = 168
-          Height = 256
+          Height = 267
           Align = alClient
-          Date = 41846.947612719910000000
+          Date = 41846.936044247680000000
           TabOrder = 0
         end
       end
@@ -427,15 +447,15 @@ inherited frmEditInvoice: TfrmEditInvoice
   inherited pnlFields: TPanel
     Left = 1119
     Width = 1
-    Height = 503
+    Height = 518
     Alignment = taRightJustify
     ExplicitLeft = 1119
     ExplicitWidth = 1
-    ExplicitHeight = 503
+    ExplicitHeight = 518
   end
   object lbxCustomers: TListBox [3]
     Left = 521
-    Top = 38
+    Top = 35
     Width = 240
     Height = 59
     ItemHeight = 13

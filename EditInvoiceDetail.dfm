@@ -1,26 +1,38 @@
 inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
+  ActiveControl = pnlFields
   Caption = 'Details wijzigen'
-  ClientHeight = 237
+  ClientHeight = 211
   ClientWidth = 437
   KeyPreview = True
   OldCreateOrder = False
   Position = poOwnerFormCenter
   ExplicitWidth = 445
-  ExplicitHeight = 264
+  ExplicitHeight = 238
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
-    Top = 158
+    Top = 139
     Width = 437
-    ExplicitTop = 158
+    Height = 72
+    ExplicitTop = 139
     ExplicitWidth = 437
+    ExplicitHeight = 72
+    inherited btnCancel: TBitBtn
+      TabOrder = 2
+    end
+    inherited btnSave: TBitBtn
+      TabOrder = 0
+    end
+    inherited btnReset: TBitBtn
+      TabOrder = 1
+    end
   end
   inherited pnlLabels: TPanel
     Width = 204
-    Height = 158
+    Height = 139
     Color = 60138
     ExplicitWidth = 204
-    ExplicitHeight = 158
+    ExplicitHeight = 139
     object Label2: TLabel
       Left = 45
       Top = 24
@@ -30,21 +42,21 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object Label3: TLabel
       Left = 45
-      Top = 84
+      Top = 72
       Width = 24
       Height = 13
       Caption = 'Prijs:'
     end
     object Label4: TLabel
       Left = 45
-      Top = 54
+      Top = 48
       Width = 35
       Height = 13
       Caption = 'Aantal:'
     end
     object Label5: TLabel
       Left = 45
-      Top = 114
+      Top = 96
       Width = 38
       Height = 13
       Caption = 'Bedrag:'
@@ -52,10 +64,10 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
   end
   inherited pnlFields: TPanel
     Left = 204
-    Height = 158
-    Color = 9895948
+    Height = 139
+    Color = 16291591
     ExplicitLeft = 204
-    ExplicitHeight = 158
+    ExplicitHeight = 139
     object edtProductName: TEdit
       Left = 20
       Top = 16
@@ -69,7 +81,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object edtPrice: THCurrencyEdit
       Left = 20
-      Top = 76
+      Top = 64
       Width = 139
       Height = 21
       HelpType = htKeyword
@@ -82,7 +94,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object edtAmount: THFloatEdit
       Left = 20
-      Top = 46
+      Top = 40
       Width = 139
       Height = 21
       HelpType = htKeyword
@@ -97,7 +109,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object edtTotal: THCurrencyEdit
       Left = 20
-      Top = 106
+      Top = 88
       Width = 139
       Height = 21
       HelpType = htKeyword
@@ -121,7 +133,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     end
     object ckbSaveProduct: TCheckBox
       Left = 20
-      Top = 136
+      Top = 115
       Width = 137
       Height = 17
       Caption = 'Sla product op'
