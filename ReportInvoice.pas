@@ -99,12 +99,22 @@ procedure TfrmreportInvoice.frxreportGetValue(const VarName: string;
 begin
   if VarName = 'Email' then
     if DBTTInvoicesKlantEmail.AsString <>'' then
-      Value := 'Email adres    : ' + DBTTInvoicesKlantEmail.AsString
+      Value := DBTTInvoicesKlantEmail.AsString
     else
       Value := ''
   else if VarName = 'PhoneNr' then
     if DBTTInvoicesKlantTelefoonnummer.AsString <>'' then
-      Value := 'Telefoon nr.    : ' +DBTTInvoicesKlantTelefoonnummer.AsString
+      Value := DBTTInvoicesKlantTelefoonnummer.AsString
+    else
+      Value := ''
+  else if VarName = 'EmailLabel' then
+    if DBTTInvoicesKlantEmail.AsString <>'' then
+      Value := 'Email adres     :'
+    else
+      Value := ''
+  else if VarName = 'PhoneNrLabel' then
+    if DBTTInvoicesKlantTelefoonnummer.AsString <>'' then
+      Value := 'Telefoon nr.     :'
     else
       Value := ''
 end;
