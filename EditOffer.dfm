@@ -7,7 +7,6 @@ inherited frmEditOffer: TfrmEditOffer
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -71
   ExplicitWidth = 1234
   ExplicitHeight = 592
   PixelsPerInch = 96
@@ -113,6 +112,54 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 13
         Caption = 'Email adres:'
       end
+      object Label12: TLabel
+        Left = 801
+        Top = 48
+        Width = 32
+        Height = 13
+        Caption = 'Adres:'
+      end
+      object Label7: TLabel
+        Left = 801
+        Top = 4
+        Width = 90
+        Height = 13
+        Caption = 'AFLEVER ADRES:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label13: TLabel
+        Left = 801
+        Top = 72
+        Width = 87
+        Height = 13
+        Caption = 'Postcode / Plaats:'
+      end
+      object Label2: TLabel
+        Left = 801
+        Top = 24
+        Width = 57
+        Height = 13
+        Caption = 'Klant naam:'
+      end
+      object Label14: TLabel
+        Left = 41
+        Top = 100
+        Width = 58
+        Height = 13
+        Caption = 'Meetdatum:'
+      end
+      object Label15: TLabel
+        Left = 41
+        Top = 122
+        Width = 51
+        Height = 13
+        Caption = 'Legdatum:'
+      end
       object dtpInvoiceDate: TDateTimePicker
         Left = 169
         Top = 40
@@ -141,7 +188,7 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'KlantNaam'
-        TabOrder = 2
+        TabOrder = 4
         OnExit = edtCustomerNameExit
         OnKeyUp = edtCustomerNameKeyUp
       end
@@ -152,7 +199,8 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'KlantAdres'
-        TabOrder = 3
+        TabOrder = 5
+        OnExit = edtCustomerAddressExit
       end
       object edtPostCodeCity: TEdit
         Left = 521
@@ -161,17 +209,18 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'KlantPostcodePlaats'
-        TabOrder = 4
+        TabOrder = 6
+        OnExit = edtPostCodeCityExit
       end
       object ckbSaveCustomer: TCheckBox
-        Left = 781
-        Top = 64
+        Left = 801
+        Top = 116
         Width = 100
         Height = 17
         HelpType = htKeyword
         HelpKeyword = 'Factuur'
         Caption = 'Sla als klant op'
-        TabOrder = 7
+        TabOrder = 12
         OnClick = ckbSaveCustomerClick
       end
       object edtPhoneNumber: TEdit
@@ -181,9 +230,7 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'KlantTelefoonnummer'
-        TabOrder = 5
-        OnExit = edtCustomerNameExit
-        OnKeyUp = edtCustomerNameKeyUp
+        TabOrder = 7
       end
       object edtEmail: TEdit
         Left = 521
@@ -192,9 +239,56 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'KlantEmail'
-        TabOrder = 6
-        OnExit = edtCustomerNameExit
-        OnKeyUp = edtCustomerNameKeyUp
+        TabOrder = 8
+      end
+      object edtDeliverPostcodeCity: TEdit
+        Left = 929
+        Top = 64
+        Width = 240
+        Height = 21
+        HelpType = htKeyword
+        HelpKeyword = 'AfleverPostcodePlaats'
+        TabOrder = 11
+      end
+      object edtDeliverAddress: TEdit
+        Left = 929
+        Top = 40
+        Width = 240
+        Height = 21
+        HelpType = htKeyword
+        HelpKeyword = 'AfleverAdres'
+        TabOrder = 10
+      end
+      object edtDeliverName: TEdit
+        Left = 929
+        Top = 16
+        Width = 240
+        Height = 21
+        HelpType = htKeyword
+        HelpKeyword = 'AfleverNaam'
+        TabOrder = 9
+      end
+      object dtpLegDate: TDateTimePicker
+        Left = 169
+        Top = 114
+        Width = 121
+        Height = 21
+        HelpType = htKeyword
+        HelpKeyword = 'LegDatum'
+        Date = 41806.949831111110000000
+        Time = 41806.949831111110000000
+        TabOrder = 3
+      end
+      object dtpMeasureDate: TDateTimePicker
+        Left = 169
+        Top = 92
+        Width = 121
+        Height = 21
+        HelpType = htKeyword
+        HelpKeyword = 'Meetdatum'
+        Date = 41806.949831111110000000
+        Time = 41806.949831111110000000
+        TabOrder = 2
       end
     end
     object Panel2: TPanel
@@ -242,7 +336,7 @@ inherited frmEditOffer: TfrmEditOffer
       object ckbInvoice: TCheckBox
         Left = 393
         Top = 64
-        Width = 145
+        Width = 248
         Height = 17
         HelpType = htKeyword
         Caption = 'Zet om naar een factuur'
@@ -330,6 +424,8 @@ inherited frmEditOffer: TfrmEditOffer
         inherited lvwItems: TListView
           Width = 760
           Height = 212
+          ExplicitLeft = -6
+          ExplicitTop = 14
           ExplicitWidth = 760
           ExplicitHeight = 212
         end
@@ -360,7 +456,7 @@ inherited frmEditOffer: TfrmEditOffer
           Width = 166
           Height = 266
           Align = alClient
-          Date = 41846.937142118050000000
+          Date = 41846.807497893520000000
           TabOrder = 0
         end
       end
@@ -379,7 +475,7 @@ inherited frmEditOffer: TfrmEditOffer
     Left = 521
     Top = 35
     Width = 240
-    Height = 59
+    Height = 58
     ItemHeight = 13
     TabOrder = 3
     Visible = False

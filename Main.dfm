@@ -30,7 +30,7 @@ inherited frmMain: TfrmMain
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitTop = 5
+      ExplicitHeight = 19
     end
     object Label1: TLabel [2]
       Left = 420
@@ -174,7 +174,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F004001400120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F004801480120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4407,7 +4407,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113004001400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113004801480110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5168,6 +5168,28 @@ inherited frmMain: TfrmMain
       FieldName = 'KlantEmail'
       Size = 255
     end
+    object DBTInvoicesAfleverNaam: TWideStringField
+      FieldName = 'AfleverNaam'
+      Size = 255
+    end
+    object DBTInvoicesAfleverAdres: TWideStringField
+      FieldName = 'AfleverAdres'
+      Size = 255
+    end
+    object DBTInvoicesAfleverPostcodePlaats: TWideStringField
+      FieldName = 'AfleverPostcodePlaats'
+      Size = 255
+    end
+    object DBTInvoicesAfleverTelefoonnummer: TWideStringField
+      FieldName = 'AfleverTelefoonnummer'
+      Size = 255
+    end
+    object DBTInvoicesMeetdatum: TDateTimeField
+      FieldName = 'Meetdatum'
+    end
+    object DBTInvoicesLegDatum: TDateTimeField
+      FieldName = 'LegDatum'
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -5295,6 +5317,28 @@ inherited frmMain: TfrmMain
     object DBTOffersKlantEmail: TWideStringField
       FieldName = 'KlantEmail'
       Size = 255
+    end
+    object DBTOffersAfleverNaam: TWideStringField
+      FieldName = 'AfleverNaam'
+      Size = 255
+    end
+    object DBTOffersAfleverAdres: TWideStringField
+      FieldName = 'AfleverAdres'
+      Size = 255
+    end
+    object DBTOffersAfleverPostCodePlaats: TWideStringField
+      FieldName = 'AfleverPostCodePlaats'
+      Size = 255
+    end
+    object DBTOffersAfleverTelefoonnummer: TWideStringField
+      FieldName = 'AfleverTelefoonnummer'
+      Size = 255
+    end
+    object DBTOffersMeetDatum: TDateTimeField
+      FieldName = 'MeetDatum'
+    end
+    object DBTOffersLegDatum: TDateTimeField
+      FieldName = 'LegDatum'
     end
   end
   object DBTCustomers: TADOTable

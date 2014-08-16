@@ -103,6 +103,18 @@ type
     DBTInvoiceDetailsAantal: TFloatField;
     DBTInvoicesKlantEmail: TWideStringField;
     DBTOffersKlantEmail: TWideStringField;
+    DBTInvoicesAfleverNaam: TWideStringField;
+    DBTInvoicesAfleverAdres: TWideStringField;
+    DBTInvoicesAfleverPostcodePlaats: TWideStringField;
+    DBTInvoicesAfleverTelefoonnummer: TWideStringField;
+    DBTOffersAfleverNaam: TWideStringField;
+    DBTOffersAfleverAdres: TWideStringField;
+    DBTOffersAfleverPostCodePlaats: TWideStringField;
+    DBTOffersAfleverTelefoonnummer: TWideStringField;
+    DBTInvoicesMeetdatum: TDateTimeField;
+    DBTInvoicesLegDatum: TDateTimeField;
+    DBTOffersMeetDatum: TDateTimeField;
+    DBTOffersLegDatum: TDateTimeField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);

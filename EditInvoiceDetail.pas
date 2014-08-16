@@ -69,7 +69,7 @@ begin
       TFilter := TProducts;
       filterTable('Omschrijving', ' like ', edtProductName.Text);
       lbxProducts.Visible := TProducts.RecordCount > 1;
-      lbxProducts.Top := 68;
+      lbxProducts.Top := 34;
       if TProducts.RecordCount > 1 then
         fillProducts(TProducts);
     end;
@@ -82,7 +82,7 @@ begin
   lbxProducts.Items.BeginUpdate;
   lbxProducts.Visible := true;
   for I := 0 to TProducts.RecordCount-1 do begin
-    lbxProducts.Items.AddObject(TProducts.FieldByName('Nr').AsString + ' | ' +TProducts.FieldByName('Naam').AsString, Pointer(TProducts.FieldByName('ID').AsInteger));
+    lbxProducts.Items.AddObject(TProducts.FieldByName('Omschrijving').AsString, Pointer(TProducts.FieldByName('ID').AsInteger));
     TProducts.Next
   end;
   lbxProducts.Items.EndUpdate;
@@ -132,7 +132,7 @@ procedure TfrmEditInvoiceDetail.SelectProduct(ProductId: Integer);
 begin
   TFilter := TProducts;
   filterTable('Id', ProductId);
-  edtProductName.Text := TFilter.FieldByName('Naam').AsString;
+  edtProductName.Text := TFilter.FieldByName('Omschrijving').AsString;
   edtPrice.Value := TFilter.FieldByName('Prijs').AsCurrency;
   lbxProducts.Visible := false;
 end;

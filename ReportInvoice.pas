@@ -45,6 +45,12 @@ type
     DBTInvoiceDetailsAangemaaktOp: TDateTimeField;
     DBTInvoiceDetailsAantal: TFloatField;
     DBTTInvoicesKlantEmail: TWideStringField;
+    DBTTInvoicesAfleverNaam: TWideStringField;
+    DBTTInvoicesAfleverAdres: TWideStringField;
+    DBTTInvoicesAfleverPostcodePlaats: TWideStringField;
+    DBTTInvoicesAfleverTelefoonnummer: TWideStringField;
+    DBTTInvoicesMeetdatum: TDateTimeField;
+    DBTTInvoicesLegDatum: TDateTimeField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
   public
@@ -91,44 +97,14 @@ end;
 procedure TfrmreportInvoice.frxreportGetValue(const VarName: string;
   var Value: Variant);
 begin
-  if VarName = 'lblAanbetaling' then
-    if DBTTInvoicesAanbetaling.Value >0 then
-      Value := 'Betaald             :'
-    else
-      Value := ''
-  else if VarName = 'PayedVia' then
-    if DBTTInvoicesAanbetaling.Value >0 then
-      Value := DBTTInvoicesAanbetalingVia.Value
-    else
-      Value := ''
-  else if VarName = 'Payed' then
-    if DBTTInvoicesAanbetaling.Value >0 then
-      Value := FormatFloat('0.00', DBTTInvoicesAanbetaling.AsCurrency)
-    else
-      Value := ''
-  else if VarName = 'lblToBePayed' then
-    if DBTTInvoicesAanbetaling.Value >0 then
-      Value := 'Nog te betalen  :'
-    else
-      Value := ''
-  else if VarName = 'ToBePayedVia' then
-    if DBTTInvoicesAanbetaling.Value >0 then
-      Value := DBTTInvoicesNogTebetalenVia.Value
-    else
-      Value := ''
-  else if VarName = 'ToBePayed' then
-    if DBTTInvoicesAanbetaling.Value >0 then
-      Value := FormatFloat('0.00', DBTTInvoicesNogTebetalen.AsCurrency)
-    else
-      Value := ''
-  else if VarName = 'Email' then
+  if VarName = 'Email' then
     if DBTTInvoicesKlantEmail.AsString <>'' then
-      Value := 'Email adres        :' + DBTTInvoicesKlantEmail.AsString
+      Value := 'Email adres    : ' + DBTTInvoicesKlantEmail.AsString
     else
       Value := ''
   else if VarName = 'PhoneNr' then
     if DBTTInvoicesKlantTelefoonnummer.AsString <>'' then
-      Value := 'Telefoon nr.       :' +DBTTInvoicesKlantTelefoonnummer.AsString
+      Value := 'Telefoon nr.    : ' +DBTTInvoicesKlantTelefoonnummer.AsString
     else
       Value := ''
 end;

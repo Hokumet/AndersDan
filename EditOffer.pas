@@ -41,6 +41,17 @@ type
     MonthCalendar1: TMonthCalendar;
     Label1: TLabel;
     edtEmail: TEdit;
+    edtDeliverPostcodeCity: TEdit;
+    edtDeliverAddress: TEdit;
+    Label12: TLabel;
+    Label7: TLabel;
+    Label13: TLabel;
+    Label2: TLabel;
+    edtDeliverName: TEdit;
+    Label14: TLabel;
+    Label15: TLabel;
+    dtpLegDate: TDateTimePicker;
+    dtpMeasureDate: TDateTimePicker;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure ckbSaveCustomerClick(Sender: TObject);
@@ -51,6 +62,8 @@ type
       Shift: TShiftState);
     procedure edtCustomerNameExit(Sender: TObject);
     procedure frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
+    procedure edtCustomerAddressExit(Sender: TObject);
+    procedure edtPostCodeCityExit(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TOfferDetails: TADOTable;
@@ -65,7 +78,7 @@ type
     procedure loadDetailsTables; override;
     procedure saveFields(); override;
     procedure loadOnce(); override;
-    //procedure loadOnceAfter(); override;
+    procedure loadOnceAfter(); override;
   public
     property invoiceNr:Integer write fInvoiceNr;
   end;
@@ -87,10 +100,20 @@ begin
       ckbSaveCustomer.Checked := false;
 end;
 
+procedure TfrmEditOffer.edtCustomerAddressExit(Sender: TObject);
+begin
+  if edtDeliverAddress.Text ='' then
+    edtDeliverAddress.Text := edtCustomerAddress.Text;
+end;
+
 procedure TfrmEditOffer.edtCustomerNameExit(Sender: TObject);
 begin
   if TCustomers.RecordCount =1 then
     SelectCustomer(TCustomers.FieldByName('ID').AsInteger);
+
+
+  if edtDeliverName.Text ='' then
+    edtDeliverName.Text := edtCustomerName.Text;
 end;
 
 procedure TfrmEditOffer.edtCustomerNameKeyUp(Sender: TObject; var Key: Word;
@@ -121,6 +144,12 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmEditOffer.edtPostCodeCityExit(Sender: TObject);
+begin
+  if edtDeliverPostcodeCity.Text ='' then
+    edtDeliverPostcodeCity.Text := edtPostCodeCity.Text;
 end;
 
 procedure TfrmEditOffer.frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
@@ -223,6 +252,15 @@ begin
 end;
 
 
+procedure TfrmEditOffer.loadOnceAfter;
+begin
+  inherited;
+  if CurrTable.FieldByName('Omgezet').AsBoolean then begin
+    ckbInvoice.Caption := 'Deze factuur is al 1 keer omgezet';
+    ckbInvoice.Font.Style := [fsBold, fsUnderline];
+  end;
+end;
+
 procedure TfrmEditOffer.saveFields;
 var I: Integer;
     fNr:Integer;
@@ -238,19 +276,20 @@ begin
       saveField(pnlLabels.Controls[I]);
   end;
   TFilter := TCustomers;
-  if ckbSaveCustomer.Checked then
+  if ckbSaveCustomer.Checked then begin
     filterTable('Naam', ' = ', edtCustomerName.Text);
 
-  if TCustomers.RecordCount = 0 then begin
-    TCustomers.Insert;
-    TCustomers.FieldByName('Naam').AsString := edtCustomerName.Text;
-    TCustomers.FieldByName('Adres').AsString := edtCustomerAddress.Text;
-    TCustomers.FieldByName('PostcodePlaats').AsString := edtPostCodeCity.Text;
-    TCustomers.FieldByName('Telefoonnummer').AsString := edtPhoneNumber.Text;
-    TCustomers.FieldByName('EmailAdres').AsString := edtEmail.Text;
+    if TCustomers.RecordCount = 0 then begin
+      TCustomers.Insert;
+      TCustomers.FieldByName('Naam').AsString := edtCustomerName.Text;
+      TCustomers.FieldByName('Adres').AsString := edtCustomerAddress.Text;
+      TCustomers.FieldByName('PostcodePlaats').AsString := edtPostCodeCity.Text;
+      TCustomers.FieldByName('Telefoonnummer').AsString := edtPhoneNumber.Text;
+      TCustomers.FieldByName('EmailAdres').AsString := edtEmail.Text;
 
-    TCustomers.Post;
-    TCustomers.UpdateBatch;
+      TCustomers.Post;
+      TCustomers.UpdateBatch;
+    end;
   end;
   if ckbInvoice.Checked then begin
     OId := CurrTable.FieldByName('ID').AsInteger;
@@ -265,6 +304,14 @@ begin
     TInvoices.FieldByName('KlantAdres').AsString := edtCustomerAddress.Text;
     TInvoices.FieldByName('KlantPostCodePlaats').AsString := edtPostCodeCity.Text;
     TInvoices.FieldByName('KlantTelefoonnummer').AsString := edtPhoneNumber.Text;
+    TInvoices.FieldByName('KlantEmail').AsString := edtEmail.Text;
+    TInvoices.FieldByName('Opmerking').AsString := edtComment.Text;
+    TInvoices.FieldByName('AfleverNaam').AsString := edtDeliverName.Text;
+    TInvoices.FieldByName('AfleverAdres').AsString := edtDeliverAddress.Text;
+    TInvoices.FieldByName('AfleverPostCodePlaats').AsString := edtDeliverPostcodeCity.Text;
+    TInvoices.FieldByName('Meetdatum').AsDateTime := dtpMeasureDate.Date;
+    TInvoices.FieldByName('LegDatum').AsDateTime := dtpLegDate.Date;
+
 
     TInvoices.Post;
     TInvoices.UpdateBatch;
@@ -307,6 +354,8 @@ begin
   edtCustomerName.Text := TFilter.FieldByName('Naam').AsString;
   edtCustomerAddress.Text := TFilter.FieldByName('Adres').AsString;
   edtPostCodeCity.Text := TFilter.FieldByName('PostcodePlaats').AsString;
+  edtPhoneNumber.Text := TFilter.FieldByName('Telefoonnummer').AsString;
+  edtEmail.Text := TFilter.FieldByName('Emailadres').AsString;
   lbxCustomers.Visible := false;
 end;
 

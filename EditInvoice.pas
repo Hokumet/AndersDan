@@ -35,7 +35,6 @@ type
     edtPostCodeCity: TEdit;
     Label10: TLabel;
     ckbSaveCustomer: TCheckBox;
-    lbxCustomers: TListBox;
     ckbInvoicePayed: TCheckBox;
     edtPhoneNumber: TEdit;
     Label6: TLabel;
@@ -48,6 +47,19 @@ type
     MonthCalendar1: TMonthCalendar;
     Label1: TLabel;
     edtEmail: TEdit;
+    Label2: TLabel;
+    edtDeliverPostcodeCity: TEdit;
+    edtDeliverAddress: TEdit;
+    Label7: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    lbxCustomers: TListBox;
+    edtDeliverCustomerName: TEdit;
+    Label11: TLabel;
+    Label14: TLabel;
+    dtpMeasureDate: TDateTimePicker;
+    dtpLegDate: TDateTimePicker;
+    Label15: TLabel;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -60,6 +72,8 @@ type
     procedure edtCustomerNameExit(Sender: TObject);
     procedure ckbInvoicePayedClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
+    procedure edtCustomerAddressExit(Sender: TObject);
+    procedure edtPostCodeCityExit(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TInvoiceDetails: TADOTable;
@@ -108,10 +122,19 @@ begin
   edtToBePayed.Value := edtTotal.Value - edtAanbetaling.Value;
 end;
 
+procedure TfrmEditInvoice.edtCustomerAddressExit(Sender: TObject);
+begin
+  if edtDeliverAddress.Text ='' then
+    edtDeliverAddress.Text := edtCustomerAddress.Text
+end;
+
 procedure TfrmEditInvoice.edtCustomerNameExit(Sender: TObject);
 begin
   if TCustomers.RecordCount = 1 then
     SelectCustomer(TCustomers.FieldByName('ID').AsInteger);
+
+  if edtDeliverCustomerName.Text ='' then
+    edtDeliverCustomerName.Text := edtCustomerName.Text
 end;
 
 procedure TfrmEditInvoice.edtCustomerNameKeyUp(Sender: TObject; var Key: Word;
@@ -142,6 +165,12 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmEditInvoice.edtPostCodeCityExit(Sender: TObject);
+begin
+  if edtDeliverPostcodeCity.Text ='' then
+    edtDeliverPostcodeCity.Text := edtPostCodeCity.Text;
 end;
 
 procedure TfrmEditInvoice.frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
@@ -285,6 +314,7 @@ begin
   edtCustomerAddress.Text := TFilter.FieldByName('Adres').AsString;
   edtPostCodeCity.Text := TFilter.FieldByName('PostcodePlaats').AsString;
   edtPhoneNumber.Text := TFilter.FieldByName('TelefoonNummer').AsString;
+  edtEmail.Text := TFilter.FieldByName('EmailAdres').AsString;
   lbxCustomers.Visible := false;
 end;
 

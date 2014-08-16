@@ -40,6 +40,12 @@ type
     DBTOfferDetailsAangemaaktOp: TDateTimeField;
     DBTOfferDetailsAantal: TFloatField;
     DBTOffersKlantEmail: TWideStringField;
+    DBTOffersAfleverNaam: TWideStringField;
+    DBTOffersAfleverAdres: TWideStringField;
+    DBTOffersAfleverPostCodePlaats: TWideStringField;
+    DBTOffersAfleverTelefoonnummer: TWideStringField;
+    DBTOffersMeetDatum: TDateTimeField;
+    DBTOffersLegDatum: TDateTimeField;
     procedure frxreportBeforePrint(Sender: TfrxReportComponent);
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
@@ -60,6 +66,9 @@ implementation
 constructor TfrmReportOffer.Create(Owner: TComponent; ID: Integer;
   MasterTable: TADOTable);
 var footer: TfrxPageFooter;
+    page: TfrxReportPage;
+    memo9: TfrxMemoView;
+    memo10: TfrxMemoView;
 begin
   inherited Create(Owner);
   DBTOffers.Connection := MasterTable.Connection;
@@ -80,6 +89,15 @@ begin
   if DBTOfferDetails.RecordCount < 20 then  begin
     footer.PrintOnFirstPage := true;
   end;
+
+  page := TfrxReportPage(frxreport.FindComponent('Page1'));
+  memo9 := TfrxMemoView(frxreport.FindComponent('Memo9'));
+  memo10 := TfrxMemoView(frxreport.FindComponent('Memo10'));
+  memo9.Top := 0;
+  memo9.Left := 0;
+  memo10.Top := 0;
+  memo10.Left := 0;
+  page.BottomMargin := 0;
 end;
 
 procedure TfrmReportOffer.exportToPdf(ExportDir: String);
@@ -92,6 +110,7 @@ begin
   oExportfilter.FileName := 'OfferteExport-'+DBTOffersOfferteNr.AsString+'.pdf';
   frxReport.PrepareReport(True);
   frxReport.Export(oExportFilter);
+
 end;
 
 procedure TfrmReportOffer.frxreportBeforePrint(Sender: TfrxReportComponent);
@@ -118,12 +137,12 @@ procedure TfrmReportOffer.frxreportGetValue(const VarName: string;
 begin
  if VarName = 'Email' then
     if DBTOffersKlantEmail.AsString <>'' then
-      Value := 'Email adres        :' + DBTOffersKlantEmail.AsString
+      Value := 'Email adres    : ' + DBTOffersKlantEmail.AsString
     else
       Value := ''
   else if VarName = 'PhoneNr' then
     if DBTOffersKlantTelefoonnummer.AsString <>'' then
-      Value := 'Telefoon nr.       :' +DBTOffersKlantTelefoonnummer.AsString
+      Value := 'Telefoon nr.    : ' +DBTOffersKlantTelefoonnummer.AsString
     else
       Value := ''
 end;
