@@ -71,7 +71,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     object edtProductName: TEdit
       Left = 20
       Top = 16
-      Width = 139
+      Width = 205
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Omschrijving'
@@ -123,7 +123,7 @@ inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
     object lbxProducts: TListBox
       Left = 20
       Top = 34
-      Width = 139
+      Width = 205
       Height = 68
       ItemHeight = 13
       TabOrder = 5

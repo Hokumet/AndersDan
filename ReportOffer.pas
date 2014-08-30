@@ -46,6 +46,8 @@ type
     DBTOffersAfleverTelefoonnummer: TWideStringField;
     DBTOffersMeetDatum: TDateTimeField;
     DBTOffersLegDatum: TDateTimeField;
+    DBTOffersKlantAanhef: TWideStringField;
+    DBTOffersAfleverAanhef: TWideStringField;
     procedure frxreportBeforePrint(Sender: TfrxReportComponent);
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
@@ -89,15 +91,6 @@ begin
   if DBTOfferDetails.RecordCount < 20 then  begin
     footer.PrintOnFirstPage := true;
   end;
-
-  page := TfrxReportPage(frxreport.FindComponent('Page1'));
-  memo9 := TfrxMemoView(frxreport.FindComponent('Memo9'));
-  memo10 := TfrxMemoView(frxreport.FindComponent('Memo10'));
-  memo9.Top := 0;
-  memo9.Left := 0;
-  memo10.Top := 0;
-  memo10.Left := 0;
-  page.BottomMargin := 0;
 end;
 
 procedure TfrmReportOffer.exportToPdf(ExportDir: String);
@@ -134,17 +127,74 @@ end;
 
 procedure TfrmReportOffer.frxreportGetValue(const VarName: string;
   var Value: Variant);
+var formattedDateTime: String;
 begin
  if VarName = 'Email' then
     if DBTOffersKlantEmail.AsString <>'' then
-      Value := 'Email adres    : ' + DBTOffersKlantEmail.AsString
+      Value := DBTOffersKlantEmail.AsString
     else
       Value := ''
   else if VarName = 'PhoneNr' then
     if DBTOffersKlantTelefoonnummer.AsString <>'' then
-      Value := 'Telefoon nr.    : ' +DBTOffersKlantTelefoonnummer.AsString
+      Value := DBTOffersKlantTelefoonnummer.AsString
     else
       Value := ''
+  else if VarName = 'EmailLabel' then
+    if DBTOffersKlantEmail.AsString <>'' then
+      Value := 'Email adres     :'
+    else
+      Value := ''
+  else if VarName = 'PhoneNrLabel' then
+    if DBTOffersKlantTelefoonnummer.AsString <>'' then
+      Value := 'Telefoon nr.     :'
+    else
+      Value := ''
+  else if VarName = 'MeasureLabel' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTOffersMeetdatum.AsDateTime);
+    if formattedDateTime <> '12-12-2012' then
+      Value := 'Meetdatum      :'
+    else
+      Value := ''
+  end
+  else if VarName = 'LegLabel' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTOffersLegDatum.AsDateTime);
+    if formattedDateTime <> '12-12-2012' then
+      Value := 'Legdatum        :'
+    else
+      Value := ''
+  end
+  else if VarName = 'Measure' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTOffersMeetdatum.AsDateTime);
+    if formattedDateTime <> '12-12-2012' then
+      Value := formattedDateTime
+    else
+      Value := ''
+  end
+  else if VarName = 'Leg' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTOffersLegDatum.AsDateTime);
+    if formattedDateTime  <> '12-12-2012' then
+      Value := formattedDateTime
+    else
+      Value := ''
+  end
+  else if VarName = 'FullName' then begin
+    if DBTOffersKlantAanhef.AsString  <> '' then
+      Value := DBTOffersKlantAanhef.AsString + ' ' + DBTOffersKlantNaam.AsString
+    else
+      Value := DBTOffersKlantNaam.AsString
+  end
+  else if VarName = 'DeliverFullName' then begin
+    if DBTOffersAfleverAanhef.AsString  <> '' then
+      Value := DBTOffersAfleverAanhef.AsString + ' ' + DBTOffersAfleverNaam.AsString
+    else
+      Value := DBTOffersAfleverNaam.AsString
+  end
+  else if VarName = 'DeliverTitle' then begin
+    if DBTOffersAfleverNaam.AsString  = '' then
+      Value := ''
+    else
+      Value := 'AFLEVERADRES'
+  end;
 end;
 
 end.

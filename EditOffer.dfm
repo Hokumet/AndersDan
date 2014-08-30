@@ -160,6 +160,19 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 13
         Caption = 'Legdatum:'
       end
+      object Label11: TLabel
+        Left = 393
+        Top = 4
+        Width = 95
+        Height = 13
+        Caption = 'FACTUUR ADRES:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object dtpInvoiceDate: TDateTimePicker
         Left = 169
         Top = 40
@@ -275,8 +288,9 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'LegDatum'
-        Date = 41806.949831111110000000
-        Time = 41806.949831111110000000
+        Date = 41255.949831111110000000
+        Time = 41255.949831111110000000
+        ImeName = 'ShowOrHide'
         TabOrder = 3
       end
       object dtpMeasureDate: TDateTimePicker
@@ -286,9 +300,52 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'Meetdatum'
-        Date = 41806.949831111110000000
-        Time = 41806.949831111110000000
+        Date = 41255.949831111110000000
+        Time = 41255.949831111110000000
+        ImeName = 'ShowOrHide'
         TabOrder = 2
+      end
+      object rbtCustomerGender: TRadioGroup
+        Left = 520
+        Top = -9
+        Width = 241
+        Height = 29
+        HelpType = htKeyword
+        HelpKeyword = 'KlantAanhef'
+        BiDiMode = bdLeftToRight
+        Color = 60138
+        Columns = 4
+        ItemIndex = 0
+        Items.Strings = (
+          ''
+          'Dhr.'
+          'Mvr.'
+          'Dhr/Mevr')
+        ParentBiDiMode = False
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 13
+        OnExit = rbtCustomerGenderExit
+      end
+      object rbtDeliverGender: TRadioGroup
+        Left = 928
+        Top = -9
+        Width = 241
+        Height = 29
+        HelpType = htKeyword
+        HelpKeyword = 'AfleverAanhef'
+        BiDiMode = bdLeftToRight
+        Color = 60138
+        Columns = 4
+        Items.Strings = (
+          ''
+          'Dhr.'
+          'Mvr.'
+          'Dhr/Mevr')
+        ParentBiDiMode = False
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 14
       end
     end
     object Panel2: TPanel
@@ -424,8 +481,6 @@ inherited frmEditOffer: TfrmEditOffer
         inherited lvwItems: TListView
           Width = 760
           Height = 212
-          ExplicitLeft = -6
-          ExplicitTop = 14
           ExplicitWidth = 760
           ExplicitHeight = 212
         end
@@ -456,7 +511,7 @@ inherited frmEditOffer: TfrmEditOffer
           Width = 166
           Height = 266
           Align = alClient
-          Date = 41846.807497893520000000
+          Date = 41846.942315486110000000
           TabOrder = 0
         end
       end

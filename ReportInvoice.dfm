@@ -130,6 +130,14 @@ object frmreportInvoice: TfrmreportInvoice
     object DBTTInvoicesLegDatum: TDateTimeField
       FieldName = 'LegDatum'
     end
+    object DBTTInvoicesKlantAanhef: TWideStringField
+      FieldName = 'KlantAanhef'
+      Size = 255
+    end
+    object DBTTInvoicesAfleverAanhef: TWideStringField
+      FieldName = 'AfleverAanhef'
+      Size = 255
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -264,6 +272,34 @@ object frmreportInvoice: TfrmreportInvoice
       item
         Name = 'EmailLabel'
         Value = ''
+      end
+      item
+        Name = 'Measure'
+        Value = ''
+      end
+      item
+        Name = 'MeasureLabel'
+        Value = ''
+      end
+      item
+        Name = 'Leg'
+        Value = ''
+      end
+      item
+        Name = 'LegLabel'
+        Value = ''
+      end
+      item
+        Name = 'FullName'
+        Value = ''
+      end
+      item
+        Name = 'DeliverFullName'
+        Value = ''
+      end
+      item
+        Name = 'DeliverTitle'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -284,7 +320,7 @@ object frmreportInvoice: TfrmreportInvoice
         Width = 718.110700000000000000
         object Memo2: TfrxMemoView
           Left = 444.015748030000000000
-          Top = 184.307098820000000000
+          Top = 183.307086610000000000
           Width = 97.889758900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -299,7 +335,7 @@ object frmreportInvoice: TfrmreportInvoice
         end
         object Memo3: TfrxMemoView
           Left = 444.015748030000000000
-          Top = 203.204736610000000000
+          Top = 202.204724409448800000
           Width = 97.889758900000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -329,8 +365,8 @@ object frmreportInvoice: TfrmreportInvoice
         end
         object frxMasterDataUFactuurNr: TfrxMemoView
           Left = 545.015748030000000000
-          Top = 184.307098820000000000
-          Width = 154.204724409448800000
+          Top = 183.307086610000000000
+          Width = 154.204724410000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'FactuurNr'
@@ -348,8 +384,8 @@ object frmreportInvoice: TfrmreportInvoice
         end
         object frxMasterDataUFactuurDatum: TfrxMemoView
           Left = 545.015748030000000000
-          Top = 203.204736610000000000
-          Width = 154.204724409448800000
+          Top = 202.204736610000000000
+          Width = 154.204724410000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataSet = frxMasterData
@@ -364,24 +400,6 @@ object frmreportInvoice: TfrmreportInvoice
           HAlign = haRight
           Memo.UTF8W = (
             '[frxMasterDataU."FactuurDatum"]')
-          ParentFont = False
-        end
-        object frxMasterDataUKlantNaam: TfrxMemoView
-          Left = 48.015748030000000000
-          Top = 164.503900390000000000
-          Width = 306.141930000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'KlantNaam'
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8W = (
-            '[frxMasterDataU."KlantNaam"]')
           ParentFont = False
         end
         object frxMasterDataUKlantAdres: TfrxMemoView
@@ -404,7 +422,7 @@ object frmreportInvoice: TfrmreportInvoice
         end
         object frxMasterDataUKlantPostCodePlaats: TfrxMemoView
           Left = 48.015748030000000000
-          Top = 203.094500390000000000
+          Top = 202.094500390000000000
           Width = 306.141930000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -420,54 +438,27 @@ object frmreportInvoice: TfrmreportInvoice
             '[frxMasterDataU."KlantPostCodePlaats"]')
           ParentFont = False
         end
+        object FullName1: TfrxMemoView
+          Left = 48.000000000000000000
+          Top = 164.409448818897600000
+          Width = 306.141732280000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FullName]')
+          ParentFont = False
+        end
       end
       object MasterData1: TfrxMasterData
         Height = 200.976500000000000000
         Top = 306.141810390000000000
         Width = 718.110700000000000000
         RowCount = 1
-        object frxMasterDataUMeetdatum: TfrxMemoView
-          Left = 545.007874020000000000
-          Top = 75.118120000000000000
-          Width = 154.204724409448800000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'Meetdatum'
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          DisplayFormat.FormatStr = 'dd-mm-yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[frxMasterDataU."Meetdatum"]')
-          ParentFont = False
-        end
-        object frxMasterDataULegDatum: TfrxMemoView
-          Left = 545.007874020000000000
-          Top = 93.913420000000000000
-          Width = 154.204724410000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'LegDatum'
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          DisplayFormat.FormatStr = 'dd-mm-yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[frxMasterDataU."LegDatum"]')
-          ParentFont = False
-        end
         object Memo18: TfrxMemoView
           Left = 444.094488190000000000
           Top = 75.118120000000000000
@@ -480,7 +471,7 @@ object frmreportInvoice: TfrmreportInvoice
           Font.Name = 'Arial'
           Font.Style = []
           Memo.UTF8W = (
-            'Meetdatum      :')
+            '[MeasureLabel]')
           ParentFont = False
         end
         object Memo19: TfrxMemoView
@@ -495,7 +486,7 @@ object frmreportInvoice: TfrmreportInvoice
           Font.Name = 'Arial'
           Font.Style = []
           Memo.UTF8W = (
-            'Legdatum        :')
+            '[LegLabel]')
           ParentFont = False
         end
         object Memo9: TfrxMemoView
@@ -597,24 +588,6 @@ object frmreportInvoice: TfrmreportInvoice
             '[PhoneNrLabel]')
           ParentFont = False
         end
-        object frxMasterDataUAfleverNaam: TfrxMemoView
-          Left = 48.015748030000000000
-          Top = 94.141737170000000000
-          Width = 253.228510000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'AfleverNaam'
-          DataSet = frxMasterData
-          DataSetName = 'frxMasterDataU'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[frxMasterDataU."AfleverNaam"]')
-          ParentFont = False
-        end
         object frxMasterDataUAfleverAdres: TfrxMemoView
           Left = 48.015748031496060000
           Top = 113.039374960000000000
@@ -651,21 +624,6 @@ object frmreportInvoice: TfrmreportInvoice
             '[frxMasterDataU."AfleverPostcodePlaats"]')
           ParentFont = False
         end
-        object Memo17: TfrxMemoView
-          Left = 48.015748030000000000
-          Top = 75.236359610000000000
-          Width = 249.448980000000000000
-          Height = 18.897637800000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'AFLEVERADRES')
-          ParentFont = False
-        end
         object Memo20: TfrxMemoView
           Left = 545.007874020000000000
           Top = 132.212598430000000000
@@ -684,7 +642,7 @@ object frmreportInvoice: TfrmreportInvoice
         end
         object Memo21: TfrxMemoView
           Left = 545.007874020000000000
-          Top = 112.559055118110200000
+          Top = 112.559055120000000000
           Width = 154.204724410000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -696,6 +654,68 @@ object frmreportInvoice: TfrmreportInvoice
           HAlign = haRight
           Memo.UTF8W = (
             '[PhoneNr]')
+          ParentFont = False
+        end
+        object Leg: TfrxMemoView
+          Left = 545.007874020000000000
+          Top = 93.795419610000000000
+          Width = 154.204724410000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Leg]')
+          ParentFont = False
+        end
+        object Measure: TfrxMemoView
+          Left = 545.007874020000000000
+          Top = 75.338709610000000000
+          Width = 154.204724410000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Measure]')
+          ParentFont = False
+        end
+        object FullName: TfrxMemoView
+          Left = 48.000000000000000000
+          Top = 94.110236220000000000
+          Width = 253.228346460000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[DeliverFullName]')
+          ParentFont = False
+        end
+        object DeliverTitle: TfrxMemoView
+          Left = 48.000000000000000000
+          Top = 75.212598430000000000
+          Width = 249.448818900000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[DeliverTitle]')
           ParentFont = False
         end
       end
@@ -1034,7 +1054,7 @@ object frmreportInvoice: TfrmreportInvoice
           HAlign = haCenter
           Memo.UTF8W = (
             
-              'ATTENTIE UIT ALLE TE STOFFEREN RUIMTES, DIENEN TAPIJN, VINYL, LA' +
+              'ATTENTIE UIT ALLE TE STOFFEREN RUIMTES, DIENEN TAPIJT, VINYL, LA' +
               'MINAAT EN MEUBELS VERWIJDERD TE ZIJN')
           ParentFont = False
           VAlign = vaCenter
@@ -1071,7 +1091,9 @@ object frmreportInvoice: TfrmreportInvoice
       'AfleverPostcodePlaats=AfleverPostcodePlaats'
       'AfleverTelefoonnummer=AfleverTelefoonnummer'
       'Meetdatum=Meetdatum'
-      'LegDatum=LegDatum')
+      'LegDatum=LegDatum'
+      'KlantAanhef=KlantAanhef'
+      'AfleverAanhef=AfleverAanhef')
     DataSet = DBTTInvoices
     BCDToCurrency = False
     Left = 144

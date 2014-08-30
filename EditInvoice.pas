@@ -60,6 +60,8 @@ type
     dtpMeasureDate: TDateTimePicker;
     dtpLegDate: TDateTimePicker;
     Label15: TLabel;
+    rbtCustomerGender: TRadioGroup;
+    rbtDeliverGender: TRadioGroup;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -74,6 +76,7 @@ type
     procedure frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
     procedure edtCustomerAddressExit(Sender: TObject);
     procedure edtPostCodeCityExit(Sender: TObject);
+    procedure rbtCustomerGenderExit(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TInvoiceDetails: TADOTable;
@@ -278,6 +281,12 @@ begin
   end;
 end;
 
+
+procedure TfrmEditInvoice.rbtCustomerGenderExit(Sender: TObject);
+begin
+  if (rbtDeliverGender.ItemIndex = 0) or (rbtDeliverGender.ItemIndex = -1) then
+    rbtDeliverGender.ItemIndex := rbtCustomerGender.ItemIndex;
+end;
 
 procedure TfrmEditInvoice.saveFields;
 var I: Integer;

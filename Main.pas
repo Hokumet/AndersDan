@@ -115,6 +115,10 @@ type
     DBTInvoicesLegDatum: TDateTimeField;
     DBTOffersMeetDatum: TDateTimeField;
     DBTOffersLegDatum: TDateTimeField;
+    DBTInvoicesKlantAanhef: TWideStringField;
+    DBTOffersKlantAanhef: TWideStringField;
+    DBTInvoicesAfleverAanhef: TWideStringField;
+    DBTOffersAfleverAanhef: TWideStringField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -150,7 +154,7 @@ var
 implementation
 
 uses EditOffer, EditInvoice, EditArticle, EditCustomer, ReportInvoice,ShellApi,
-  ReportOffer;
+  ReportOffer ;
 
 Const
   Invoice = 'Invoice';
@@ -230,7 +234,7 @@ begin
       CurrentTable.Locate('OfferteNr', oNr, []);
       frmHEdit := TfrmEditOffer.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'OfferteId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
-      TfrmEditInvoice(frmHEdit).invoiceNr := faNr;
+      TfrmEditOffer(frmHEdit).invoiceNr := faNr;
     end
     else if lvwItems.HelpKeyword = Customer then begin
       frmHEdit := TfrmEditCustomer.Create(Self, 0, CurrentTable);
@@ -320,6 +324,7 @@ var
   I,X: Integer;
   column: TListColumn;
 begin
+  Loading := True;
   lvwItems.Clear;
   CurrentTable.Last;
   for I := 0 to CurrentTable.RecordCount - 1 do
@@ -332,6 +337,8 @@ begin
       else begin
         if FieldCaptionAndFieldType.Values[column.DisplayName] = 'curr' then
           LI.SubItems.Add('€ '+FormatFloat('0.00',CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsFloat))
+        else if FieldCaptionAndFieldType.Values[column.DisplayName] = 'date' then
+          LI.SubItems.Add(FormatDateTime('dd-mm-yyyy',CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsDateTime))
         else
           LI.SubItems.Add(CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString);
       end;
@@ -339,6 +346,7 @@ begin
     LI.Data := Pointer(CurrentTable.FieldByName('ID').asInteger);
     CurrentTable.Prior;
   end;
+  Loading := False;
 end;
 
 procedure TfrmMain.LoadInvoices;
@@ -407,6 +415,7 @@ var
   LI: TListItem;
   column: TListColumn;
 begin
+  Loading := True;
   lvwItems.Clear;
   CurrentTable.Last;
   for I := 0 to CurrentTable.RecordCount - 1 do
@@ -421,6 +430,8 @@ begin
       begin
         if FieldCaptionAndFieldType.Values[column.DisplayName] = 'curr' then
           LI.SubItems.Add('€ ' + FormatFloat('0.00', CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsFloat))
+        else if FieldCaptionAndFieldType.Values[column.DisplayName] = 'date' then
+          LI.SubItems.Add(FormatDateTime('dd-mm-yyyy',CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsDateTime))
         else
           LI.SubItems.Add(CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString);
       end;
@@ -436,6 +447,8 @@ begin
     lblToBePayed.Caption := 'Totaal betaald:     € ' + FormatFloat('0.00', totalPayed) + '     '
   else
     lblToBePayed.Caption := 'Totaal openstaand:     € ' + FormatFloat('0.00', totalTobePayed) + '     ';
+
+  Loading := False;
 end;
 
 procedure TfrmMain.Refresh;
@@ -515,8 +528,10 @@ end;
 procedure TfrmMain.SetInvoiceColums;
 begin
   addColumn('Factuur nr','FactuurNr', 75);
-  addColumn('Factuur datum','FactuurDatum', 110);
+  addColumn('Factuur datum','FactuurDatum', 'date', 110);
   addColumn('Klant naam', 'KlantNaam', 200);
+  addColumn('Meetdatum','MeetDatum', 'date', 110);
+  addColumn('Legdatum','LegDatum', 'date', 110);
   addColumn('Totaal', 'Totaal', 'curr', 150);
   addColumn('Aanbetaling', 'Aanbetaling', 'curr', 150);
   addColumn('Nog te betalen', 'NogTeBetalen', 'curr', 150, true);
@@ -525,8 +540,10 @@ end;
 procedure TfrmMain.SetOfferColums;
 begin
   addColumn('Offerte nr','OfferteNr', 75);
-  addColumn('Offerte datum','OfferteDatum', 110);
+  addColumn('Offerte datum','OfferteDatum', 'date', 110);
   addColumn('Klant naam', 'KlantNaam', 200);
+  addColumn('Meetdatum','MeetDatum', 'date', 110);
+  addColumn('Legdatum','LegDatum', 'date', 110);
   addColumn('Totaal', 'Totaal', 'curr', 150, true);
 end;
 

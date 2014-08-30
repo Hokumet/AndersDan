@@ -51,6 +51,8 @@ type
     DBTTInvoicesAfleverTelefoonnummer: TWideStringField;
     DBTTInvoicesMeetdatum: TDateTimeField;
     DBTTInvoicesLegDatum: TDateTimeField;
+    DBTTInvoicesKlantAanhef: TWideStringField;
+    DBTTInvoicesAfleverAanhef: TWideStringField;
     procedure frxreportGetValue(const VarName: string; var Value: Variant);
   private
   public
@@ -96,6 +98,7 @@ end;
 
 procedure TfrmreportInvoice.frxreportGetValue(const VarName: string;
   var Value: Variant);
+var formattedDateTime: String;
 begin
   if VarName = 'Email' then
     if DBTTInvoicesKlantEmail.AsString <>'' then
@@ -117,6 +120,54 @@ begin
       Value := 'Telefoon nr.     :'
     else
       Value := ''
+  else if VarName = 'MeasureLabel' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTTInvoicesMeetdatum.AsDateTime);
+    if formattedDateTime <> '12-12-2012' then
+      Value := 'Meetdatum      :'
+    else
+      Value := ''
+  end
+  else if VarName = 'LegLabel' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTTInvoicesLegDatum.AsDateTime);
+    if formattedDateTime <> '12-12-2012' then
+      Value := 'Legdatum        :'
+    else
+      Value := ''
+  end
+  else if VarName = 'Measure' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTTInvoicesMeetdatum.AsDateTime);
+    if formattedDateTime <> '12-12-2012' then
+      Value := formattedDateTime
+    else
+      Value := ''
+  end
+  else if VarName = 'Leg' then begin
+    DateTimeToString(formattedDateTime, 'dd-mm-yyyy', DBTTInvoicesLegDatum.AsDateTime);
+    if formattedDateTime  <> '12-12-2012' then
+      Value := formattedDateTime
+    else
+      Value := ''
+  end
+  else if VarName = 'FullName' then begin
+    if DBTTInvoicesKlantAanhef.AsString  <> '' then
+      Value := DBTTInvoicesKlantAanhef.AsString + ' ' + DBTTInvoicesKlantNaam.AsString
+    else
+      Value := DBTTInvoicesKlantNaam.AsString
+  end
+  else if VarName = 'DeliverFullName' then begin
+    if DBTTInvoicesAfleverAanhef.AsString  <> '' then
+      Value := DBTTInvoicesAfleverAanhef.AsString + ' ' + DBTTInvoicesAfleverNaam.AsString
+    else
+      Value := DBTTInvoicesAfleverNaam.AsString
+  end
+  else if VarName = 'DeliverTitle' then begin
+    if DBTTInvoicesAfleverNaam.AsString  = '' then
+      Value := ''
+    else
+      Value := 'AFLEVERADRES'
+  end;
+
+
 end;
 
 end.

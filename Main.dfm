@@ -168,13 +168,13 @@ inherited frmMain: TfrmMain
     Width = 1221
     Height = 397
     OnCustomDrawItem = lvwItemsCustomDrawItem
-    ExplicitTop = 91
+    ExplicitTop = 92
     ExplicitWidth = 1221
     ExplicitHeight = 397
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F004801480120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F005001500120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4407,7 +4407,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113004801480110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113005001500110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5190,6 +5190,14 @@ inherited frmMain: TfrmMain
     object DBTInvoicesLegDatum: TDateTimeField
       FieldName = 'LegDatum'
     end
+    object DBTInvoicesKlantAanhef: TWideStringField
+      FieldName = 'KlantAanhef'
+      Size = 255
+    end
+    object DBTInvoicesAfleverAanhef: TWideStringField
+      FieldName = 'AfleverAanhef'
+      Size = 255
+    end
   end
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
@@ -5339,6 +5347,14 @@ inherited frmMain: TfrmMain
     end
     object DBTOffersLegDatum: TDateTimeField
       FieldName = 'LegDatum'
+    end
+    object DBTOffersKlantAanhef: TWideStringField
+      FieldName = 'KlantAanhef'
+      Size = 255
+    end
+    object DBTOffersAfleverAanhef: TWideStringField
+      FieldName = 'AfleverAanhef'
+      Size = 255
     end
   end
   object DBTCustomers: TADOTable

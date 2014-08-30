@@ -52,6 +52,9 @@ type
     Label15: TLabel;
     dtpLegDate: TDateTimePicker;
     dtpMeasureDate: TDateTimePicker;
+    rbtCustomerGender: TRadioGroup;
+    Label11: TLabel;
+    rbtDeliverGender: TRadioGroup;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure ckbSaveCustomerClick(Sender: TObject);
@@ -64,6 +67,7 @@ type
     procedure frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
     procedure edtCustomerAddressExit(Sender: TObject);
     procedure edtPostCodeCityExit(Sender: TObject);
+    procedure rbtCustomerGenderExit(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TOfferDetails: TADOTable;
@@ -261,10 +265,17 @@ begin
   end;
 end;
 
+procedure TfrmEditOffer.rbtCustomerGenderExit(Sender: TObject);
+begin
+  if (rbtDeliverGender.ItemIndex = -1) or (rbtDeliverGender.ItemIndex = 0) then
+    rbtDeliverGender.ItemIndex := rbtCustomerGender.ItemIndex;
+end;
+
 procedure TfrmEditOffer.saveFields;
 var I: Integer;
     fNr:Integer;
     OId:Integer;
+    FId:Integer;
 begin
   if CurrTable.FieldByName('Omgezet').AsBoolean then begin
     CurrTable.Cancel;
@@ -312,11 +323,17 @@ begin
     TInvoices.FieldByName('Meetdatum').AsDateTime := dtpMeasureDate.Date;
     TInvoices.FieldByName('LegDatum').AsDateTime := dtpLegDate.Date;
 
+    FId := TInvoices.FieldByName('ID').AsInteger;
 
     TInvoices.Post;
+    FId := TInvoices.FieldByName('ID').AsInteger;
     TInvoices.UpdateBatch;
+    FId := TInvoices.FieldByName('ID').AsInteger;
+    TInvoices.Refresh;
+    FId := TInvoices.FieldByName('ID').AsInteger;
+    TInvoices.Locate('FactuurNr', fInvoiceNr, []);
+    FId := TInvoices.FieldByName('ID').AsInteger;
 
-//    TInvoices.Locate('FactuurNr', fInvoiceNr, []);
     TOfferDetails.First;
     for I := 0 to TOfferDetails.RecordCount - 1 do begin
       TInvoiceDetails.Insert;

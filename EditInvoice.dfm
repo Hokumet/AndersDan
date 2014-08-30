@@ -277,7 +277,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         TabOrder = 11
       end
       object lbxCustomers: TListBox
-        Left = 525
+        Left = 521
         Top = 39
         Width = 240
         Height = 59
@@ -289,7 +289,7 @@ inherited frmEditInvoice: TfrmEditInvoice
       end
       object edtDeliverCustomerName: TEdit
         Left = 929
-        Top = 16
+        Top = 20
         Width = 240
         Height = 21
         HelpType = htKeyword
@@ -303,8 +303,9 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'Meetdatum'
-        Date = 41806.949831111110000000
-        Time = 41806.949831111110000000
+        Date = 41255.949831111110000000
+        Time = 41255.949831111110000000
+        ImeName = 'ShowOrHide'
         TabOrder = 2
       end
       object dtpLegDate: TDateTimePicker
@@ -314,9 +315,52 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 21
         HelpType = htKeyword
         HelpKeyword = 'LegDatum'
-        Date = 41806.949831111110000000
-        Time = 41806.949831111110000000
+        Date = 41255.949831111110000000
+        Time = 41255.949831111110000000
+        ImeName = 'ShowOrHide'
         TabOrder = 3
+      end
+      object rbtCustomerGender: TRadioGroup
+        Left = 520
+        Top = -9
+        Width = 241
+        Height = 29
+        HelpType = htKeyword
+        HelpKeyword = 'KlantAanhef'
+        BiDiMode = bdLeftToRight
+        Color = 60138
+        Columns = 4
+        ItemIndex = 0
+        Items.Strings = (
+          ''
+          'Dhr.'
+          'Mvr.'
+          'Dhr/Mevr')
+        ParentBiDiMode = False
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 14
+        OnExit = rbtCustomerGenderExit
+      end
+      object rbtDeliverGender: TRadioGroup
+        Left = 928
+        Top = -9
+        Width = 241
+        Height = 29
+        HelpType = htKeyword
+        HelpKeyword = 'AfleverAanhef'
+        BiDiMode = bdLeftToRight
+        Color = 60138
+        Columns = 4
+        Items.Strings = (
+          ''
+          'Dhr.'
+          'Mvr.'
+          'Dhr/Mevr')
+        ParentBiDiMode = False
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 15
       end
     end
     object Panel2: TPanel
@@ -558,10 +602,8 @@ inherited frmEditInvoice: TfrmEditInvoice
           Width = 168
           Height = 267
           Align = alClient
-          Date = 41846.806453807870000000
+          Date = 41846.942180486110000000
           TabOrder = 0
-          ExplicitLeft = 6
-          ExplicitWidth = 163
         end
       end
     end
