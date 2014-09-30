@@ -133,17 +133,18 @@ type
     procedure lvwItemsCustomDrawItem(Sender: TCustomListView; Item: TListItem;
       State: TCustomDrawState; var DefaultDraw: Boolean);
   private
-       procedure LoadInvoices;
-       procedure LoadData;
+     procedure LoadInvoices;
+     procedure LoadData;
 
-       procedure SetArticleColums;
-       procedure SetCustomerColums;
-       procedure SetInvoiceColums;
-       procedure SetOfferColums;
+     procedure SetArticleColums;
+     procedure SetCustomerColums;
+     procedure SetInvoiceColums;
+     procedure SetOfferColums;
     procedure LoadInvoicesFiltered(totalPayed: Double; totalTobePayed: Double);
   protected
-        procedure Refresh; override;
-        procedure OpenDatasets(); override;
+      procedure Refresh; override;
+      procedure OpenDatasets(); override;
+      procedure DoSomeThingElse; override;
   public
       //
   end;
@@ -209,6 +210,7 @@ procedure TfrmMain.btnNewClick(Sender: TObject);
 var oNr: Integer;
     faNr: Integer;
     Id: Integer;
+    ShowModal: Integer;
 begin
     if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then begin
       faNr := GetLastNr(DBTInvoices, 'FactuurNr')+ 1;
@@ -244,8 +246,11 @@ begin
     end;
 
   try
-    if frmHEdit.ShowModal = mrOk then
-        Refresh
+    ShowModal :=  frmHEdit.ShowModal;
+    if ShowModal = mrOk then
+      Refresh
+    else if ShowModal = mrYes then
+      DoSomeThingElse
     else
       if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then begin
         CurrentTable.DeleteRecords(arCurrent);
@@ -309,6 +314,13 @@ begin
     end;
     LoadInvoicesFiltered(0,0);
   end;
+end;
+
+procedure TfrmMain.DoSomeThingElse;
+begin
+  btnPrinten.Click;
+  btnEdit.Click;
+  Refresh;
 end;
 
 function TfrmMain.GetLastNr(Table:TADOTable; FieldId: String): Integer;

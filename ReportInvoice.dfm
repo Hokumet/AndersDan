@@ -706,7 +706,7 @@ object frmreportInvoice: TfrmreportInvoice
         object DeliverTitle: TfrxMemoView
           Left = 48.000000000000000000
           Top = 75.212598430000000000
-          Width = 249.448818900000000000
+          Width = 253.228348900000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET

@@ -168,13 +168,13 @@ inherited frmMain: TfrmMain
     Width = 1221
     Height = 397
     OnCustomDrawItem = lvwItemsCustomDrawItem
-    ExplicitTop = 92
+    ExplicitTop = 91
     ExplicitWidth = 1221
     ExplicitHeight = 397
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F005001500120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F005801580120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4407,7 +4407,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113005001500110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113005801580110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5202,6 +5202,7 @@ inherited frmMain: TfrmMain
   object DBTInvoiceDetails: TADOTable
     Connection = DBCConnection
     CursorType = ctStatic
+    LockType = ltBatchOptimistic
     TableName = 'FactuurDetails'
     Left = 256
     Top = 240
@@ -5242,7 +5243,7 @@ inherited frmMain: TfrmMain
     Connection = DBCConnection
     CursorType = ctStatic
     TableName = 'Producten'
-    Left = 360
+    Left = 376
     Top = 240
     object DBTProductsId: TAutoIncField
       FieldName = 'Id'
@@ -5461,6 +5462,7 @@ inherited frmMain: TfrmMain
   object DBTOfferDetails: TADOTable
     Connection = DBCConnection
     CursorType = ctStatic
+    LockType = ltBatchOptimistic
     TableName = 'OfferteDetails'
     Left = 312
     Top = 240

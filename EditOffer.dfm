@@ -7,6 +7,7 @@ inherited frmEditOffer: TfrmEditOffer
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
+  ExplicitTop = -71
   ExplicitWidth = 1234
   ExplicitHeight = 592
   PixelsPerInch = 96
@@ -29,10 +30,10 @@ inherited frmEditOffer: TfrmEditOffer
       ExplicitTop = 31
     end
     inherited btnCancel: TBitBtn
-      Left = 661
+      Left = 1020
       Top = 7
       TabOrder = 2
-      ExplicitLeft = 661
+      ExplicitLeft = 1020
       ExplicitTop = 7
     end
     inherited btnSave: TBitBtn
@@ -41,11 +42,21 @@ inherited frmEditOffer: TfrmEditOffer
       ExplicitTop = 7
     end
     inherited btnReset: TBitBtn
-      Left = 353
+      Left = 695
       Top = 7
       TabOrder = 1
-      ExplicitLeft = 353
+      ExplicitLeft = 695
       ExplicitTop = 7
+    end
+    object btnPrint: TBitBtn
+      Left = 370
+      Top = 7
+      Width = 90
+      Height = 25
+      Caption = 'Save && Print'
+      ModalResult = 6
+      TabOrder = 3
+      OnClick = btnPrintClick
     end
   end
   inherited pnlLabels: TPanel
@@ -511,7 +522,7 @@ inherited frmEditOffer: TfrmEditOffer
           Width = 166
           Height = 266
           Align = alClient
-          Date = 41846.942315486110000000
+          Date = 41846.823294155100000000
           TabOrder = 0
         end
       end

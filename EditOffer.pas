@@ -55,6 +55,7 @@ type
     rbtCustomerGender: TRadioGroup;
     Label11: TLabel;
     rbtDeliverGender: TRadioGroup;
+    btnPrint: TBitBtn;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure ckbSaveCustomerClick(Sender: TObject);
@@ -68,6 +69,7 @@ type
     procedure edtCustomerAddressExit(Sender: TObject);
     procedure edtPostCodeCityExit(Sender: TObject);
     procedure rbtCustomerGenderExit(Sender: TObject);
+    procedure btnPrintClick(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TOfferDetails: TADOTable;
@@ -92,10 +94,15 @@ var
 
 implementation
 
-uses Main, EditArticle, EditInvoiceDetail, ReportOffer;
+uses Main, EditArticle, EditInvoiceDetail, ReportOffer,ShellApi;
 {$R *.dfm}
 
 { TfrmEditInvoice }
+
+procedure TfrmEditOffer.btnPrintClick(Sender: TObject);
+begin
+  saveFields();
+end;
 
 procedure TfrmEditOffer.ckbSaveCustomerClick(Sender: TObject);
 begin
@@ -311,12 +318,14 @@ begin
     TInvoices.FieldByName('SubTotaal').AsCurrency := edtSubtotal.Value;
     TInvoices.FieldByName('Btw').AsCurrency := edtBtw.Value;
     TInvoices.FieldByName('Totaal').AsCurrency := edtTotal.Value;
+    TInvoices.FieldByName('KlantAanhef').AsString := rbtCustomerGender.Items[rbtCustomerGender.ItemIndex];
     TInvoices.FieldByName('KlantNaam').AsString := edtCustomerName.Text;
     TInvoices.FieldByName('KlantAdres').AsString := edtCustomerAddress.Text;
     TInvoices.FieldByName('KlantPostCodePlaats').AsString := edtPostCodeCity.Text;
     TInvoices.FieldByName('KlantTelefoonnummer').AsString := edtPhoneNumber.Text;
     TInvoices.FieldByName('KlantEmail').AsString := edtEmail.Text;
     TInvoices.FieldByName('Opmerking').AsString := edtComment.Text;
+    TInvoices.FieldByName('AfleverAanhef').AsString := rbtDeliverGender.Items[rbtDeliverGender.ItemIndex];
     TInvoices.FieldByName('AfleverNaam').AsString := edtDeliverName.Text;
     TInvoices.FieldByName('AfleverAdres').AsString := edtDeliverAddress.Text;
     TInvoices.FieldByName('AfleverPostCodePlaats').AsString := edtDeliverPostcodeCity.Text;
@@ -324,15 +333,31 @@ begin
     TInvoices.FieldByName('LegDatum').AsDateTime := dtpLegDate.Date;
 
     FId := TInvoices.FieldByName('ID').AsInteger;
-
+//    ShowMessage('FId=' + IntToStr(FId));
     TInvoices.Post;
-    FId := TInvoices.FieldByName('ID').AsInteger;
+//    FId := TInvoices.FieldByName('ID').AsInteger;
+//    ShowMessage('FId2=' + IntToStr(FId));
     TInvoices.UpdateBatch;
-    FId := TInvoices.FieldByName('ID').AsInteger;
-    TInvoices.Refresh;
-    FId := TInvoices.FieldByName('ID').AsInteger;
+//    FId := TInvoices.FieldByName('ID').AsInteger;
+//    ShowMessage('FId3=' + IntToStr(FId));
+//    TInvoices.Refresh;
+//    FId := TInvoices.FieldByName('ID').AsInteger;
+//    ShowMessage('FId4=' + IntToStr(FId));
+    TInvoices.Close;
+    TInvoices.Open;
     TInvoices.Locate('FactuurNr', fInvoiceNr, []);
     FId := TInvoices.FieldByName('ID').AsInteger;
+//    ShowMessage('LAST   FId=' + IntToStr(FId));
+
+//    CurrQuery.Connection := CurrTable.Connection;
+//    CurrQuery.SQL.Clear;
+//    CurrQuery.SQL.Add('Select Max(ID) as NFId from Facturen');
+//    CurrQuery.ExecSQL;
+//    CurrQuery.Open;
+//    CurrQuery.First;
+//    FId := CurrQuery.FieldByName('NFId').AsInteger;
+////    ShowMessage('QUERY   FId=' + IntToStr(FId));
+//    CurrQuery.Close;
 
     TOfferDetails.First;
     for I := 0 to TOfferDetails.RecordCount - 1 do begin

@@ -1,4 +1,5 @@
 inherited frmEditInvoiceDetail: TfrmEditInvoiceDetail
+  Hint = 'Detail'
   ActiveControl = pnlFields
   Caption = 'Details wijzigen'
   ClientHeight = 211

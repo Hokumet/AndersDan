@@ -62,6 +62,7 @@ type
     Label15: TLabel;
     rbtCustomerGender: TRadioGroup;
     rbtDeliverGender: TRadioGroup;
+    btnPrint: TBitBtn;
     procedure frameInvoiceDetailsbtnNewClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnEditClick(Sender: TObject);
     procedure edtAanbetalingExit(Sender: TObject);
@@ -77,6 +78,7 @@ type
     procedure edtCustomerAddressExit(Sender: TObject);
     procedure edtPostCodeCityExit(Sender: TObject);
     procedure rbtCustomerGenderExit(Sender: TObject);
+    procedure btnPrintClick(Sender: TObject);
   private
     fInvoiceNr: Integer;
     TInvoiceDetails: TADOTable;
@@ -103,6 +105,11 @@ uses Main, EditArticle, EditInvoiceDetail, ReportInvoice, ReportOffer;
 {$R *.dfm}
 
 { TfrmEditInvoice }
+
+procedure TfrmEditInvoice.btnPrintClick(Sender: TObject);
+begin
+  saveFields();
+end;
 
 procedure TfrmEditInvoice.ckbInvoicePayedClick(Sender: TObject);
 begin

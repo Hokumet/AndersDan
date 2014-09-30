@@ -116,7 +116,7 @@ end;
 procedure TfrmEditInvoiceDetail.saveFields;
 begin
   inherited;
-  if ckbSaveProduct.Checked then
+  if ckbSaveProduct.Checked then begin
     filterTable('Omschrijving', ' = ', edtProductName.Text);
 
     if TProducts.RecordCount = 0 then begin
@@ -126,6 +126,7 @@ begin
       TProducts.Post;
       TProducts.UpdateBatch;
     end;
+  end;
 end;
 
 procedure TfrmEditInvoiceDetail.SelectProduct(ProductId: Integer);

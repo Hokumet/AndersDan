@@ -710,8 +710,8 @@ object frmReportOffer: TfrmReportOffer
         end
         object DeliverTitle: TfrxMemoView
           Left = 49.133890000000000000
-          Top = 75.212598425196850000
-          Width = 105.826771650000000000
+          Top = 75.212598430000000000
+          Width = 347.716691650000000000
           Height = 18.897650000000000000
           ShowHint = False
           Memo.UTF8W = (

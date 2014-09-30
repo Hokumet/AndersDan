@@ -7,6 +7,7 @@ inherited frmEditInvoice: TfrmEditInvoice
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
+  ExplicitTop = -69
   ExplicitWidth = 1242
   ExplicitHeight = 597
   PixelsPerInch = 96
@@ -29,12 +30,12 @@ inherited frmEditInvoice: TfrmEditInvoice
       ExplicitTop = 33
     end
     inherited btnCancel: TBitBtn
-      Left = 661
+      Left = 1020
       Top = 7
       BiDiMode = bdRightToLeft
       ParentBiDiMode = False
       TabOrder = 2
-      ExplicitLeft = 661
+      ExplicitLeft = 1020
       ExplicitTop = 7
     end
     inherited btnSave: TBitBtn
@@ -43,11 +44,21 @@ inherited frmEditInvoice: TfrmEditInvoice
       ExplicitTop = 7
     end
     inherited btnReset: TBitBtn
-      Left = 352
+      Left = 695
       Top = 7
       TabOrder = 1
-      ExplicitLeft = 352
+      ExplicitLeft = 695
       ExplicitTop = 7
+    end
+    object btnPrint: TBitBtn
+      Left = 370
+      Top = 7
+      Width = 90
+      Height = 25
+      Caption = 'Save && Print'
+      ModalResult = 6
+      TabOrder = 3
+      OnClick = btnPrintClick
     end
   end
   inherited pnlLabels: TPanel
@@ -602,7 +613,7 @@ inherited frmEditInvoice: TfrmEditInvoice
           Width = 168
           Height = 267
           Align = alClient
-          Date = 41846.942180486110000000
+          Date = 41846.823235405090000000
           TabOrder = 0
         end
       end
