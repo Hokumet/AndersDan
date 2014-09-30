@@ -436,8 +436,9 @@ begin
     for X := 0 to lvwItems.Columns.Count - 1 do
     begin
       column := lvwItems.Columns.Items[X];
-      if X = 0 then
-        LI.Caption := CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString
+      if X = 0 then begin
+        LI.Caption := CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString;
+      end
       else
       begin
         if FieldCaptionAndFieldType.Values[column.DisplayName] = 'curr' then
@@ -452,6 +453,16 @@ begin
     if lvwItems.HelpKeyword = Invoice then begin
       totalPayed := totalPayed + CurrentTable.FieldByName('Totaal').AsFloat;
       totalTobePayed := totalTobePayed + CurrentTable.FieldByName('NogTeBetalen').AsFloat;
+      if CurrentTable.FieldByName('NogTeBetalen').AsFloat > 0 then
+        LI.ImageIndex := 12
+      else
+        LI.ImageIndex := 13;
+    end
+    else begin
+      if (lvwItems.HelpKeyword = Offer) and CurrentTable.FieldByName('Omgezet').AsBoolean then
+          LI.ImageIndex := 10
+        else
+          LI.ImageIndex := 11;
     end;
     CurrentTable.Prior;
   end;
