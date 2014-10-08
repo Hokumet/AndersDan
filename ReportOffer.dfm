@@ -806,8 +806,8 @@ object frmReportOffer: TfrmReportOffer
         end
       end
       object PageFooter: TfrxPageFooter
-        Height = 241.889688110000000000
-        Top = 767.244306850000000000
+        Height = 306.141732283464600000
+        Top = 740.787401574803200000
         Width = 718.110700000000000000
         PrintOnFirstPage = False
         object Memo8: TfrxMemoView
@@ -964,7 +964,7 @@ object frmReportOffer: TfrmReportOffer
         end
         object Memo7: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 132.283833150000000000
+          Top = 142.110236220472400000
           Width = 710.551640000000000000
           Height = 52.913420000000000000
           ShowHint = False

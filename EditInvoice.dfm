@@ -7,7 +7,6 @@ inherited frmEditInvoice: TfrmEditInvoice
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -69
   ExplicitWidth = 1242
   ExplicitHeight = 597
   PixelsPerInch = 96
@@ -613,7 +612,7 @@ inherited frmEditInvoice: TfrmEditInvoice
           Width = 168
           Height = 267
           Align = alClient
-          Date = 41846.823235405090000000
+          Date = 41846.932205208330000000
           TabOrder = 0
         end
       end

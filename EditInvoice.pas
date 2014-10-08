@@ -113,11 +113,12 @@ end;
 
 procedure TfrmEditInvoice.ckbInvoicePayedClick(Sender: TObject);
 begin
-  if ckbInvoicePayed.Checked then
-    if MessageDlg('Weet je zeker dat je de factuur als betaald wil aanmerken',mtError, mbOKCancel, 0) <> mrOK  then
-      ckbInvoicePayed.Checked := false
-    else
-      edtToBePayed.Value := 0;
+  if not Loading then
+    if ckbInvoicePayed.Checked then
+      if MessageDlg('Weet je zeker dat je de factuur als betaald wil aanmerken',mtError, mbOKCancel, 0) <> mrOK  then
+        ckbInvoicePayed.Checked := false
+      else
+        edtToBePayed.Value := 0;
 end;
 
 procedure TfrmEditInvoice.ckbSaveCustomerClick(Sender: TObject);
@@ -303,7 +304,7 @@ begin
       saveField(pnlLabels.Controls[I]);
   end;
   TFilter := TCustomers;
-  if ckbSaveCustomer.Checked then
+  if ckbSaveCustomer.Checked then begin
     filterTable('Naam', ' = ', edtCustomerName.Text);
 
     if TCustomers.RecordCount = 0 then begin
@@ -317,8 +318,9 @@ begin
       TCustomers.Post;
       TCustomers.UpdateBatch;
     end;
-    if ckbInvoicePayed.Checked then
-      CurrTable.FieldByName('Betaald').AsBoolean := true;
+  end;
+  CurrTable.FieldByName('Betaald').AsBoolean := ckbInvoicePayed.Checked;
+
   inherited;
 end;
 
