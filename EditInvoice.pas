@@ -79,6 +79,7 @@ type
     procedure edtPostCodeCityExit(Sender: TObject);
     procedure rbtCustomerGenderExit(Sender: TObject);
     procedure btnPrintClick(Sender: TObject);
+    procedure FormShortCut(var Msg: TWMKey; var Handled: Boolean);
   private
     fInvoiceNr: Integer;
     TInvoiceDetails: TADOTable;
@@ -184,6 +185,16 @@ begin
     edtDeliverPostcodeCity.Text := edtPostCodeCity.Text;
 end;
 
+procedure TfrmEditInvoice.FormShortCut(var Msg: TWMKey; var Handled: Boolean);
+begin
+  inherited;
+  if (Msg.Charcode = VK_INSERT) then
+  begin
+    frameInvoiceDetails.btnNew.Click;
+    Handled := True;
+  end
+end;
+
 procedure TfrmEditInvoice.frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
 begin
   inherited;
@@ -275,7 +286,7 @@ begin
   frameInvoiceDetails.FTable := TInvoiceDetails;
   frameInvoiceDetails.EForm := frmEditArticle;
 
-  frameInvoiceDetails.addColumn('Omschrijving', 200 );
+  frameInvoiceDetails.addColumn('Omschrijving', 400 );
   frameInvoiceDetails.addColumn('Aantal', 75);
   frameInvoiceDetails.addAlignColumn('Prijs', 75, taRightJustify);
   frameInvoiceDetails.addAlignColumn('Bedrag', 100, taRightJustify);

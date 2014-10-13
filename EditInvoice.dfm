@@ -7,6 +7,7 @@ inherited frmEditInvoice: TfrmEditInvoice
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
+  OnShortCut = FormShortCut
   ExplicitWidth = 1242
   ExplicitHeight = 597
   PixelsPerInch = 96
@@ -73,55 +74,61 @@ inherited frmEditInvoice: TfrmEditInvoice
       Height = 141
       Align = alTop
       Color = 60138
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
       ParentBackground = False
+      ParentFont = False
       TabOrder = 0
       object lblNr: TLabel
         Left = 41
         Top = 28
-        Width = 82
-        Height = 13
+        Width = 94
+        Height = 14
         Caption = 'Factuur nummer:'
       end
       object lblDate: TLabel
         Left = 41
         Top = 52
-        Width = 74
-        Height = 13
+        Width = 84
+        Height = 14
         Caption = 'Factuur datum:'
       end
       object Label8: TLabel
         Left = 393
         Top = 28
-        Width = 57
-        Height = 13
+        Width = 64
+        Height = 14
         Caption = 'Klant naam:'
       end
       object Label9: TLabel
         Left = 393
         Top = 52
-        Width = 32
-        Height = 13
+        Width = 35
+        Height = 14
         Caption = 'Adres:'
       end
       object Label10: TLabel
         Left = 393
         Top = 76
-        Width = 87
-        Height = 13
+        Width = 99
+        Height = 14
         Caption = 'Postcode / Plaats:'
       end
       object Label6: TLabel
         Left = 393
         Top = 100
-        Width = 84
-        Height = 13
+        Width = 98
+        Height = 14
         Caption = 'Telefoonnummer:'
       end
       object Label1: TLabel
         Left = 393
         Top = 124
-        Width = 58
-        Height = 13
+        Width = 64
+        Height = 14
         Caption = 'Email adres:'
       end
       object Label2: TLabel
@@ -153,43 +160,43 @@ inherited frmEditInvoice: TfrmEditInvoice
       object Label12: TLabel
         Left = 801
         Top = 52
-        Width = 32
-        Height = 13
+        Width = 35
+        Height = 14
         Caption = 'Adres:'
       end
       object Label13: TLabel
         Left = 801
         Top = 76
-        Width = 87
-        Height = 13
+        Width = 99
+        Height = 14
         Caption = 'Postcode / Plaats:'
       end
       object Label11: TLabel
         Left = 801
         Top = 28
-        Width = 57
-        Height = 13
+        Width = 64
+        Height = 14
         Caption = 'Klant naam:'
       end
       object Label14: TLabel
         Left = 41
         Top = 100
-        Width = 58
-        Height = 13
+        Width = 67
+        Height = 14
         Caption = 'Meetdatum:'
       end
       object Label15: TLabel
         Left = 41
         Top = 122
-        Width = 51
-        Height = 13
+        Width = 59
+        Height = 14
         Caption = 'Legdatum:'
       end
       object dtpInvoiceDate: TDateTimePicker
         Left = 169
         Top = 44
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'FactuurDatum'
         Date = 41806.949831111110000000
@@ -200,7 +207,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 169
         Top = 20
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'FactuurNr'
         Alignment = taRightJustify
@@ -210,7 +217,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 521
         Top = 20
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'KlantNaam'
         TabOrder = 4
@@ -221,7 +228,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 521
         Top = 44
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'KlantAdres'
         TabOrder = 5
@@ -231,7 +238,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 521
         Top = 68
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'KlantPostcodePlaats'
         TabOrder = 6
@@ -245,14 +252,14 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'Factuur'
         Caption = 'Sla als klant op'
-        TabOrder = 9
+        TabOrder = 12
         OnClick = ckbSaveCustomerClick
       end
       object edtPhoneNumber: TEdit
         Left = 521
         Top = 92
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'KlantTelefoonnummer'
         TabOrder = 7
@@ -262,7 +269,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 521
         Top = 116
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'KlantEmail'
         TabOrder = 8
@@ -272,27 +279,27 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 929
         Top = 68
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'AfleverPostcodePlaats'
-        TabOrder = 10
+        TabOrder = 11
       end
       object edtDeliverAddress: TEdit
         Left = 929
         Top = 44
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'AfleverAdres'
-        TabOrder = 11
+        TabOrder = 10
       end
       object lbxCustomers: TListBox
         Left = 521
         Top = 39
         Width = 240
         Height = 59
-        ItemHeight = 13
-        TabOrder = 12
+        ItemHeight = 14
+        TabOrder = 13
         Visible = False
         OnDblClick = lbxCustomersDblClick
         OnKeyUp = lbxCustomersKeyUp
@@ -301,16 +308,16 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 929
         Top = 20
         Width = 240
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'AfleverNaam'
-        TabOrder = 13
+        TabOrder = 9
       end
       object dtpMeasureDate: TDateTimePicker
         Left = 169
         Top = 87
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'Meetdatum'
         Date = 41255.949831111110000000
@@ -322,7 +329,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 169
         Top = 114
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'LegDatum'
         Date = 41255.949831111110000000
@@ -380,62 +387,68 @@ inherited frmEditInvoice: TfrmEditInvoice
       Height = 102
       Align = alBottom
       Color = 60138
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
       ParentBackground = False
+      ParentFont = False
       TabOrder = 1
       object Label3: TLabel
         Left = 41
         Top = 72
-        Width = 34
-        Height = 13
+        Width = 38
+        Height = 14
         Caption = 'Totaal:'
       end
       object Label4: TLabel
         Left = 41
         Top = 48
-        Width = 22
-        Height = 13
+        Width = 26
+        Height = 14
         Caption = 'Btw:'
       end
       object Label5: TLabel
         Left = 41
         Top = 24
-        Width = 50
-        Height = 13
+        Width = 56
+        Height = 14
         Caption = 'Subtotaal:'
       end
       object lblPayed: TLabel
         Left = 393
         Top = 24
-        Width = 61
-        Height = 13
+        Width = 68
+        Height = 14
         Caption = 'Aanbetaling:'
       end
       object lblToBePayed: TLabel
         Left = 393
         Top = 48
-        Width = 75
-        Height = 13
+        Width = 87
+        Height = 14
         Caption = 'Nog te betalen:'
       end
       object lblPayedVia: TLabel
         Left = 699
         Top = 24
-        Width = 72
-        Height = 13
+        Width = 81
+        Height = 14
         Caption = 'Betalings type:'
       end
       object lblToBePayedVia: TLabel
         Left = 699
         Top = 72
-        Width = 72
-        Height = 13
+        Width = 81
+        Height = 14
         Caption = 'Betalings type:'
       end
       object edtTotal: THCurrencyEdit
         Left = 169
         Top = 64
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'Totaal'
         ReadOnly = True
@@ -447,7 +460,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 169
         Top = 40
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'Btw'
         ReadOnly = True
@@ -459,7 +472,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 169
         Top = 16
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'Subtotaal'
         ReadOnly = True
@@ -471,7 +484,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 521
         Top = 16
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'Aanbetaling'
         TabOrder = 0
@@ -483,7 +496,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 521
         Top = 40
         Width = 121
-        Height = 21
+        Height = 22
         HelpType = htKeyword
         HelpKeyword = 'NogTeBetalen'
         TabOrder = 7
@@ -504,7 +517,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 781
         Top = 64
         Width = 145
-        Height = 21
+        Height = 22
         Hint = 'BetalingsTypes'
         HelpType = htKeyword
         HelpKeyword = 'NogTeBetalenVia'
@@ -515,7 +528,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         Left = 781
         Top = 16
         Width = 145
-        Height = 21
+        Height = 22
         Hint = 'BetalingsTypes'
         HelpType = htKeyword
         HelpKeyword = 'AanbetalingVia'
@@ -538,8 +551,14 @@ inherited frmEditInvoice: TfrmEditInvoice
         Height = 269
         Align = alLeft
         Color = 16291591
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentBackground = False
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
         ExplicitLeft = 1
         ExplicitTop = 1

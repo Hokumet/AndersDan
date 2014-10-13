@@ -42,7 +42,6 @@ type
     ADODataSet1Subtotaal: TBCDField;
     ADODataSet1Totaal: TBCDField;
     lblToBePayed: TLabel;
-    ckbPayed: TCheckBox;
     DBTInvoicesId: TAutoIncField;
     DBTInvoicesFactuurNr: TIntegerField;
     DBTInvoicesOfferteNr: TIntegerField;
@@ -98,7 +97,6 @@ type
     DBTOfferDetailsBedrag: TBCDField;
     DBTOfferDetailsAangemaaktDoor: TWideStringField;
     DBTOfferDetailsAangemaaktOp: TDateTimeField;
-    Label1: TLabel;
     DBTOfferDetailsAantal: TFloatField;
     DBTInvoiceDetailsAantal: TFloatField;
     DBTInvoicesKlantEmail: TWideStringField;
@@ -119,6 +117,10 @@ type
     DBTOffersKlantAanhef: TWideStringField;
     DBTInvoicesAfleverAanhef: TWideStringField;
     DBTOffersAfleverAanhef: TWideStringField;
+    lblShowAll: TLabel;
+    ckbShowAll: TCheckBox;
+    ckbPayed: TCheckBox;
+    lblPayed: TLabel;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -130,9 +132,9 @@ type
       Selected: Boolean);
       function GetLastNr(Table:TADOTable; FieldId: String): Integer;
     procedure ckbPayedClick(Sender: TObject);
-    procedure lvwItemsCustomDrawItem(Sender: TCustomListView; Item: TListItem;
-      State: TCustomDrawState; var DefaultDraw: Boolean);
+    procedure ckbShowAllClick(Sender: TObject);
   private
+     ShowAll :boolean;
      procedure LoadInvoices;
      procedure LoadData;
 
@@ -140,7 +142,7 @@ type
      procedure SetCustomerColums;
      procedure SetInvoiceColums;
      procedure SetOfferColums;
-    procedure LoadInvoicesFiltered(totalPayed: Double; totalTobePayed: Double);
+     procedure LoadInvoicesFiltered(totalPayed: Double; totalTobePayed: Double);
   protected
       procedure Refresh; override;
       procedure OpenDatasets(); override;
@@ -316,6 +318,12 @@ begin
   end;
 end;
 
+procedure TfrmMain.ckbShowAllClick(Sender: TObject);
+begin
+  ShowAll := ckbShowAll.Checked;
+  Refresh;
+end;
+
 procedure TfrmMain.DoSomeThingElse;
 begin
   btnPrinten.Click;
@@ -354,9 +362,17 @@ begin
         else
           LI.SubItems.Add(CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString);
       end;
+
+      if lvwItems.HelpKeyword = Product then
+        LI.ImageIndex := 6
+      else
+        LI.ImageIndex := 8;
     end;
     LI.Data := Pointer(CurrentTable.FieldByName('ID').asInteger);
     CurrentTable.Prior;
+    if (not ShowAll) and (I = 2) then
+      Break;
+
   end;
   Loading := False;
 end;
@@ -370,33 +386,10 @@ begin
   if lvwItems.HelpKeyword = Invoice  then
     LoadFiltered('Betaald=' + QuotedStr('false'));
 
+  lblPayed.Visible := lvwItems.HelpKeyword = Invoice;
+  ckbPayed.Visible := lvwItems.HelpKeyword = Invoice;
+
   LoadInvoicesFiltered(totalPayed, totalTobePayed);
-end;
-
-function myHexToColor(AValue: String): TColor;
-var
-  iRed: Integer;
-  iGreen: Integer;
-  iBlue: Integer;
-begin
-  iRed := StrToInt('$' + AValue[1] + AValue[2]);
-  iGreen := StrToInt('$' + AValue[3] + AValue[4]);
-  iBlue := StrToInt('$' + AValue[5] + AValue[6]);
-  Result := RGB(iRed, iGreen, iBlue);
-//myresult:=IntToStr(Result);
-end;
-
-procedure TfrmMain.lvwItemsCustomDrawItem(Sender: TCustomListView;
-  Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
-begin
-  inherited;
-  if (Item.Index mod 2) = 0 then begin
-    Sender.Canvas.Brush.Color :=  myHexToColor('ebf1fa');
-  end
-  else begin
-    Sender.Canvas.Brush.Color := clWhite;
-  end;
-
 end;
 
 procedure TfrmMain.lvwItemsSelectItem(Sender: TObject; Item: TListItem;
@@ -426,33 +419,38 @@ var
   I: Integer;
   LI: TListItem;
   column: TListColumn;
+  skip: boolean;
 begin
   Loading := True;
   lvwItems.Clear;
   CurrentTable.Last;
-  for I := 0 to CurrentTable.RecordCount - 1 do
-  begin
-    LI := lvwItems.Items.Add;
-    for X := 0 to lvwItems.Columns.Count - 1 do
-    begin
-      column := lvwItems.Columns.Items[X];
-      if X = 0 then begin
-        LI.Caption := CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString;
-      end
-      else
-      begin
-        if FieldCaptionAndFieldType.Values[column.DisplayName] = 'curr' then
-          LI.SubItems.Add('€ ' + FormatFloat('0.00', CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsFloat))
-        else if FieldCaptionAndFieldType.Values[column.DisplayName] = 'date' then
-          LI.SubItems.Add(FormatDateTime('dd-mm-yyyy',CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsDateTime))
+  for I := 0 to CurrentTable.RecordCount - 1 do begin
+    if ShowAll or (I < 3) then begin
+      LI := lvwItems.Items.Add;
+      for X := 0 to lvwItems.Columns.Count - 1 do begin
+        column := lvwItems.Columns.Items[X];
+        if X = 0 then begin
+          LI.Caption := CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString;
+        end
         else
-          LI.SubItems.Add(CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString);
+        begin
+          if FieldCaptionAndFieldType.Values[column.DisplayName] = 'curr' then
+            LI.SubItems.Add('€ ' + FormatFloat('0.00', CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsFloat))
+          else if FieldCaptionAndFieldType.Values[column.DisplayName] = 'date' then
+            LI.SubItems.Add(FormatDateTime('dd-mm-yyyy',CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsDateTime))
+          else
+            LI.SubItems.Add(CurrentTable.FieldByName(FieldCaptionAndFieldName.Values[column.DisplayName]).AsString);
+        end;
       end;
+      LI.Data := Pointer(CurrentTable.FieldByName('ID').asInteger);
     end;
-    LI.Data := Pointer(CurrentTable.FieldByName('ID').asInteger);
     if lvwItems.HelpKeyword = Invoice then begin
       totalPayed := totalPayed + CurrentTable.FieldByName('Totaal').AsFloat;
       totalTobePayed := totalTobePayed + CurrentTable.FieldByName('NogTeBetalen').AsFloat;
+
+      totalPayed := totalPayed + CurrentTable.FieldByName('Totaal').AsFloat;
+      totalTobePayed := totalTobePayed + CurrentTable.FieldByName('NogTeBetalen').AsFloat;
+
       if CurrentTable.FieldByName('NogTeBetalen').AsFloat > 0 then
         LI.ImageIndex := 12
       else
@@ -460,16 +458,13 @@ begin
     end
     else begin
       if (lvwItems.HelpKeyword = Offer) and CurrentTable.FieldByName('Omgezet').AsBoolean then
-          LI.ImageIndex := 10
-        else
-          LI.ImageIndex := 11;
+        LI.ImageIndex := 10
+      else
+        LI.ImageIndex := 11;
     end;
     CurrentTable.Prior;
   end;
-  if ckbPayed.Checked then
-    lblToBePayed.Caption := 'Totaal betaald:     € ' + FormatFloat('0.00', totalPayed) + '     '
-  else
-    lblToBePayed.Caption := 'Totaal openstaand:     € ' + FormatFloat('0.00', totalTobePayed) + '     ';
+  StatusBar.Panels.Items[3].Text := '€ ' + FormatFloat('0.00', totalTobePayed);
 
   Loading := False;
 end;
@@ -535,39 +530,41 @@ end;
 
 procedure TfrmMain.SetArticleColums;
 begin
-  addColumn('Omschrijving', 'Omschrijving', 200);
+  addColumn('Id','Id', 100);
+  addColumn('Omschrijving', 'Omschrijving', 300);
   addColumn('Prijs', 'Prijs', 'curr', 130, true);
 end;
 
 procedure TfrmMain.SetCustomerColums;
 begin
-  addColumn('Naam', 'Naam', 200);
-  addColumn('Adres', 'Adres', 200);
-  addColumn('Postcode en plaats', 'PostcodePlaats', 200);
-  addColumn('Telefoonnummer', 'Telefoonnummer', 200);
-  addColumn('Emailadres', 'Emailadres', 'niks', 200,  true);
+  addColumn('Id','Id', 100);
+  addColumn('Naam', 'Naam', 250);
+  addColumn('Adres', 'Adres', 250);
+  addColumn('Postcode en plaats', 'PostcodePlaats', 250);
+  addColumn('Telefoonnummer', 'Telefoonnummer', 150);
+  addColumn('Emailadres', 'Emailadres', 'niks', 250,  true);
 end;
 
 procedure TfrmMain.SetInvoiceColums;
 begin
-  addColumn('Factuur nr','FactuurNr', 75);
-  addColumn('Factuur datum','FactuurDatum', 'date', 110);
-  addColumn('Klant naam', 'KlantNaam', 200);
-  addColumn('Meetdatum','MeetDatum', 'date', 110);
-  addColumn('Legdatum','LegDatum', 'date', 110);
-  addColumn('Totaal', 'Totaal', 'curr', 150);
-  addColumn('Aanbetaling', 'Aanbetaling', 'curr', 150);
-  addColumn('Nog te betalen', 'NogTeBetalen', 'curr', 150, true);
+  addColumn('Factuur nr','FactuurNr', 100);
+  addColumn('Factuur datum','FactuurDatum', 'date', 100);
+  addColumn('Klant naam', 'KlantNaam', 350);
+  addColumn('Meetdatum','MeetDatum', 'date', 100);
+  addColumn('Legdatum','LegDatum', 'date', 100);
+  addColumn('Totaal', 'Totaal', 'curr', 120);
+  addColumn('Aanbetaling', 'Aanbetaling', 'curr', 120);
+  addColumn('Nog te betalen', 'NogTeBetalen', 'curr', 120, true);
 end;
 
 procedure TfrmMain.SetOfferColums;
 begin
-  addColumn('Offerte nr','OfferteNr', 75);
-  addColumn('Offerte datum','OfferteDatum', 'date', 110);
-  addColumn('Klant naam', 'KlantNaam', 200);
-  addColumn('Meetdatum','MeetDatum', 'date', 110);
-  addColumn('Legdatum','LegDatum', 'date', 110);
-  addColumn('Totaal', 'Totaal', 'curr', 150, true);
+  addColumn('Offerte nr','OfferteNr', 100);
+  addColumn('Offerte datum','OfferteDatum', 'date', 100);
+  addColumn('Klant naam', 'KlantNaam', 350);
+  addColumn('Meetdatum','MeetDatum', 'date', 100);
+  addColumn('Legdatum','LegDatum', 'date', 100);
+  addColumn('Totaal', 'Totaal', 'curr', 120, true);
 end;
 
 end.

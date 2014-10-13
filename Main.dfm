@@ -3,11 +3,11 @@ inherited frmMain: TfrmMain
   Top = 0
   Align = alClient
   Caption = 'Main'
-  ClientHeight = 507
+  ClientHeight = 495
   ClientWidth = 1221
   WindowState = wsMaximized
   ExplicitWidth = 1229
-  ExplicitHeight = 553
+  ExplicitHeight = 541
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlHeader: TPanel
@@ -16,6 +16,9 @@ inherited frmMain: TfrmMain
     Color = 16291591
     ExplicitWidth = 1221
     ExplicitHeight = 31
+    inherited lblHeader: TLabel
+      Visible = False
+    end
     object lblToBePayed: TLabel [1]
       Left = 1161
       Top = 0
@@ -32,12 +35,12 @@ inherited frmMain: TfrmMain
       ParentFont = False
       ExplicitHeight = 19
     end
-    object Label1: TLabel [2]
-      Left = 420
+    object lblShowAll: TLabel [2]
+      Left = 8
       Top = 9
-      Width = 49
+      Width = 64
       Height = 16
-      Caption = 'Betaald'
+      Caption = 'Toon alles'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -13
@@ -45,8 +48,24 @@ inherited frmMain: TfrmMain
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object ckbPayed: TCheckBox
-      Left = 472
+    object lblPayed: TLabel [3]
+      Left = 238
+      Top = 9
+      Width = 54
+      Height = 16
+      Caption = 'Betaald:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    inherited edtZoeken: TEdit
+      Visible = False
+    end
+    object ckbShowAll: TCheckBox
+      Left = 94
       Top = 8
       Width = 25
       Height = 17
@@ -60,6 +79,23 @@ inherited frmMain: TfrmMain
       ParentColor = False
       ParentFont = False
       TabOrder = 1
+      OnClick = ckbShowAllClick
+    end
+    object ckbPayed: TCheckBox
+      Left = 304
+      Top = 8
+      Width = 25
+      Height = 17
+      Alignment = taLeftJustify
+      Color = 16291591
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 2
       OnClick = ckbPayedClick
     end
   end
@@ -69,61 +105,74 @@ inherited frmMain: TfrmMain
       item
         Control = ToolBar
         ImageIndex = -1
-        MinHeight = 56
+        MinHeight = 57
         Width = 1221
       end>
     ExplicitWidth = 1221
     inherited ToolBar: TToolBar
       Width = 1212
-      ButtonWidth = 99
+      Height = 57
+      ButtonHeight = 53
+      ButtonWidth = 114
+      Font.Height = -12
+      ParentFont = False
       ExplicitWidth = 1212
+      ExplicitHeight = 57
       inherited btnNew: TToolButton
         OnClick = btnNewClick
-        ExplicitWidth = 112
+        ExplicitWidth = 127
+        ExplicitHeight = 53
       end
       inherited btnEdit: TToolButton
-        Left = 112
-        ExplicitLeft = 112
-        ExplicitWidth = 99
+        Left = 127
+        ExplicitLeft = 127
+        ExplicitWidth = 114
+        ExplicitHeight = 53
       end
       inherited btnDelete: TToolButton
-        Left = 211
-        ExplicitLeft = 211
-        ExplicitWidth = 99
+        Left = 241
+        ExplicitLeft = 241
+        ExplicitWidth = 114
+        ExplicitHeight = 53
       end
       inherited Seperator: TToolButton
-        Left = 310
-        ExplicitLeft = 310
+        Left = 355
+        ExplicitLeft = 355
+        ExplicitHeight = 53
       end
       inherited btnPrint: TToolButton
-        Left = 324
+        Left = 369
         Visible = False
-        ExplicitLeft = 324
-        ExplicitWidth = 99
+        ExplicitLeft = 369
+        ExplicitWidth = 114
+        ExplicitHeight = 53
       end
       inherited btnPrinten: TToolButton
-        Left = 423
+        Left = 483
         Enabled = False
-        ExplicitLeft = 423
-        ExplicitWidth = 99
+        ExplicitLeft = 483
+        ExplicitWidth = 114
+        ExplicitHeight = 53
       end
       inherited ToolButton2: TToolButton
-        Left = 522
-        ExplicitLeft = 522
+        Left = 597
+        ExplicitLeft = 597
+        ExplicitHeight = 53
       end
       inherited btnBegin: TToolButton
-        Left = 530
+        Left = 605
         HelpType = htKeyword
         HelpKeyword = 'Invoice'
         Caption = '&Facturen'
         Down = True
         Grouped = True
         Style = tbsCheck
-        ExplicitLeft = 530
-        ExplicitWidth = 99
+        ExplicitLeft = 605
+        ExplicitWidth = 114
+        ExplicitHeight = 53
       end
       object btnOffers: TToolButton
-        Left = 629
+        Left = 719
         Top = 0
         HelpType = htKeyword
         HelpKeyword = 'Offer'
@@ -134,49 +183,68 @@ inherited frmMain: TfrmMain
         OnClick = btnOffersClick
       end
       object btnArticles: TToolButton
-        Left = 728
+        Left = 833
         Top = 0
         HelpType = htKeyword
         HelpKeyword = 'Product'
         Caption = '&Producten beheren'
         Grouped = True
-        ImageIndex = 15
+        ImageIndex = 24
         Style = tbsCheck
         OnClick = btnArticlesClick
       end
       object btnCustomers: TToolButton
-        Left = 827
+        Left = 947
         Top = 0
         HelpType = htKeyword
         HelpKeyword = 'Customer'
         Caption = '&Klanten beheren'
         Grouped = True
-        ImageIndex = 16
+        ImageIndex = 4
         Style = tbsCheck
         OnClick = btnCustomersClick
       end
     end
   end
   inherited StatusBar: TStatusBar
-    Top = 488
+    Top = 476
     Width = 1221
+    Panels = <
+      item
+        Text = 'Gebruiker:'
+        Width = 75
+      end
+      item
+        Text = 'user:'
+        Width = 100
+      end
+      item
+        Text = 'Totaal openstaand:'
+        Width = 110
+      end
+      item
+        Text = 'tobepayed'
+        Width = 50
+      end>
     ExplicitTop = 488
     ExplicitWidth = 1221
   end
   inherited lvwItems: TMyListView
     Top = 91
     Width = 1221
-    Height = 397
+    Height = 385
+    Font.Height = -12
     GroupHeaderImages = imgPmSmall
+    ParentFont = False
     SmallImages = imgPmSmall
-    OnCustomDrawItem = lvwItemsCustomDrawItem
+    OnCustomDrawItem = nil
     ExplicitTop = 91
     ExplicitWidth = 1221
     ExplicitHeight = 397
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F005C015C0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F006001600120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4409,7 +4477,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113005C015C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113006001600110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

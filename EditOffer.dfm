@@ -7,7 +7,7 @@ inherited frmEditOffer: TfrmEditOffer
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  ExplicitTop = -71
+  OnShortCut = FormShortCut
   ExplicitWidth = 1234
   ExplicitHeight = 592
   PixelsPerInch = 96
@@ -449,8 +449,14 @@ inherited frmEditOffer: TfrmEditOffer
         Height = 268
         Align = alLeft
         Color = 16291591
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentBackground = False
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
         ExplicitLeft = 1
         ExplicitTop = 1
@@ -522,7 +528,7 @@ inherited frmEditOffer: TfrmEditOffer
           Width = 166
           Height = 266
           Align = alClient
-          Date = 41846.823294155100000000
+          Date = 41846.703319618060000000
           TabOrder = 0
         end
       end

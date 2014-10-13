@@ -2,26 +2,26 @@ inherited frmEditArticle: TfrmEditArticle
   ActiveControl = pnlFields
   Caption = 'Product bekijken / wijzigen'
   ClientHeight = 150
-  ClientWidth = 438
+  ClientWidth = 530
   KeyPreview = True
   OldCreateOrder = False
   Position = poOwnerFormCenter
-  ExplicitWidth = 446
+  ExplicitWidth = 538
   ExplicitHeight = 177
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlFields: TPanel [0]
     Left = 149
-    Width = 289
+    Width = 381
     Height = 77
     Color = 16291591
     ExplicitLeft = 149
-    ExplicitWidth = 289
-    ExplicitHeight = 86
+    ExplicitWidth = 381
+    ExplicitHeight = 77
     object Edit1: TEdit
       Left = 16
       Top = 13
-      Width = 238
+      Width = 321
       Height = 21
       HelpType = htKeyword
       HelpKeyword = 'Omschrijving'
@@ -41,7 +41,7 @@ inherited frmEditArticle: TfrmEditArticle
   end
   inherited Panel3: TPanel [1]
     Top = 77
-    Width = 438
+    Width = 530
     Height = 73
     ExplicitTop = 77
     ExplicitWidth = 438
@@ -52,7 +52,7 @@ inherited frmEditArticle: TfrmEditArticle
     Height = 77
     Color = 60138
     ExplicitWidth = 149
-    ExplicitHeight = 86
+    ExplicitHeight = 77
     object Label2: TLabel
       Left = 41
       Top = 24

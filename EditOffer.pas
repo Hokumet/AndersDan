@@ -70,6 +70,7 @@ type
     procedure edtPostCodeCityExit(Sender: TObject);
     procedure rbtCustomerGenderExit(Sender: TObject);
     procedure btnPrintClick(Sender: TObject);
+    procedure FormShortCut(var Msg: TWMKey; var Handled: Boolean);
   private
     fInvoiceNr: Integer;
     TOfferDetails: TADOTable;
@@ -161,6 +162,16 @@ procedure TfrmEditOffer.edtPostCodeCityExit(Sender: TObject);
 begin
   if edtDeliverPostcodeCity.Text ='' then
     edtDeliverPostcodeCity.Text := edtPostCodeCity.Text;
+end;
+
+procedure TfrmEditOffer.FormShortCut(var Msg: TWMKey; var Handled: Boolean);
+begin
+  inherited;
+  if (Msg.Charcode = VK_INSERT) then
+  begin
+    frameInvoiceDetails.btnNew.Click;
+    Handled := True;
+  end
 end;
 
 procedure TfrmEditOffer.frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
