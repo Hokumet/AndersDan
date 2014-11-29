@@ -42,40 +42,7 @@ type
     ADODataSet1Subtotaal: TBCDField;
     ADODataSet1Totaal: TBCDField;
     lblToBePayed: TLabel;
-    DBTInvoicesId: TAutoIncField;
-    DBTInvoicesFactuurNr: TIntegerField;
-    DBTInvoicesOfferteNr: TIntegerField;
-    DBTInvoicesFactuurDatum: TDateTimeField;
-    DBTInvoicesSubtotaal: TBCDField;
-    DBTInvoicesBtw: TBCDField;
-    DBTInvoicesTotaal: TBCDField;
-    DBTInvoicesAanbetaling: TBCDField;
-    DBTInvoicesAanbetalingVia: TWideStringField;
-    DBTInvoicesNogTeBetalen: TBCDField;
-    DBTInvoicesNogTeBetalenVia: TWideStringField;
-    DBTInvoicesKlantNaam: TWideStringField;
-    DBTInvoicesKlantAdres: TWideStringField;
-    DBTInvoicesKlantPostCodePlaats: TWideStringField;
-    DBTInvoicesKlantTelefoonnummer: TWideStringField;
-    DBTInvoicesAangemaaktDoor: TWideStringField;
-    DBTInvoicesAangemaaktOp: TDateTimeField;
-    DBTInvoicesBetaald: TBooleanField;
     DBTOfferDetails: TADOTable;
-    DBTOffersId: TAutoIncField;
-    DBTOffersOfferteNr: TIntegerField;
-    DBTOffersOfferteDatum: TDateTimeField;
-    DBTOffersSubtotaal: TBCDField;
-    DBTOffersBtw: TBCDField;
-    DBTOffersTotaal: TBCDField;
-    DBTOffersKlantNaam: TWideStringField;
-    DBTOffersKlantAdres: TWideStringField;
-    DBTOffersKlantPostCodePlaats: TWideStringField;
-    DBTOffersKlantTelefoonnummer: TWideStringField;
-    DBTOffersAangemaaktDoor: TWideStringField;
-    DBTOffersAangemaaktOp: TDateTimeField;
-    DBTOffersOmgezet: TBooleanField;
-    DBTInvoicesOpmerking: TWideMemoField;
-    DBTOffersOpmerking: TWideMemoField;
     DBTProductsId: TAutoIncField;
     DBTProductsOmschrijving: TWideStringField;
     DBTProductsPrijs: TBCDField;
@@ -99,28 +66,61 @@ type
     DBTOfferDetailsAangemaaktOp: TDateTimeField;
     DBTOfferDetailsAantal: TFloatField;
     DBTInvoiceDetailsAantal: TFloatField;
-    DBTInvoicesKlantEmail: TWideStringField;
-    DBTOffersKlantEmail: TWideStringField;
-    DBTInvoicesAfleverNaam: TWideStringField;
-    DBTInvoicesAfleverAdres: TWideStringField;
-    DBTInvoicesAfleverPostcodePlaats: TWideStringField;
-    DBTInvoicesAfleverTelefoonnummer: TWideStringField;
-    DBTOffersAfleverNaam: TWideStringField;
-    DBTOffersAfleverAdres: TWideStringField;
-    DBTOffersAfleverPostCodePlaats: TWideStringField;
-    DBTOffersAfleverTelefoonnummer: TWideStringField;
-    DBTInvoicesMeetdatum: TDateTimeField;
-    DBTInvoicesLegDatum: TDateTimeField;
-    DBTOffersMeetDatum: TDateTimeField;
-    DBTOffersLegDatum: TDateTimeField;
-    DBTInvoicesKlantAanhef: TWideStringField;
-    DBTOffersKlantAanhef: TWideStringField;
-    DBTInvoicesAfleverAanhef: TWideStringField;
-    DBTOffersAfleverAanhef: TWideStringField;
     lblShowAll: TLabel;
     ckbShowAll: TCheckBox;
     ckbPayed: TCheckBox;
     lblPayed: TLabel;
+    DBTInvoicesId: TAutoIncField;
+    DBTInvoicesFactuurNr: TIntegerField;
+    DBTInvoicesOfferteNr: TIntegerField;
+    DBTInvoicesFactuurDatum: TDateTimeField;
+    DBTInvoicesSubtotaal: TBCDField;
+    DBTInvoicesBtw: TBCDField;
+    DBTInvoicesTotaal: TBCDField;
+    DBTInvoicesAanbetaling: TBCDField;
+    DBTInvoicesAanbetalingVia: TWideStringField;
+    DBTInvoicesNogTeBetalen: TBCDField;
+    DBTInvoicesNogTeBetalenVia: TWideStringField;
+    DBTInvoicesKlantAanhef: TWideStringField;
+    DBTInvoicesKlantNaam: TWideStringField;
+    DBTInvoicesKlantAdres: TWideStringField;
+    DBTInvoicesKlantPostCodePlaats: TWideStringField;
+    DBTInvoicesKlantEmail: TWideStringField;
+    DBTInvoicesKlantTelefoonnummer: TWideStringField;
+    DBTInvoicesAfleverAanhef: TWideStringField;
+    DBTInvoicesAfleverNaam: TWideStringField;
+    DBTInvoicesAfleverAdres: TWideStringField;
+    DBTInvoicesAfleverPostcodePlaats: TWideStringField;
+    DBTInvoicesAfleverTelefoonnummer: TWideStringField;
+    DBTInvoicesMeetdatum: TDateTimeField;
+    DBTInvoicesLegDatum: TDateTimeField;
+    DBTInvoicesAangemaaktDoor: TWideStringField;
+    DBTInvoicesAangemaaktOp: TDateTimeField;
+    DBTInvoicesBetaald: TBooleanField;
+    DBTInvoicesOpmerking: TWideMemoField;
+    DBTOffersId: TAutoIncField;
+    DBTOffersOfferteNr: TIntegerField;
+    DBTOffersOfferteDatum: TDateTimeField;
+    DBTOffersSubtotaal: TBCDField;
+    DBTOffersBtw: TBCDField;
+    DBTOffersTotaal: TBCDField;
+    DBTOffersKlantAanhef: TWideStringField;
+    DBTOffersKlantNaam: TWideStringField;
+    DBTOffersKlantAdres: TWideStringField;
+    DBTOffersKlantPostCodePlaats: TWideStringField;
+    DBTOffersKlantEmail: TWideStringField;
+    DBTOffersKlantTelefoonnummer: TWideStringField;
+    DBTOffersAfleverAanhef: TWideStringField;
+    DBTOffersAfleverNaam: TWideStringField;
+    DBTOffersAfleverAdres: TWideStringField;
+    DBTOffersAfleverPostCodePlaats: TWideStringField;
+    DBTOffersAfleverTelefoonnummer: TWideStringField;
+    DBTOffersMeetDatum: TDateTimeField;
+    DBTOffersLegDatum: TDateTimeField;
+    DBTOffersAangemaaktDoor: TWideStringField;
+    DBTOffersAangemaaktOp: TDateTimeField;
+    DBTOffersOmgezet: TBooleanField;
+    DBTOffersOpmerking: TWideMemoField;
     procedure btnBeginClick(Sender: TObject);
     procedure btnOffersClick(Sender: TObject);
     procedure btnArticlesClick(Sender: TObject);
@@ -130,9 +130,11 @@ type
     procedure btnPrintenClick(Sender: TObject);
     procedure lvwItemsSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
-      function GetLastNr(Table:TADOTable; FieldId: String): Integer;
+    function GetLastNr(TTable: String; FieldId: String): Integer;
+    procedure InsertNewRow(FieldId: String; faNr: Integer);
     procedure ckbPayedClick(Sender: TObject);
     procedure ckbShowAllClick(Sender: TObject);
+    procedure pmpNewKopieClick(Sender: TObject);
   private
      ShowAll :boolean;
      procedure LoadInvoices;
@@ -143,10 +145,12 @@ type
      procedure SetInvoiceColums;
      procedure SetOfferColums;
      procedure LoadInvoicesFiltered(totalPayed: Double; totalTobePayed: Double);
+    procedure PrintInvoiceAndOffer(Id: Integer);
+    function AddLeadingZeroes(aNumber:Integer; Length: integer): string;
   protected
       procedure Refresh; override;
       procedure OpenDatasets(); override;
-      procedure DoSomeThingElse; override;
+      procedure DoSomeThingElse(Id: Integer); override;
   public
       //
   end;
@@ -157,7 +161,7 @@ var
 implementation
 
 uses EditOffer, EditInvoice, EditArticle, EditCustomer, ReportInvoice,ShellApi,
-  ReportOffer ;
+  ReportOffer , ReportInvoiceWithBackground, ReportOfferWithBackground;
 
 Const
   Invoice = 'Invoice';
@@ -197,7 +201,7 @@ begin
       frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable, 'FactuurId');
     end
     else if lvwItems.HelpKeyword = Offer then begin
-      faNr := GetLastNr(DBTInvoices, 'FactuurNr')+ 1;
+      faNr := GetLastNr(DBTInvoices.TableName, 'FactuurNr')+ 1;
       frmHEdit := TfrmEditOffer.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'OfferteId');
       TfrmEditOffer(frmHEdit).invoiceNr := faNr;
     end
@@ -208,35 +212,39 @@ begin
   inherited;
 end;
 
+function TfrmMain.AddLeadingZeroes(aNumber:Integer; Length : integer) : string;
+begin
+   result := System.SysUtils.Format('%.*d', [Length, aNumber]) ;
+end;
+
 procedure TfrmMain.btnNewClick(Sender: TObject);
 var oNr: Integer;
     faNr: Integer;
-    Id: Integer;
+    nId: Integer;
     ShowModal: Integer;
 begin
     if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then begin
-      faNr := GetLastNr(DBTInvoices, 'FactuurNr')+ 1;
-      oNr := GetLastNr(DBTOffers, 'OfferteNr')+ 1;
-      DBTQuery.Active := False;
+      faNr := GetLastNr(DBTInvoices.TableName, 'FactuurNr')+ 1;
+      oNr := GetLastNr(DBTOffers.TableName, 'OfferteNr')+ 1;
       DBTQuery.SQL.Clear;
     end;
 
     if lvwItems.HelpKeyword = Invoice then begin
-      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(FactuurNr) Values(' + IntToStr(faNr) + ')';
-      DBTQuery.ExecSQL;
+      InsertNewRow('FactuurNr', faNr);
       CurrentTable.Active := False;
       CurrentTable.Active := True;
       CurrentTable.Locate('FactuurNr', faNr, []);
-      frmHEdit := TfrmEditInvoice.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'FactuurId');
+      nId := CurrentTable.FieldByName('ID').AsInteger;
+      frmHEdit := TfrmEditInvoice.Create(Self, nId, CurrentTable,  'FactuurId');
       frmHEdit.Caption := 'Factuur bekijken / wijzigen';
     end
     else if lvwItems.HelpKeyword = Offer then begin
-      DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(OfferteNr) Values(' + IntToStr(oNr) + ')';
-      DBTQuery.ExecSQL;
+      InsertNewRow('OfferteNr', oNr);
       CurrentTable.Active := False;
       CurrentTable.Active := True;
       CurrentTable.Locate('OfferteNr', oNr, []);
-      frmHEdit := TfrmEditOffer.Create(Self, CurrentTable.FieldByName('ID').AsInteger, CurrentTable,  'OfferteId');
+      nId := CurrentTable.FieldByName('ID').AsInteger;
+      frmHEdit := TfrmEditOffer.Create(Self, nId, CurrentTable,  'OfferteId');
       frmHEdit.Caption := 'Offerte bekijken / wijzigen';
       TfrmEditOffer(frmHEdit).invoiceNr := faNr;
     end
@@ -252,7 +260,7 @@ begin
     if ShowModal = mrOk then
       Refresh
     else if ShowModal = mrYes then
-      DoSomeThingElse
+      DoSomeThingElse(nId)
     else
       if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then begin
         CurrentTable.DeleteRecords(arCurrent);
@@ -270,35 +278,10 @@ begin
 end;
 
 procedure TfrmMain.btnPrintenClick(Sender: TObject);
-var fileName: PWideChar;
-    fileString: String;
-    Id: Integer;
+var Id: Integer;
 begin
   Id := Integer(lvwItems.Selected.Data);
-  if lvwItems.HelpKeyword = Invoice  then begin
-    try
-      frmReportInvoice := TfrmReportInvoice.Create(Self, Id, DBTInvoices);
-
-      if frmReportInvoice.frxReport.PrepareReport then
-        frmReportInvoice.frxReport.ShowPreparedReport;
-    finally
-      frmReportInvoice.Free;
-    end;
-  end
-  else begin
-    fileString :=Inifile.ReadString('Offerte','SaveDir','C:\Ada\')+'\OfferteExport-'+IntToStr(Id)+'.pdf';
-    if FileExists(fileString) then
-      ShellExecute(0, nil, PChar(fileString), nil, nil, SW_SHOWNORMAL)
-    else begin
-      try
-        frmReportOffer := TfrmReportOffer.Create(Self, Id, DBTOffers);
-        if frmReportOffer.frxReport.PrepareReport then
-          frmReportOffer.frxReport.ShowPreparedReport;
-      finally
-        frmReportOffer.Free;
-      end;
-    end;
-  end;
+  PrintInvoiceAndOffer(Id);
 end;
 
 procedure TfrmMain.ckbPayedClick(Sender: TObject);
@@ -324,18 +307,67 @@ begin
   Refresh;
 end;
 
-procedure TfrmMain.DoSomeThingElse;
+procedure TfrmMain.DoSomeThingElse(Id: Integer);
 begin
-  btnPrinten.Click;
+  PrintInvoiceAndOffer(Id);
   btnEdit.Click;
   Refresh;
 end;
 
-function TfrmMain.GetLastNr(Table:TADOTable; FieldId: String): Integer;
+procedure TfrmMain.PrintInvoiceAndOffer(Id: Integer);
+var
+  fileString: string;
 begin
-  Table.Sort := FieldId + ' DESC';
-  Table.First;
-  Result := Table.FieldByName(FieldId).AsInteger;
+  if id = 0 then
+    id := Integer(lvwItems.Selected.Data);
+
+  if lvwItems.HelpKeyword = Invoice then
+  begin
+    try
+      frmReportInvoice := TfrmReportInvoice.Create(Self, Id, DBTInvoices);
+      if frmReportInvoice.frxReport.PrepareReport then
+        frmReportInvoice.frxReport.ShowPreparedReport;
+    finally
+      frmReportInvoice.Free;
+    end;
+  end
+  else
+  begin
+    fileString := Inifile.ReadString('Offerte', 'SaveDir', 'C:\Ada\') + '\OfferteExport-' + IntToStr(Id) + '.pdf';
+    if FileExists(fileString) then
+      ShellExecute(0, nil, PChar(fileString), nil, nil, SW_SHOWNORMAL)
+    else
+    begin
+      try
+        frmReportOffer := TfrmReportOffer.Create(Self, Id, DBTOffers);
+        if frmReportOffer.frxReport.PrepareReport then
+          frmReportOffer.frxReport.ShowPreparedReport;
+      finally
+        frmReportOffer.Free;
+      end;
+    end;
+  end;
+end;
+
+procedure TfrmMain.InsertNewRow(FieldId: String; faNr: Integer);
+begin
+  DBTQuery.Close;
+  DBTQuery.SQL.Text := 'Insert into ' + CurrentTable.TableName + '(' + FieldId + ') Values(' + IntToStr(faNr) + ')';
+  DBTQuery.ExecSQL;
+  //DBTQuery.Open;
+end;
+
+function TfrmMain.GetLastNr(TTable: String; FieldId: String): Integer;
+begin
+  //Table.Sort := FieldId + ' DESC';
+  //Table.First;
+  //Result := Table.FieldByName(FieldId).AsInteger;
+    DBTQuery.Close;
+    DBTQuery.SQL.Clear;
+    DBTQuery.SQL.Text := 'Select MAX(' + FieldId + ') as LastNr from ' + TTable;
+    DBTQuery.ExecSQL;
+    DBTQuery.Open;
+    Result := DBTQuery.FieldByName('LastNr').AsInteger;
 end;
 
 procedure TfrmMain.LoadData;
@@ -413,13 +445,38 @@ begin
   DBTCustomers.Open;
 end;
 
+procedure TfrmMain.pmpNewKopieClick(Sender: TObject);
+var Id: Integer;
+begin
+
+  Id := Integer(lvwItems.Selected.Data);
+  if lvwItems.HelpKeyword = Invoice then
+  begin
+    try
+      frmreportInvoiceWithBackground := TfrmreportInvoiceWithBackground.Create(Self, Id, DBTCustomers);
+      frmreportInvoiceWithBackground.exportToPdf(Inifile.ReadString('Factuur','SaveDirWithBackground','C:\Ada\'));
+    finally
+      frmreportInvoiceWithBackground.Free;
+    end;
+  end
+  else   if lvwItems.HelpKeyword = Offer then
+  begin
+    try
+      frmReportOfferWithBackground := TfrmReportOfferWithBackground.Create(Self, Id, DBTCustomers);
+      frmReportOfferWithBackground.exportToPdf(Inifile.ReadString('Offerte','SaveDirWithBackground','C:\Ada\'));
+    finally
+      frmReportOfferWithBackground.Free;
+    end;
+
+  end;
+end;
+
 procedure TfrmMain.LoadInvoicesFiltered(totalPayed: Double; totalTobePayed: Double);
 var
   X: Integer;
   I: Integer;
   LI: TListItem;
   column: TListColumn;
-  skip: boolean;
 begin
   Loading := True;
   lvwItems.Clear;
@@ -445,9 +502,6 @@ begin
       LI.Data := Pointer(CurrentTable.FieldByName('ID').asInteger);
     end;
     if lvwItems.HelpKeyword = Invoice then begin
-      totalPayed := totalPayed + CurrentTable.FieldByName('Totaal').AsFloat;
-      totalTobePayed := totalTobePayed + CurrentTable.FieldByName('NogTeBetalen').AsFloat;
-
       totalPayed := totalPayed + CurrentTable.FieldByName('Totaal').AsFloat;
       totalTobePayed := totalTobePayed + CurrentTable.FieldByName('NogTeBetalen').AsFloat;
 

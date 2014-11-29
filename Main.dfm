@@ -226,7 +226,7 @@ inherited frmMain: TfrmMain
         Text = 'tobepayed'
         Width = 50
       end>
-    ExplicitTop = 488
+    ExplicitTop = 476
     ExplicitWidth = 1221
   end
   inherited lvwItems: TMyListView
@@ -236,15 +236,16 @@ inherited frmMain: TfrmMain
     Font.Height = -12
     GroupHeaderImages = imgPmSmall
     ParentFont = False
+    PopupMenu = pmpNewMenu
     SmallImages = imgPmSmall
     OnCustomDrawItem = nil
     ExplicitTop = 91
     ExplicitWidth = 1221
-    ExplicitHeight = 397
+    ExplicitHeight = 385
   end
   inherited imgMainButtons: TImageList
     Bitmap = {
-      494C01011F006001600120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F006C016C0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000000001000001002000000000000000
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4477,7 +4478,7 @@ inherited frmMain: TfrmMain
   end
   inherited imgPmSmall: TImageList
     Bitmap = {
-      494C010113006001600110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113006C016C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5148,16 +5149,21 @@ inherited frmMain: TfrmMain
     ConnectionString = 
       'Provider=Microsoft.ACE.OLEDB.12.0;Password="";Data Source=G:\ADA' +
       'FactuurProgramma.accdb;Persist Security Info=True;Jet OLEDB:Data' +
-      'base Password=adafactuur'
+      'base Password=Keloglan2014'
   end
   inherited DBTQuery: TADOQuery
     Left = 184
     Top = 240
   end
+  inherited pmpNewMenu: TPopupMenu
+    inherited pmpNewKopie: TMenuItem
+      Caption = 'Opslaan als pdf'
+    end
+  end
   inherited DBTClone: TADOTable
     Top = 168
   end
-  object DBTInvoices: TADOTable
+  object DBTInvoices: TADOTable [13]
     Connection = DBCConnection
     CursorType = ctStatic
     TableName = 'Facturen'
@@ -5204,6 +5210,10 @@ inherited frmMain: TfrmMain
       FieldName = 'NogTeBetalenVia'
       Size = 255
     end
+    object DBTInvoicesKlantAanhef: TWideStringField
+      FieldName = 'KlantAanhef'
+      Size = 255
+    end
     object DBTInvoicesKlantNaam: TWideStringField
       FieldName = 'KlantNaam'
       Size = 255
@@ -5216,26 +5226,16 @@ inherited frmMain: TfrmMain
       FieldName = 'KlantPostCodePlaats'
       Size = 255
     end
+    object DBTInvoicesKlantEmail: TWideStringField
+      FieldName = 'KlantEmail'
+      Size = 255
+    end
     object DBTInvoicesKlantTelefoonnummer: TWideStringField
       FieldName = 'KlantTelefoonnummer'
       Size = 255
     end
-    object DBTInvoicesAangemaaktDoor: TWideStringField
-      FieldName = 'AangemaaktDoor'
-      Size = 255
-    end
-    object DBTInvoicesAangemaaktOp: TDateTimeField
-      FieldName = 'AangemaaktOp'
-    end
-    object DBTInvoicesBetaald: TBooleanField
-      FieldName = 'Betaald'
-    end
-    object DBTInvoicesOpmerking: TWideMemoField
-      FieldName = 'Opmerking'
-      BlobType = ftWideMemo
-    end
-    object DBTInvoicesKlantEmail: TWideStringField
-      FieldName = 'KlantEmail'
+    object DBTInvoicesAfleverAanhef: TWideStringField
+      FieldName = 'AfleverAanhef'
       Size = 255
     end
     object DBTInvoicesAfleverNaam: TWideStringField
@@ -5260,16 +5260,22 @@ inherited frmMain: TfrmMain
     object DBTInvoicesLegDatum: TDateTimeField
       FieldName = 'LegDatum'
     end
-    object DBTInvoicesKlantAanhef: TWideStringField
-      FieldName = 'KlantAanhef'
+    object DBTInvoicesAangemaaktDoor: TWideStringField
+      FieldName = 'AangemaaktDoor'
       Size = 255
     end
-    object DBTInvoicesAfleverAanhef: TWideStringField
-      FieldName = 'AfleverAanhef'
-      Size = 255
+    object DBTInvoicesAangemaaktOp: TDateTimeField
+      FieldName = 'AangemaaktOp'
+    end
+    object DBTInvoicesBetaald: TBooleanField
+      FieldName = 'Betaald'
+    end
+    object DBTInvoicesOpmerking: TWideMemoField
+      FieldName = 'Opmerking'
+      BlobType = ftWideMemo
     end
   end
-  object DBTInvoiceDetails: TADOTable
+  object DBTInvoiceDetails: TADOTable [14]
     Connection = DBCConnection
     CursorType = ctStatic
     LockType = ltBatchOptimistic
@@ -5309,7 +5315,7 @@ inherited frmMain: TfrmMain
       FieldName = 'Aantal'
     end
   end
-  object DBTProducts: TADOTable
+  object DBTProducts: TADOTable [15]
     Connection = DBCConnection
     CursorType = ctStatic
     TableName = 'Producten'
@@ -5335,7 +5341,7 @@ inherited frmMain: TfrmMain
       FieldName = 'AangemaaktOp'
     end
   end
-  object DBTOffers: TADOTable
+  object DBTOffers: TADOTable [16]
     Connection = DBCConnection
     CursorType = ctStatic
     TableName = 'Offertes'
@@ -5363,6 +5369,10 @@ inherited frmMain: TfrmMain
       FieldName = 'Totaal'
       Precision = 19
     end
+    object DBTOffersKlantAanhef: TWideStringField
+      FieldName = 'KlantAanhef'
+      Size = 255
+    end
     object DBTOffersKlantNaam: TWideStringField
       FieldName = 'KlantNaam'
       Size = 255
@@ -5375,26 +5385,16 @@ inherited frmMain: TfrmMain
       FieldName = 'KlantPostCodePlaats'
       Size = 255
     end
+    object DBTOffersKlantEmail: TWideStringField
+      FieldName = 'KlantEmail'
+      Size = 255
+    end
     object DBTOffersKlantTelefoonnummer: TWideStringField
       FieldName = 'KlantTelefoonnummer'
       Size = 255
     end
-    object DBTOffersAangemaaktDoor: TWideStringField
-      FieldName = 'AangemaaktDoor'
-      Size = 255
-    end
-    object DBTOffersAangemaaktOp: TDateTimeField
-      FieldName = 'AangemaaktOp'
-    end
-    object DBTOffersOmgezet: TBooleanField
-      FieldName = 'Omgezet'
-    end
-    object DBTOffersOpmerking: TWideMemoField
-      FieldName = 'Opmerking'
-      BlobType = ftWideMemo
-    end
-    object DBTOffersKlantEmail: TWideStringField
-      FieldName = 'KlantEmail'
+    object DBTOffersAfleverAanhef: TWideStringField
+      FieldName = 'AfleverAanhef'
       Size = 255
     end
     object DBTOffersAfleverNaam: TWideStringField
@@ -5419,16 +5419,22 @@ inherited frmMain: TfrmMain
     object DBTOffersLegDatum: TDateTimeField
       FieldName = 'LegDatum'
     end
-    object DBTOffersKlantAanhef: TWideStringField
-      FieldName = 'KlantAanhef'
+    object DBTOffersAangemaaktDoor: TWideStringField
+      FieldName = 'AangemaaktDoor'
       Size = 255
     end
-    object DBTOffersAfleverAanhef: TWideStringField
-      FieldName = 'AfleverAanhef'
-      Size = 255
+    object DBTOffersAangemaaktOp: TDateTimeField
+      FieldName = 'AangemaaktOp'
+    end
+    object DBTOffersOmgezet: TBooleanField
+      FieldName = 'Omgezet'
+    end
+    object DBTOffersOpmerking: TWideMemoField
+      FieldName = 'Opmerking'
+      BlobType = ftWideMemo
     end
   end
-  object DBTCustomers: TADOTable
+  object DBTCustomers: TADOTable [17]
     Connection = DBCConnection
     CursorType = ctStatic
     TableName = 'Klanten'
@@ -5466,7 +5472,7 @@ inherited frmMain: TfrmMain
       FieldName = 'AangemaaktOp'
     end
   end
-  object ADODataSet1: TADODataSet
+  object ADODataSet1: TADODataSet [18]
     Connection = DBCConnection
     CursorType = ctStatic
     CommandText = 
@@ -5529,7 +5535,7 @@ inherited frmMain: TfrmMain
       Precision = 19
     end
   end
-  object DBTOfferDetails: TADOTable
+  object DBTOfferDetails: TADOTable [19]
     Connection = DBCConnection
     CursorType = ctStatic
     LockType = ltBatchOptimistic

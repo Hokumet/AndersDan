@@ -218,9 +218,9 @@ object frmReportOffer: TfrmReportOffer
     Outline = False
     Background = False
     HTMLTags = True
-    Author = 'FastReport'
+    Author = 'Hokumet & Kilic'
     Subject = 'FastReport PDF export'
-    Creator = 'Ada'
+    Creator = 'Ada Offerte'
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
     HideToolbar = False
     HideMenubar = False
