@@ -8,7 +8,6 @@ inherited frmEditInvoice: TfrmEditInvoice
   Position = poDesigned
   WindowState = wsMaximized
   OnShortCut = FormShortCut
-  ExplicitTop = -53
   ExplicitWidth = 1242
   ExplicitHeight = 597
   PixelsPerInch = 96
@@ -233,7 +232,6 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'KlantAdres'
         TabOrder = 5
-        OnExit = edtCustomerAddressExit
       end
       object edtPostCodeCity: TEdit
         Left = 521
@@ -243,7 +241,6 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpType = htKeyword
         HelpKeyword = 'KlantPostcodePlaats'
         TabOrder = 6
-        OnExit = edtPostCodeCityExit
       end
       object ckbSaveCustomer: TCheckBox
         Left = 801
@@ -358,7 +355,6 @@ inherited frmEditInvoice: TfrmEditInvoice
         ParentBackground = False
         ParentColor = False
         TabOrder = 14
-        OnExit = rbtCustomerGenderExit
       end
       object rbtDeliverGender: TRadioGroup
         Left = 928
@@ -455,6 +451,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         ReadOnly = True
         TabOrder = 4
         Alignment = taRightJustify
+        MinValue = -9999999.000000000000000000
         MaxValue = 999999.000000000000000000
       end
       object edtBtw: THCurrencyEdit
@@ -467,6 +464,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         ReadOnly = True
         TabOrder = 6
         Alignment = taRightJustify
+        MinValue = -9999999.000000000000000000
         MaxValue = 999999.000000000000000000
       end
       object edtSubtotal: THCurrencyEdit
@@ -479,6 +477,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         ReadOnly = True
         TabOrder = 5
         Alignment = taRightJustify
+        MinValue = -9999999.000000000000000000
         MaxValue = 999999.000000000000000000
       end
       object edtAanbetaling: THCurrencyEdit
@@ -491,6 +490,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         TabOrder = 0
         OnExit = edtAanbetalingExit
         Alignment = taRightJustify
+        MinValue = -9999999.000000000000000000
         MaxValue = 999999.000000000000000000
       end
       object edtToBePayed: THCurrencyEdit
@@ -502,6 +502,7 @@ inherited frmEditInvoice: TfrmEditInvoice
         HelpKeyword = 'NogTeBetalen'
         TabOrder = 7
         Alignment = taRightJustify
+        MinValue = -9999999.000000000000000000
         MaxValue = 999999.000000000000000000
       end
       object ckbInvoicePayed: TCheckBox
@@ -632,7 +633,7 @@ inherited frmEditInvoice: TfrmEditInvoice
           Width = 168
           Height = 267
           Align = alClient
-          Date = 41846.682797974540000000
+          Date = 41846.666064988430000000
           TabOrder = 0
         end
       end

@@ -16,7 +16,9 @@ uses
   ReportAncestor in '..\Commons\ReportAncestor.pas' {frmReportAnchestor},
   ReportOffer in 'ReportOffer.pas' {frmReportOffer},
   ReportInvoice in 'ReportInvoice.pas' {frmreportInvoice},
-  EditInvoice in 'EditInvoice.pas' {frmEditInvoice};
+  EditInvoice in 'EditInvoice.pas' {frmEditInvoice},
+  ReportInvoiceWithBackground in 'ReportInvoiceWithBackground.pas' {frmreportInvoiceWithBackground},
+  ReportOfferWithBackground in 'ReportOfferWithBackground.pas' {frmReportOfferWithBackground};
 
 {$R *.res}
 
@@ -25,5 +27,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Anders dan anderen Factuur programma';
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmreportInvoiceWithBackground, frmreportInvoiceWithBackground);
+  Application.CreateForm(TfrmReportOfferWithBackground, frmReportOfferWithBackground);
   Application.Run;
 end.

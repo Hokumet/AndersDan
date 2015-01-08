@@ -198,17 +198,17 @@ procedure TfrmMain.btnEditClick(Sender: TObject);
 var faNr: Integer;
 begin
     if lvwItems.HelpKeyword = Invoice then begin
-      frmHEdit := TfrmEditInvoice.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable, 'FactuurId');
+        frmHEdit := TfrmEditInvoice.Create(Self, CurrentId, CurrentTable, 'FactuurId');
     end
     else if lvwItems.HelpKeyword = Offer then begin
       faNr := GetLastNr(DBTInvoices.TableName, 'FactuurNr')+ 1;
-      frmHEdit := TfrmEditOffer.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable , 'OfferteId');
+      frmHEdit := TfrmEditOffer.Create(Self, CurrentId, CurrentTable , 'OfferteId');
       TfrmEditOffer(frmHEdit).invoiceNr := faNr;
     end
     else if lvwItems.HelpKeyword = Product then
-      frmHEdit := TfrmEditArticle.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable)
+      frmHEdit := TfrmEditArticle.Create(Self, CurrentId, CurrentTable)
     else if lvwItems.HelpKeyword = Customer then
-      frmHEdit := TfrmEditCustomer.Create(Self, Integer(lvwItems.Selected.Data), CurrentTable) ;
+      frmHEdit := TfrmEditCustomer.Create(Self, CurrentId, CurrentTable) ;
   inherited;
 end;
 
@@ -257,16 +257,18 @@ begin
 
   try
     ShowModal :=  frmHEdit.ShowModal;
-    if ShowModal = mrOk then
-      Refresh
-    else if ShowModal = mrYes then
-      DoSomeThingElse(nId)
-    else
-      if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then begin
-        CurrentTable.DeleteRecords(arCurrent);
-      end;
   finally
     frmHEdit.Free;
+  end;
+  if ShowModal = mrOk then
+    Refresh
+  else if ShowModal = mrYes then begin
+    CurrentId := nId;
+    DoSomeThingElse(nId)
+  end
+  else begin
+    if (lvwItems.HelpKeyword = Invoice) or (lvwItems.HelpKeyword = Offer) then
+      CurrentTable.DeleteRecords(arCurrent);
   end;
 end;
 

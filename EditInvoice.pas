@@ -75,9 +75,6 @@ type
     procedure edtCustomerNameExit(Sender: TObject);
     procedure ckbInvoicePayedClick(Sender: TObject);
     procedure frameInvoiceDetailsbtnDeleteClick(Sender: TObject);
-    procedure edtCustomerAddressExit(Sender: TObject);
-    procedure edtPostCodeCityExit(Sender: TObject);
-    procedure rbtCustomerGenderExit(Sender: TObject);
     procedure btnPrintClick(Sender: TObject);
     procedure FormShortCut(var Msg: TWMKey; var Handled: Boolean);
   private
@@ -118,8 +115,10 @@ begin
     if ckbInvoicePayed.Checked then
       if MessageDlg('Weet je zeker dat je de factuur als betaald wil aanmerken',mtError, mbOKCancel, 0) <> mrOK  then
         ckbInvoicePayed.Checked := false
-      else
+      else begin
+        edtAanbetaling.Value := edtToBePayed.Value    ;
         edtToBePayed.Value := 0;
+      end;
 end;
 
 procedure TfrmEditInvoice.ckbSaveCustomerClick(Sender: TObject);
@@ -134,19 +133,10 @@ begin
   edtToBePayed.Value := edtTotal.Value - edtAanbetaling.Value;
 end;
 
-procedure TfrmEditInvoice.edtCustomerAddressExit(Sender: TObject);
-begin
-  if edtDeliverAddress.Text ='' then
-    edtDeliverAddress.Text := edtCustomerAddress.Text
-end;
-
 procedure TfrmEditInvoice.edtCustomerNameExit(Sender: TObject);
 begin
   if TCustomers.RecordCount = 1 then
     SelectCustomer(TCustomers.FieldByName('ID').AsInteger);
-
-  if edtDeliverCustomerName.Text ='' then
-    edtDeliverCustomerName.Text := edtCustomerName.Text
 end;
 
 procedure TfrmEditInvoice.edtCustomerNameKeyUp(Sender: TObject; var Key: Word;
@@ -177,12 +167,6 @@ begin
       end;
     end;
   end;
-end;
-
-procedure TfrmEditInvoice.edtPostCodeCityExit(Sender: TObject);
-begin
-  if edtDeliverPostcodeCity.Text ='' then
-    edtDeliverPostcodeCity.Text := edtPostCodeCity.Text;
 end;
 
 procedure TfrmEditInvoice.FormShortCut(var Msg: TWMKey; var Handled: Boolean);
@@ -243,6 +227,7 @@ begin
   inherited;
   frameInvoiceDetails.lvwItems.Clear;
   TInvoiceDetails.First;
+  Total := 0;
   for I := 0 to TInvoiceDetails.RecordCount-1 do begin
     Item := frameInvoiceDetails.lvwItems.Items.Add;
     Item.Caption :=TInvoiceDetails.FieldByName('Omschrijving').AsString;
@@ -300,12 +285,6 @@ begin
   end;
 end;
 
-
-procedure TfrmEditInvoice.rbtCustomerGenderExit(Sender: TObject);
-begin
-  if (rbtDeliverGender.ItemIndex = 0) or (rbtDeliverGender.ItemIndex = -1) then
-    rbtDeliverGender.ItemIndex := rbtCustomerGender.ItemIndex;
-end;
 
 procedure TfrmEditInvoice.saveFields;
 var I: Integer;
