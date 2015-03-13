@@ -1,15 +1,15 @@
 inherited frmEditCustomer: TfrmEditCustomer
   ActiveControl = pnlFields
   Caption = 'Klant wijzigen'
-  ClientHeight = 221
+  ClientHeight = 252
   KeyPreview = True
   Position = poOwnerFormCenter
   ExplicitWidth = 407
-  ExplicitHeight = 248
+  ExplicitHeight = 279
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
-    Top = 148
+    Top = 179
     Height = 73
     ExplicitTop = 148
     ExplicitHeight = 73
@@ -24,7 +24,7 @@ inherited frmEditCustomer: TfrmEditCustomer
     end
   end
   inherited pnlLabels: TPanel
-    Height = 148
+    Height = 179
     Color = 60138
     ExplicitHeight = 148
     object Label1: TLabel
@@ -58,13 +58,20 @@ inherited frmEditCustomer: TfrmEditCustomer
     object Label5: TLabel
       Left = 36
       Top = 120
+      Width = 93
+      Height = 13
+      Caption = 'Telefoonnummer 2:'
+    end
+    object Label6: TLabel
+      Left = 36
+      Top = 147
       Width = 55
       Height = 13
       Caption = 'Emailadres:'
     end
   end
   inherited pnlFields: TPanel
-    Height = 148
+    Height = 179
     Color = 16291591
     ExplicitHeight = 148
     object Edit1: TEdit
@@ -109,8 +116,17 @@ inherited frmEditCustomer: TfrmEditCustomer
       Width = 184
       Height = 21
       HelpType = htKeyword
-      HelpKeyword = 'Emailadres'
+      HelpKeyword = 'Telefoonnummer2'
       TabOrder = 4
+    end
+    object Edit6: TEdit
+      Left = 40
+      Top = 139
+      Width = 184
+      Height = 21
+      HelpType = htKeyword
+      HelpKeyword = 'Emailadres'
+      TabOrder = 5
     end
   end
   inherited CurrQuery: TADOQuery

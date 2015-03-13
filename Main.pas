@@ -482,6 +482,11 @@ var
 begin
   Loading := True;
   lvwItems.Clear;
+  if lvwItems.HelpKeyword = Invoice  then
+    CurrentTable.Sort := 'FactuurNr ASC'
+  else
+    CurrentTable.Sort := 'OfferteNr ASC';
+
   CurrentTable.Last;
   for I := 0 to CurrentTable.RecordCount - 1 do begin
     if ShowAll or (I < 3) then begin
